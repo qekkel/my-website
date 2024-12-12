@@ -1,0 +1,150 @@
+/* Основной стиль для сайта */
+body {
+    background-color: #EDDFDC;
+    font-family: Arial, sans-serif;
+    color: #3D6E69;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Глобальная настройка box-sizing */
+* {
+    box-sizing: border-box;
+}
+
+/* Шапка */
+header {
+    background-color: #EDDFDC;
+    margin: 0;
+    padding: 0rem 0rem;
+    display: flex;
+    flex-direction: column; /* Добавляем вертикальное расположение элементов */
+    justify-content: center; /* Центрируем элементы по вертикали */
+    align-items: center;
+    height: 250px; /* Увеличиваем высоту шапки */
+}
+
+/* Контейнер для логотипа и текста */
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-bottom: 20px; /* Добавляем отступ снизу, чтобы разделить логотип и меню */
+}
+
+/* Лого */
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Текст рядом с логотипом */
+.logo-text {
+    font-family: 'Pangolin', sans-serif;
+    font-size: 2rem;
+    color: #3D6E69;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+/* Меню */
+nav {
+    display: flex;
+    justify-content: center; /* Центрируем меню */
+    width: 100%;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+    color: #E75C67;
+}
+
+nav a:first-child {
+    margin-left: 50px;
+}
+
+/* Основной контент */
+main {
+    padding: 20px;
+}
+
+/* Стиль галереи */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    max-width: 100%; /* Максимальная ширина контейнера */
+  }
+
+.gallery-item img {
+    margin-bottom: 20px; /* Добавляем отступ снизу */
+    width: 100%;
+    max-width: 450px;
+    height: auto; /* Сохраняет пропорции изображений */
+  border-radius: 10px;
+  object-fit: cover; /* Заполняет контейнер изображением, сохраняя пропорции */
+  transition: transform 0.3s ease; /* Плавный переход при изменении размера */
+}
+
+.gallery-item:hover img {
+    opacity: 0.7;
+}
+/* Добавляем overlay с красным цветом при наведении */
+.gallery-item:hover::before {
+    content: ""; /* Пустое содержимое, чтобы создать элемент */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #E75C67; /* Красный цвет */
+    opacity: 0.7; /* Устанавливаем непрозрачность */
+    border-radius: 10px;
+    z-index: 1; /* Чтобы наложение было поверх изображения */
+    transition: opacity 0.3s ease;
+  }
+/* Добавляем overlay и текст с названием */
+.gallery-item:hover::after {
+    content: attr(data-title); /* Извлекаем название картины */
+    position: absolute;
+    top: 50%; /* Центрируем текст по вертикали */
+    left: 50%; /* Центрируем текст по горизонтали */
+    transform: translate(-50%, -50%); /* Сдвигаем текст, чтобы он был точно по центру */
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Добавляем тень для улучшения видимости */
+    background-color: rgba(231, 92, 103, 0.7); /* Полупрозрачный красный фон */
+    padding: 10px;
+    border-radius: 10px;
+    width: 90%;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 2; /* Чтобы текст был поверх наложенного цвета */
+  }
+/* Футер */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
