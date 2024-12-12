@@ -151,6 +151,59 @@ main {
     z-index: 2;
 }
 
+
+
+/* Секция About */
+.about-container {
+    display: flex;
+    justify-content: center; /* Центрируем контейнер по горизонтали */
+    align-items: center; /* Центрируем элементы по вертикали */
+    gap: 20px; /* Отступ между изображением и текстом */
+    padding: 20px;
+    max-width: 1200px; /* Ограничиваем максимальную ширину */
+    margin: 0 auto; /* Центрируем контейнер */
+  }
+  
+  .profile-image {
+    width: 30vw;  /* Ширина изображения — 30% от ширины окна */
+    height: auto; /* Высота будет сохранять пропорции */
+    max-width: 250px; /* Максимальная ширина изображения */
+    border-radius: 1%;
+    object-fit: cover;
+  }
+  
+  .text-content {
+    max-width: 600px; /* Ограничиваем максимальную ширину текста */
+    font-size: 1.1rem; /* Размер шрифта */
+    line-height: 1.6; /* Межстрочный интервал */
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .about-container {
+      flex-direction: column; /* Элементы будут располагаться в колонку на маленьких экранах */
+      text-align: center;
+    }
+  
+    .profile-image {
+      width: 50vw; /* Увеличиваем ширину изображения на маленьких экранах */
+      max-width: 200px; /* Максимальная ширина изображения */
+    }
+  
+    .text-content {
+      max-width: 90%; /* Текст будет занимать больше пространства на мобильных устройствах */
+    }
+  }
+
+
+
+
+
+  
 /* Футер */
 footer {
     background-color: #333;
