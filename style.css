@@ -2,7 +2,7 @@
 body {
     background-color: #EDDFDC;
     font-family: Arial, sans-serif;
-    color: #3D6E69;
+    color: #333;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -151,63 +151,137 @@ main {
     z-index: 2;
 }
 
-
-
 /* Секция About */
 .about-container {
     display: flex;
     justify-content: center; /* Центрируем контейнер по горизонтали */
-    align-items: center; /* Центрируем элементы по вертикали */
     gap: 20px; /* Отступ между изображением и текстом */
     padding: 20px;
+    
     max-width: 1200px; /* Ограничиваем максимальную ширину */
     margin: 0 auto; /* Центрируем контейнер */
-  }
+}
   
-  .profile-image {
+.profile-image {
     width: 30vw;  /* Ширина изображения — 30% от ширины окна */
     height: auto; /* Высота будет сохранять пропорции */
     max-width: 250px; /* Максимальная ширина изображения */
-    border-radius: 1%;
+    border-radius: 50%;
     object-fit: cover;
-  }
+}
   
-  .text-content {
+.text-content {
     max-width: 600px; /* Ограничиваем максимальную ширину текста */
     font-size: 1.1rem; /* Размер шрифта */
     line-height: 1.6; /* Межстрочный интервал */
-  }
+    color: #333;
+}
   
-  h1 {
+h1 {
     font-size: 2rem;
-    margin-bottom: 10px;
-  }
+    margin-bottom: 20px;
+}
   
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .about-container {
-      flex-direction: column; /* Элементы будут располагаться в колонку на маленьких экранах */
-      text-align: center;
+        flex-direction: column; /* Элементы будут располагаться в колонку на маленьких экранах */
+        text-align: center;
     }
   
     .profile-image {
-      width: 50vw; /* Увеличиваем ширину изображения на маленьких экранах */
-      max-width: 200px; /* Максимальная ширина изображения */
+        width: 50vw; /* Увеличиваем ширину изображения на маленьких экранах */
+        max-width: 200px; /* Максимальная ширина изображения */
     }
   
     .text-content {
-      max-width: 90%; /* Текст будет занимать больше пространства на мобильных устройствах */
+        max-width: 90%; /* Текст будет занимать больше пространства на мобильных устройствах */
     }
-  }
+}
 
+
+
+
+
+
+/* Стили для раздела "Contact" */
+.contact-section {
+    display: flex; /* Используется Flexbox для выравнивания элементов в строку */
+    justify-content: center; /* Распределяет элементы по всей ширине с равным промежутком между ними */
+    padding: 50px; /* Отступы вокруг всего раздела, чтобы добавить пространство */
+}
+  
+.contact-info {
+    width: 45%; /* Задает ширину блока с информацией о контакте в 45% от ширины родителя */
+    font-size: 18px; /* Устанавливает размер шрифта для текста в этом блоке */
+    margin-right: 20px; /* Отступ справа, чтобы увеличить расстояние между текстом и формой */
+}
+  
+.contact-info a {
+    color: #E75C67; /* Устанавливает цвет ссылок в блоке контактов */
+}
+  
+contact-form {
+    width: 45%; /* Ширина формы также составляет 45% от родительского контейнера */
+    margin-right: 20px; /* Отступ справа, чтобы увеличить расстояние между текстом и формой */
+}
+  
+.form-row {
+    display: flex; /* Flexbox для выравнивания элементов формы в строку */
+    width: 100%; /* Ширина для каждого блока в строке формы */
+    gap: 20px; /* Промежуток в 20px между колонками внутри строки */
+    margin-bottom: 25px; /* Отступ снизу для разделения строк в форме */
+}
+  
+.form-row div {
+    width: 50%; /* Ширина каждого блока внутри строки составляет 48% от ширины строки */
+}
+  
+label {
+    font-size: 16px; /* Размер шрифта для меток */
+    margin-bottom: 5px; /* Отступ между меткой и полем ввода */
+    display: block; /* Блочный элемент */
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%; /* Поля ввода занимают всю ширину контейнера */
+    padding: 10px; /* Отступы внутри полей */
+    margin-bottom: 10px; /* Отступ снизу между полями */
+    border: 1px solid #ccc; /* Рамка вокруг полей */
+    border-radius: 5px; /* Округленные углы */
+    font-size: 16px; /* Размер шрифта в полях */
+}
+
+textarea {
+    height: 150px; /* Высота текстового поля */
+}
+
+button[type="submit"] {
+    background-color: #E75C67; /* Цвет фона кнопки */
+    color: white; /* Цвет текста на кнопке */
+    border: none; /* Без рамки вокруг кнопки */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    font-size: 16px; /* Размер шрифта */
+    border-radius: 5px; /* Округленные углы кнопки */
+    cursor: pointer; /* Курсор меняется на указатель */
+}
+
+button[type="submit"]:hover {
+    background-color: #c3313d; /* Цвет кнопки при наведении */
+}
 
 
 
 
   
-/* Футер */
-footer {
-    background-color: #333;
-    color: white;
+  /* Стили для футера */
+  footer {
     text-align: center;
     padding: 20px;
-}
+    background-color: #333;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
