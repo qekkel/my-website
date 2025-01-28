@@ -7,17 +7,30 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    min-height: 100%;  /* Заставляем body растягиваться на всю высоту */
+/* Убираем все отступы и поля */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
+* {
+    border: 0;
+    outline: none;
+}
 html, body {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }
-
+/* Убираем отступы у контейнера */
+header, footer {
+    margin: 0;
+    padding: 0;
+}
 /* Глобальная настройка box-sizing */
 * {
     box-sizing: border-box;
@@ -41,7 +54,20 @@ header {
     align-items: center;
     text-decoration: none;
 }
+/* Убираем отступы внутри элементов */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
 
+img {
+    display: block;  /* Убирает возможные пробелы под изображениями */
+    max-width: 100%;
+    height: auto;
+}
 /* Лого */
 .logo {
     max-width: 200px;
@@ -90,37 +116,50 @@ main {
 
 /* Стиль галереи */
 .gallery-container {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;  /* Чтобы элементы располагались в несколько строк */
-    gap: 20px; /* Отступы между колонками и строками */
-    padding: 10px;
-    justify-content: center; /* Выравнивание элементов по центру */
+    flex-wrap: wrap;
+    justify-content: space-evenly; /* Изображения будут равномерно распределяться */
+    gap: 20px; /* Расстояние между изображениями */
+    padding: 0; /* Убираем отступы внутри контейнера */
+    margin: 0; /* Убираем внешние отступы у контейнера */
 }
 
 /* Стиль для каждого элемента галереи */
 .gallery-item {
-    width: 300px;
+    width: 300px; /* Фиксированная ширина для каждого элемента */
     margin-bottom: 20px; /* Дополнительные отступы */
     position: relative;
     overflow: hidden;
-    border-radius: 0; /* Убираем закругления */
+    border-radius: 5px; /* Закругленные углы */
+    box-sizing: border-box; /* Учитываем отступы и границы в общей ширине */
 }
 
+/* Стиль для изображений в галерее */
 .gallery-image {
     width: 100%;
-    height: 300px;  /* Установите фиксированную высоту */
+    height: 400px;  /* Установите фиксированную высоту */
     object-fit: cover;  /* Это помогает изображению заполнять контейнер */
 }
 
 /* Изображения в галерее */
 .gallery-item img {
     width: 100%;
-    height: auto; /* Сохраняет пропорции изображения */
+    height: 100%; /* Высота изображения будет равна высоте контейнера */
     display: block; /* Убирает пустые области снизу */
     border-radius: 0;
     object-fit: cover;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+/* На мобильных устройствах элементы будут занимать всю ширину */
+@media (max-width: 768px) {
+    .gallery-item {
+        width: 100%; /* Каждый элемент будет занимать всю ширину контейнера */
+    }
+}
+
+
 
 /* Эффект при наведении на изображение */
 .gallery-item:hover img {
@@ -328,4 +367,3 @@ footer p {
     height: auto;
     transition: transform 0.3s ease;
 }
-
