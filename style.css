@@ -1,5 +1,7 @@
 /* Основной стиль для сайта */
 body {
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
     background-color: #EDDFDC;
     font-family: Arial, sans-serif;
     color: #333;
@@ -8,6 +10,12 @@ body {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* Глобальная настройка box-sizing */
@@ -24,7 +32,7 @@ header {
     flex-direction: column; /* Добавляем вертикальное расположение элементов */
     justify-content: center; /* Центрируем элементы по вертикали */
     align-items: center;
-    height: 250px; /* Увеличиваем высоту шапки */
+    height: 200px; /* Увеличиваем высоту шапки */
 }
 
 /* Контейнер для логотипа и текста */
@@ -32,7 +40,6 @@ header {
     display: flex;
     align-items: center;
     text-decoration: none;
-    margin-bottom: 20px; /* Добавляем отступ снизу */
 }
 
 /* Лого */
@@ -77,6 +84,7 @@ nav a:first-child {
 
 /* Основной контент */
 main {
+    flex-grow: 1; /* Этот блок растягивается, заполняя доступное пространство */
     padding: 20px;
 }
 
@@ -152,16 +160,35 @@ main {
 }
 
 /* Секция About */
+.about-section {
+    display: flex;
+    justify-content: center; /* Центрируем контент по горизонтали */
+    align-items: center;     /* Выравниваем элементы по вертикали */
+    padding: 20px;
+}
+
 .about-container {
     display: flex;
     justify-content: center; /* Центрируем контейнер по горизонтали */
     gap: 20px; /* Отступ между изображением и текстом */
     padding: 20px;
-    
     max-width: 1200px; /* Ограничиваем максимальную ширину */
     margin: 0 auto; /* Центрируем контейнер */
 }
-  
+
+.about-photo-container {
+    margin-right: 30px; /* Отступ справа от фото */
+    flex: 0 0 40%; /* Фиксированная ширина 40% */
+    position: relative;
+    overflow: hidden;
+}
+
+.about-photo {
+    width: 100%; /* Растягиваем фото на всю ширину контейнера */
+    height: auto; /* Сохраняем пропорции */
+    object-fit: cover; /* Масштабируем изображение */
+}
+
 .profile-image {
     width: 30vw;  /* Ширина изображения — 30% от ширины окна */
     height: auto; /* Высота будет сохранять пропорции */
@@ -169,39 +196,34 @@ main {
     border-radius: 50%;
     object-fit: cover;
 }
-  
+
 .text-content {
     max-width: 600px; /* Ограничиваем максимальную ширину текста */
     font-size: 1.1rem; /* Размер шрифта */
     line-height: 1.6; /* Межстрочный интервал */
     color: #333;
 }
-  
+
 h1 {
     font-size: 2rem;
     margin-bottom: 20px;
 }
-  
+
 @media (max-width: 768px) {
     .about-container {
         flex-direction: column; /* Элементы будут располагаться в колонку на маленьких экранах */
         text-align: center;
     }
-  
+
     .profile-image {
         width: 50vw; /* Увеличиваем ширину изображения на маленьких экранах */
         max-width: 200px; /* Максимальная ширина изображения */
     }
-  
+
     .text-content {
         max-width: 90%; /* Текст будет занимать больше пространства на мобильных устройствах */
     }
 }
-
-
-
-
-
 
 /* Стили для раздела "Contact" */
 .contact-section {
@@ -209,33 +231,33 @@ h1 {
     justify-content: center; /* Распределяет элементы по всей ширине с равным промежутком между ними */
     padding: 50px; /* Отступы вокруг всего раздела, чтобы добавить пространство */
 }
-  
+
 .contact-info {
     width: 45%; /* Задает ширину блока с информацией о контакте в 45% от ширины родителя */
     font-size: 18px; /* Устанавливает размер шрифта для текста в этом блоке */
     margin-right: 20px; /* Отступ справа, чтобы увеличить расстояние между текстом и формой */
 }
-  
+
 .contact-info a {
     color: #E75C67; /* Устанавливает цвет ссылок в блоке контактов */
 }
-  
-contact-form {
+
+.contact-form {
     width: 45%; /* Ширина формы также составляет 45% от родительского контейнера */
     margin-right: 20px; /* Отступ справа, чтобы увеличить расстояние между текстом и формой */
 }
-  
+
 .form-row {
     display: flex; /* Flexbox для выравнивания элементов формы в строку */
     width: 100%; /* Ширина для каждого блока в строке формы */
     gap: 20px; /* Промежуток в 20px между колонками внутри строки */
     margin-bottom: 25px; /* Отступ снизу для разделения строк в форме */
 }
-  
+
 .form-row div {
     width: 50%; /* Ширина каждого блока внутри строки составляет 48% от ширины строки */
 }
-  
+
 label {
     font-size: 16px; /* Размер шрифта для меток */
     margin-bottom: 5px; /* Отступ между меткой и полем ввода */
@@ -271,17 +293,39 @@ button[type="submit"]:hover {
     background-color: #c3313d; /* Цвет кнопки при наведении */
 }
 
-
-
-
-  
-  /* Стили для футера */
-  footer {
-    text-align: center;
-    padding: 20px;
+/* Стили футера */
+footer {
     background-color: #333;
-    color: white;
-    position: fixed;
-    bottom: 0;
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    padding: 10px 50px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-  }
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+}
+
+.social-icons a {
+    margin-left: 20px;
+}
+
+.social-icon {
+    width: 15px; /* Устанавливаем размер иконок */
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
