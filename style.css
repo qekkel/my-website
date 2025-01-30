@@ -11,11 +11,16 @@ body {
     background-color: #EDDFDC;
     font-family: Arial, sans-serif;
     color: #333;
-    padding: 0;
+    margin: 0; /* Обнуляем отступы */
+    padding: 0; /* Обнуляем внутренние отступы */
+    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
     
     }
 html {
     height: 100%;
+    margin: 0; /* Обнуляем отступы */
+    padding: 0; /* Обнуляем внутренние отступы */
+    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
     flex-direction: column;
 }
 }
@@ -55,7 +60,7 @@ img {
 /* Лого */
 .logo {
     max-width: 200px;
-    height: auto;
+    height: 200px;
 }
 
 /* Текст рядом с логотипом */
@@ -91,23 +96,22 @@ nav a:hover {
 
 /* Основной контент */
 main {
-    flex-grow: 1; /* Этот блок растягивается, заполняя доступное пространство */
-    min-height: 70vh; /* Минимальная высота контента */
+    flex-grow: 100%; /* Этот блок растягивается, заполняя доступное пространство */
     padding: 20px;
     }
 
 /* Стиль галереи */
 .gallery-container {
-    width: 100hv;
+    width: 100%;
+    height: 100%; /* Задаем высоту 100% от высоты экрана */
     display: flex;
-    gap: 10px;
     flex-wrap: wrap;
     justify-content: center; /* Центрируем блоки по горизонтали */
     align-items: center; /* Центрируем блоки по вертикали */
     gap: 20px; /* Отступы между блоками */
     padding: 20px; /* Добавляем немного отступа */
-    margin: 0; /* Убираем внешние отступы у контейнера */
-    height: 100vh; /* Задаем высоту 100% от высоты экрана */
+    margin: 60px; /* Убираем внешние отступы у контейнера */
+    
 }
 
 /* Стиль для каждого элемента галереи */
@@ -117,26 +121,25 @@ main {
     position: relative;
     overflow: hidden;
     border-radius: 0px; /* Закругленные углы */
-    box-sizing: border-box; /* Учитываем отступы и границы в общей ширине */
+}
+
+.gallery-item a {
+    display: block;  /* Чтобы ссылка растягивалась на весь элемент */
+    text-decoration: none;  /* Убираем подчеркивание */
 }
 
 /* Изображения в галерее */
 .gallery-item img {
-    width: 100%;
+    width: 100%; /* Если нужно растянуть изображение по ширине контейнера */
     display: block; /* Убирает пустые области снизу */
     border-radius: 0;
     object-fit: cover;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* На мобильных устройствах элементы будут занимать всю ширину */
-@media (max-width: 768px) {
-    .about-container {
-        gap: 10px; /* Уменьшаем расстояние между элементами */
-    }
+.gallery-item img:hover {
+    transform: scale(1.05);  /* Немного увеличиваем картинку при наведении */
 }
-
-
 
 /* Эффект при наведении на изображение */
 .gallery-item:hover img {
@@ -225,21 +228,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-    .about-container {
-        flex-direction: column; /* Элементы будут располагаться в колонку на маленьких экранах */
-        text-align: center;
-    }
 
-    .profile-image {
-        width: 50vw; /* Увеличиваем ширину изображения на маленьких экранах */
-        max-width: 200px; /* Максимальная ширина изображения */
-    }
-
-    .text-content {
-        max-width: 90%; /* Текст будет занимать больше пространства на мобильных устройствах */
-    }
-}
 
 /* Стили для раздела "Contact" */
 .contact-section {
@@ -308,8 +297,6 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #c3313d; /* Цвет кнопки при наведении */
 }
-
-
 
 
 

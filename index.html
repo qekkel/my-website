@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
+  
+  <!-- Подключаем CSS -->
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Подключаем шрифты -->
   <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
-  </head>
+  
+</head>
+
 <body>
   <header>
     <div class="header-top">
@@ -18,19 +25,20 @@
     <nav class="header-bottom">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <a href="#shop.html">Shop</a>
+      <a href="shop.html">Shop</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
-  
-  <main>
+
+
+
+
+<main>
     <section id="gallery" class="gallery-section">
       <div class="gallery-container">
         <div class="gallery-item" data-title="VAMPIRE">
           <a href="vampire.html">
-            <img src="girl-vampire-marceline.gif" alt="Vampire" class="gallery-image">
+            <img src="girl-vampire-marceline.gif" alt="Vampire">
           </a>
         </div>
         <div class="gallery-item" data-title="ZORRO">
@@ -122,45 +130,31 @@
     </section>
   </main>
 
-  <div id="projectThumbs" >
-    <div class="wrapper">
-      
-        
-          <a class="project" href="/vampire/">
-            <div>
-              <div class="project-image"><div class="intrinsic"><div class="content-fill"><img data-src="vampire.jpg" data-image="vampire.jpg" data-image-dimensions="800x1000" data-image-focal-point="0.5,0.5" alt="for_export.png"  data-load="false"/><noscript><img src="https://images.squarespace-cdn.com/content/v1/57b9bd609de4bba0e8d31c86/1628957056663-3FWJAPGFGFRZ8T9RUC0Q/for_export.png?format=500w"></noscript></div></div><div class="project-item-count">0</div></div>
-              <div class="project-title">Vampire</div>
-            </div>
-          </a>
-          <a class="project" href="/summertime/">
-            <div>
-              <div class="project-image"><div class="intrinsic"><div class="content-fill"><img data-src="vampire.jpg" data-image="vampire.jpg" data-image-dimensions="707x1000" data-image-focal-point="0.5,0.5" alt="Tumblr.png"  data-load="false"/><noscript><img src="https://images.squarespace-cdn.com/content/v1/57b9bd609de4bba0e8d31c86/1502877080781-HMNJNNROKCWQBRP57K0Y/Tumblr.png?format=500w"></noscript></div></div><div class="project-item-count">0</div></div>
-              <div class="project-title">summertime</div>
-            </div>
-          </a>
-        </div>
 
   <footer>
-    <p>© 2024 Olga Boiko</p>
+    <p>© 2025 Olga Boiko</p>
   </footer>
 
+  <!-- Подключение Masonry и ImagesLoaded -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const grid = document.querySelector('.gallery-container');
       const masonry = new Masonry(grid, {
         itemSelector: '.gallery-item',
-        columnWidth: 300,  // Укажите фиксированную ширину колонок
+        columnWidth: 300,  // Фиксированная ширина колонок
         percentPosition: true,
-        gutter: 20  // Отступы между колонками и элементами
+        gutter: 20  // Отступы между колонками
       });
 
-      imagesLoaded(grid, function() {
-        masonry.layout();
+      imagesLoaded(grid, function () {
+        masonry.layout();  // Перерасчет макета после загрузки изображений
       });
     });
   </script>
+
 </body>
+
 </html>
