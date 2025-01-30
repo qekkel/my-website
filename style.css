@@ -1,46 +1,30 @@
 /* Основной стиль для сайта */
+*,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
 body {
-    display: flex;
     flex-direction: column; /* Вертикальное расположение элементов */
     background-color: #EDDFDC;
     font-family: Arial, sans-serif;
     color: #333;
-    margin: 0;
     padding: 0;
-    min-height: 100%;  /* Заставляем body растягиваться на всю высоту */
-/* Убираем все отступы и поля */
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-* {
-    border: 0;
-    outline: none;
-}
-html, body {
+    
+    }
+html {
     height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    flex-direction: column;
 }
-/* Убираем отступы у контейнера */
-header, footer {
-    margin: 0;
-    padding: 0;
-}
-/* Глобальная настройка box-sizing */
-* {
-    box-sizing: border-box;
 }
 
 /* Шапка */
 header {
     background-color: #EDDFDC;
-    margin: 0;
-    padding: 20px; /* Добавлен отступ */
+    margin: 0px;
+    padding: 0px; /* Добавлен отступ */
     display: flex;
     flex-direction: column; /* Добавляем вертикальное расположение элементов */
     justify-content: center; /* Центрируем элементы по вертикали */
@@ -104,25 +88,26 @@ nav a:hover {
     color: #E75C67;
 }
 
-nav a:first-child {
-    margin-left: 50px;
-}
 
 /* Основной контент */
 main {
     flex-grow: 1; /* Этот блок растягивается, заполняя доступное пространство */
+    min-height: 70vh; /* Минимальная высота контента */
     padding: 20px;
-}
+    }
 
 /* Стиль галереи */
 .gallery-container {
-    width: 100%;
+    width: 100hv;
     display: flex;
+    gap: 10px;
     flex-wrap: wrap;
-    justify-content: space-evenly; /* Изображения будут равномерно распределяться */
-    gap: 20px; /* Расстояние между изображениями */
-    padding: 0; /* Убираем отступы внутри контейнера */
+    justify-content: center; /* Центрируем блоки по горизонтали */
+    align-items: center; /* Центрируем блоки по вертикали */
+    gap: 20px; /* Отступы между блоками */
+    padding: 20px; /* Добавляем немного отступа */
     margin: 0; /* Убираем внешние отступы у контейнера */
+    height: 100vh; /* Задаем высоту 100% от высоты экрана */
 }
 
 /* Стиль для каждого элемента галереи */
@@ -131,21 +116,13 @@ main {
     margin-bottom: 20px; /* Дополнительные отступы */
     position: relative;
     overflow: hidden;
-    border-radius: 5px; /* Закругленные углы */
+    border-radius: 0px; /* Закругленные углы */
     box-sizing: border-box; /* Учитываем отступы и границы в общей ширине */
-}
-
-/* Стиль для изображений в галерее */
-.gallery-image {
-    width: 100%;
-    height: 400px;  /* Установите фиксированную высоту */
-    object-fit: cover;  /* Это помогает изображению заполнять контейнер */
 }
 
 /* Изображения в галерее */
 .gallery-item img {
     width: 100%;
-    height: 100%; /* Высота изображения будет равна высоте контейнера */
     display: block; /* Убирает пустые области снизу */
     border-radius: 0;
     object-fit: cover;
@@ -154,8 +131,8 @@ main {
 
 /* На мобильных устройствах элементы будут занимать всю ширину */
 @media (max-width: 768px) {
-    .gallery-item {
-        width: 100%; /* Каждый элемент будет занимать всю ширину контейнера */
+    .about-container {
+        gap: 10px; /* Уменьшаем расстояние между элементами */
     }
 }
 
@@ -208,11 +185,11 @@ main {
 
 .about-container {
     display: flex;
-    justify-content: center; /* Центрируем контейнер по горизонтали */
-    gap: 20px; /* Отступ между изображением и текстом */
+    justify-content: center;
+    gap: 20px;
     padding: 20px;
-    max-width: 1200px; /* Ограничиваем максимальную ширину */
-    margin: 0 auto; /* Центрируем контейнер */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .about-photo-container {
@@ -294,7 +271,7 @@ h1 {
 }
 
 .form-row div {
-    width: 50%; /* Ширина каждого блока внутри строки составляет 48% от ширины строки */
+    width: calc(50% - 10px); /* Ширина каждого блока внутри строки составляет 48% от ширины строки */
 }
 
 label {
@@ -332,11 +309,15 @@ button[type="submit"]:hover {
     background-color: #c3313d; /* Цвет кнопки при наведении */
 }
 
+
+
+
+
 /* Стили футера */
 footer {
     background-color: #333;
     color: #fff;
-    padding: 20px 0;
+    padding: 0px;
     display: flex;
     padding: 10px 50px;
 }
