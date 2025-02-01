@@ -1,202 +1,264 @@
 /* Основной стиль для сайта */
-*,
-    *::before,
-    *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
+    display: flex;
     flex-direction: column; /* Вертикальное расположение элементов */
     background-color: #EDDFDC;
-    font-family: Arial, sans-serif;
+    font-family: 'Pangolin', Arial;
     color: #333;
     margin: 0; /* Обнуляем отступы */
     padding: 0; /* Обнуляем внутренние отступы */
     overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
-    
-    }
-html {
-    height: 100%;
-    margin: 0; /* Обнуляем отступы */
-    padding: 0; /* Обнуляем внутренние отступы */
-    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
-    flex-direction: column;
-}
 }
 
 /* Шапка */
 header {
-    background-color: #EDDFDC;
-    margin: 0px;
-    padding: 0px; /* Добавлен отступ */
-    display: flex;
-    flex-direction: column; /* Добавляем вертикальное расположение элементов */
-    justify-content: center; /* Центрируем элементы по вертикали */
-    align-items: center;
-    height: 200px; /* Увеличиваем высоту шапки */
+    background-color:#EDDFDC;
+    font-family: 'Pangolin';
+    padding: 20px;
+    text-align: center;
 }
 
-/* Контейнер для логотипа и текста */
 .logo-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
 }
-/* Убираем отступы внутри элементов */
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
 
-img {
-    display: block;  /* Убирает возможные пробелы под изображениями */
-    max-width: 100%;
+.logo {
+    max-width: 100px;
     height: auto;
 }
-/* Лого */
-.logo {
-    max-width: 200px;
-    height: 200px;
-}
 
-/* Текст рядом с логотипом */
 .logo-text {
-    font-family: 'Pangolin', sans-serif;
     font-size: 2rem;
     color: #3D6E69;
     margin-left: 10px;
     text-decoration: none;
+    font-family: 'Lilita One', cursive; /* Применяем шрифт Lalezar */
 }
 
-/* Меню */
 nav {
     display: flex;
-    justify-content: center; /* Центрируем меню */
-    width: 100%;
+    font-family: 'Palanquin';
+    justify-content: center;
+    margin-top: 20px;
 }
 
 nav a {
-    margin-left: 20px;
+    margin: 0 15px;
     text-decoration: none;
     color: #333;
-    font-weight: bold;
+    font-weight: bold; /* Используем жирный стиль (700), если выбран */
     font-size: 1rem;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Palanquin', sans-serif; /* Указываем новый шрифт */
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
     color: #E75C67;
 }
 
-
 /* Основной контент */
 main {
-    flex-grow: 100%; /* Этот блок растягивается, заполняя доступное пространство */
+    flex-grow: 1;
     padding: 20px;
-    }
+}
 
 /* Стиль галереи */
-.gallery-container {
+.gallery-section {
     width: 100%;
-    height: 100%; /* Задаем высоту 100% от высоты экрана */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.gallery-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Центрируем блоки по горизонтали */
-    align-items: center; /* Центрируем блоки по вертикали */
-    gap: 20px; /* Отступы между блоками */
-    padding: 20px; /* Добавляем немного отступа */
-    margin: 60px; /* Убираем внешние отступы у контейнера */
-    
+    gap: 20px;
+    justify-content: center;
 }
 
-/* Стиль для каждого элемента галереи */
 .gallery-item {
-    width: 300px; /* Фиксированная ширина для каждого элемента */
-    margin-bottom: 20px; /* Дополнительные отступы */
     position: relative;
     overflow: hidden;
-    border-radius: 0px; /* Закругленные углы */
+    border-radius: 0px;
+    transition: transform 0.3s ease;
+    width: calc(33.333% - 20px); /* 3 элемента на строку */
+    max-width: calc(100% / 3 - 20px);
 }
 
-.gallery-item a {
-    display: block;  /* Чтобы ссылка растягивалась на весь элемент */
-    text-decoration: none;  /* Убираем подчеркивание */
-}
-
-/* Изображения в галерее */
 .gallery-item img {
-    width: 100%; /* Если нужно растянуть изображение по ширине контейнера */
-    display: block; /* Убирает пустые области снизу */
-    border-radius: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-radius: 0px;
+    transition: opacity 0.3s ease;
 }
 
-.gallery-item img:hover {
-    transform: scale(1.05);  /* Немного увеличиваем картинку при наведении */
-}
-
-/* Эффект при наведении на изображение */
 .gallery-item:hover img {
     opacity: 0.7;
 }
 
-/* Добавляем overlay с красным цветом при наведении */
-.gallery-item:hover::before {
-    content: "";
+.gallery-item::after {
+    content: attr(data-title);
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #E75C67;
-    opacity: 0.9;
-    z-index: 1;
+    bottom: 10px;
+    left: 10px;
+    color: #fff;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 0px;
+
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* Добавляем overlay и текст с названием */
 .gallery-item:hover::after {
-    content: attr(data-title);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #ffffff;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 10px;
-    width: 90%;
+    opacity: 1;
+}
+
+/* Стиль модального окна */
+.modal {
+    display: none; /* По умолчанию скрыто */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
     text-align: center;
-    box-sizing: border-box;
-    z-index: 2;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Футер */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+}
+
+.social-icons a {
+    margin-left: 10px;
+}
+
+.social-icon {
+    width: 20px; /* Устанавливаем размер иконок */
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Адаптивность для галереи */
+@media (max-width: 1200px) {
+    .gallery-item {
+        width: calc(33.333% - 20px); /* 3 элемента на строку */
+        max-width: calc(33.333% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-item {
+        width: calc(50% - 20px); /* 2 элемента на строку */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-item {
+        width: calc(100% - 20px); /* 1 элемент на строку */
+        max-width: calc(100% - 20px);
+    }
 }
 
 /* Секция About */
 .about-section {
+    font-family: Arial;
     display: flex;
     justify-content: center; /* Центрируем контент по горизонтали */
-    align-items: center;     /* Выравниваем элементы по вертикали */
+    align-items: flex-start; /* Выравниваем элементы по верхнему краю */
     padding: 20px;
+    background-color: #EDDFDC;
 }
 
 .about-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     padding: 20px;
     max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .about-photo-container {
-    margin-right: 30px; /* Отступ справа от фото */
     flex: 0 0 40%; /* Фиксированная ширина 40% */
     position: relative;
     overflow: hidden;
@@ -206,29 +268,58 @@ main {
     width: 100%; /* Растягиваем фото на всю ширину контейнера */
     height: auto; /* Сохраняем пропорции */
     object-fit: cover; /* Масштабируем изображение */
-}
-
-.profile-image {
-    width: 30vw;  /* Ширина изображения — 30% от ширины окна */
-    height: auto; /* Высота будет сохранять пропорции */
-    max-width: 250px; /* Максимальная ширина изображения */
-    border-radius: 50%;
-    object-fit: cover;
+    border-radius: 0px;
 }
 
 .text-content {
+    flex: 1;
     max-width: 600px; /* Ограничиваем максимальную ширину текста */
     font-size: 1.1rem; /* Размер шрифта */
     line-height: 1.6; /* Межстрочный интервал */
     color: #333;
 }
 
-h1 {
-    font-size: 2rem;
+.text-content h2 {
+    font-size: 2.5rem;
+    color: #333;
     margin-bottom: 20px;
 }
 
+.text-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 20px;
+}
 
+.text-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.text-content ul li {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Адаптивность для секции About */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-photo-container {
+        margin-right: 0;
+        margin-bottom: 20px;
+        flex: 0 0 100%;
+    }
+
+    .text-content {
+        padding: 0;
+    }
+}
 
 /* Стили для раздела "Contact" */
 .contact-section {
@@ -276,8 +367,8 @@ textarea {
     padding: 10px; /* Отступы внутри полей */
     margin-bottom: 10px; /* Отступ снизу между полями */
     border: 1px solid #ccc; /* Рамка вокруг полей */
-    border-radius: 5px; /* Округленные углы */
-    font-size: 16px; /* Размер шрифта в полях */
+    border-radius: 0px; /* Округленные углы */
+    font-size: 16px; /* Размер шрифта */
 }
 
 textarea {
@@ -296,42 +387,4 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #c3313d; /* Цвет кнопки при наведении */
-}
-
-
-
-/* Стили футера */
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 0px;
-    display: flex;
-    padding: 10px 50px;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
-    font-size: 1rem;
-}
-
-.social-icons {
-    display: flex;
-    align-items: center;
-}
-
-.social-icons a {
-    margin-left: 20px;
-}
-
-.social-icon {
-    width: 15px; /* Устанавливаем размер иконок */
-    height: auto;
-    transition: transform 0.3s ease;
 }

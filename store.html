@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  
+  <!-- Link to CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Link to Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+  
+</head>
+
+<body>
+  <header>
+    <div class="header-top">
+      <a href="index.html" class="logo-container">
+        <img src="girl-frog-psd.png" alt="Logo" class="logo">
+        <div class="logo-text">Olga Qekkel</div>
+      </a>
+    </div>
+    <nav class="header-bottom">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="store.html">Store</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Shop Section -->
+  <section id="shop">
+    <h2>Our Products</h2>
+    <div class="product-gallery">
+      <div class="product-item">
+        <img src="product1.jpg" alt="Product 1">
+        <h3>Product 1</h3>
+        <p>Description of product 1</p>
+        <span>Price: $100</span>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+      <div class="product-item">
+        <img src="product2.jpg" alt="Product 2">
+        <h3>Product 2</h3>
+        <p>Description of product 2</p>
+        <span>Price: $150</span>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+      <!-- More products can be added in a similar manner -->
+    </div>
+  </section>
+
+  <!-- Cart Section -->
+  <section id="cart">
+    <h2>Your Cart</h2>
+    <div id="cart-items">
+      <p>Your cart is empty.</p>
+    </div>
+    <button id="checkout-btn" style="display:none;">Proceed to Checkout</button>
+  </section>
+
+  <footer>
+    <p>© 2025 Olga Boiko</p>
+  </footer>
+
+  <script>
+    let cart = [];
+
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function () {
+            const productItem = this.closest('.product-item');
+            const productName = productItem.querySelector('h3').innerText;
+            const productPrice = productItem.querySelector('span').innerText;
+
+            cart.push({ name: productName, price: productPrice });
+            updateCart();
+        });
+    });
+
+    function updateCart() {
+        const cartContainer = document.getElementById('cart-items');
+        cartContainer.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+            document.getElementById('checkout-btn').style.display = 'none';
+        } else {
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.textContent = `${item.name} - ${item.price}`;
+                cartContainer.appendChild(cartItem);
+            });
+            document.getElementById('checkout-btn').style.display = 'block';
+        }
+    }
+  </script>
+
+</body>
+
+</html>
