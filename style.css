@@ -99,7 +99,7 @@ main {
 
 .gallery-item img {
     width: 100%;
-    height: 100%;
+    height: auto; /* Сохраняем пропорции */
     object-fit: cover;
     border-radius: 0px;
     transition: opacity 0.3s ease;
