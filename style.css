@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column; /* Вертикальное расположение элементов */
     background-color: #EDDFDC;
-    font-family: 'Pangolin', Arial;
+    font-family: 'Palanquin', Arial;
     color: #333;
     margin: 0; /* Обнуляем отступы */
     padding: 0; /* Обнуляем внутренние отступы */
@@ -19,7 +19,7 @@ body {
 /* Шапка */
 header {
     background-color:#EDDFDC;
-    font-family: 'Pangolin';
+    font-family: 'Palanquin';
     padding: 20px;
     text-align: center;
 }
@@ -99,7 +99,7 @@ main {
 
 .gallery-item img {
     width: 100%;
-    height: auto; /* Сохраняем пропорции */
+    height: 100%; /* Сохраняем пропорции */
     object-fit: cover;
     border-radius: 0px;
     transition: opacity 0.3s ease;
@@ -243,7 +243,7 @@ footer p {
 
 /* Секция About */
 .about-section {
-    font-family: Arial;
+    font-family: 'Palanquin';
     display: flex;
     justify-content: center; /* Центрируем контент по горизонтали */
     align-items: flex-start; /* Выравниваем элементы по верхнему краю */

@@ -15,8 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
     gutter: 20  // Вы можете также уменьшить gutter, если нужно
   });
 
-  // После того как изображения загружены, вызываем layout для Masonry
+  // Проверяем, загружена ли библиотека imagesLoaded
+  if (typeof imagesLoaded === 'undefined') {
+    console.error('Библиотека imagesLoaded не загружена!');
+    return;
+  }
+
+  // Ждем загрузки всех изображений в контейнере
   imagesLoaded(grid, function() {
+    // После загрузки всех изображений выполняем layout
     masonry.layout();
   });
 
@@ -24,5 +31,4 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', function () {
     masonry.layout();
   });
-
 });
