@@ -29,6 +29,7 @@ header {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    margin-right: auto; /* Сдвигаем влево, добавляя автоматический отступ справа */
 }
 
 .logo {
@@ -39,7 +40,7 @@ header {
 .logo-text {
     font-size: 2rem;
     color: #3D6E69;
-    margin-left: 10px;
+    margin-left: 5px;
     text-decoration: none;
     font-family: 'Lilita One', cursive; /* Применяем шрифт Lalezar */
 }
@@ -82,7 +83,7 @@ main {
 .gallery-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 20px; /* Добавляем отступы между элементами */
     justify-content: center;
 }
 
@@ -93,6 +94,7 @@ main {
     transition: transform 0.3s ease;
     width: calc(33.333% - 20px); /* 3 элемента на строку */
     max-width: calc(100% / 3 - 20px);
+    margin-bottom: 20px; /* Добавляем отступ снизу */
 }
 
 .gallery-item img {
