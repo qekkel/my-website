@@ -395,8 +395,6 @@ button[type="submit"]:hover {
 
 
 
-
-
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 колонки */
@@ -404,7 +402,8 @@ button[type="submit"]:hover {
     padding: 20px;
   }
   
-  .product-item {
+ /* Стили для карточки товара */
+ .product-item {
     position: relative;
     border: 0px solid #ddd;
     border-radius: 10px;
@@ -413,7 +412,8 @@ button[type="submit"]:hover {
     box-shadow: none;
     transition: all 0.3s ease;
   }
-  
+
+
   .product-item img {
     width: 100%;
     border-radius: 0px;
@@ -424,15 +424,66 @@ button[type="submit"]:hover {
   }
   
   .product-name {
-    font-size: 1.2em;
-    font-weight: bold;
+  font-family: '', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #3b938a;
+}
+  
+  .product-price {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 16px;
+    color: #e75c67;
+    margin-top: 5px;
+  }
+  
+  .product-details p {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+  }
+
+  .product-detail {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 50px auto;
+  }
+  
+  .product-detail img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .product-info {
+    flex: 1;
   }
   
   .product-price {
-    font-size: 1em;
-    color: #888;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
   }
   
+  .add-to-cart {
+  background-color: #3b938a;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  font-family: 'Lilita One', sans-serif;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+  background-color: #2e7c68;
+}
   .sold-out {
     position: absolute;
     top: 10px;
@@ -464,4 +515,47 @@ button[type="submit"]:hover {
     .product-grid {
       grid-template-columns: 1fr; /* 1 колонка для мобильных экранов */
     }
+  }
+
+
+
+
+  /* Стиль для контейнера корзины */
+#cart-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Скрываем корзину по умолчанию */
+  }
+  
+  #cart-container.show {
+    display: block; /* Показываем корзину, если есть товары */
+  }
+
+  /* Стили для корзины */
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .cart-icon span {
+    margin-left: 5px;
+  }
+  
+  #cart-total-price {
+    margin-left: 10px;
   }
