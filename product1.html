@@ -18,9 +18,10 @@
   <!-- Шапка -->
   <header>
     <div class="header-top">
-      <a href="site" class="logo-container">
+      <a href="index.html" class="logo-container">
         <img src="girl-frog-psd.png" alt="Logo" class="logo">
         <div class="logo-text">Olga Qekkel</div>
+
       </a>
     </div>
     <nav class="header-bottom">
@@ -30,39 +31,65 @@
       <a href="contact.html">Contact</a>
     </nav>
   </header>
-
-
+  
+<!-- Иконка корзины в правом верхнем углу -->
+<div id="cart-icon" class="cart-icon">
+    <span id="cart-count">0</span>
+    <span id="cart-total-price">$0.00</span>
+  </div>
+  
   <div class="product-detail">
-    <img src="store/art.png" alt="Product 1">
+    <img src="store/art.png" alt="Painting Twins">
     <div class="product-info">
-      <h1>Product 1</h1>
-      <p>Description of the product goes here. High quality artwork.</p>
-      <p class="product-price">$20.00</p>
+      <h1>Painting "Twins"</h1>
+      <p><strong>Material:</strong> Primed canvas board</p>
+      <p><strong>Size:</strong> 25x25 cm</p>
+      <p><strong>Composition:</strong> 100% cotton, 280 gsm</p>
+      <p><strong>Design:</strong> Deep black background with vibrant blue floral patterns</p>
+      <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
+      <p class="product-price">Price: <span class="price-value">$20.00</span></p>
 
       <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" value="1" min="1">
+      <input type="number" id="quantity" value="1" min="1"step="1" required>
 
-      <button class="add-to-cart" data-name="Product 1" data-price="20.00">Add to Cart</button>
+      <button class="add-to-cart" data-name="Painting Twins" data-price="20.00">Add to Cart</button>
     </div>
-  </div>
+</div>
 
   <footer>
     <p>© 2025 Olga Boiko</p>
   </footer>
 
+
+  
   <script>
+    document.addEventListener('DOMContentLoaded', function () {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     document.querySelector('.add-to-cart').addEventListener('click', function () {
         const productName = this.getAttribute('data-name');
-        const productPrice = this.getAttribute('data-price');
-        const quantity = document.getElementById('quantity').value;
+        const productPrice = parseFloat(this.getAttribute('data-price'));
+        const quantityInput = document.getElementById('quantity');
+        const quantity = parseInt(quantityInput.value);
 
-        cart.push({ name: productName, price: productPrice, quantity: quantity });
+        if (quantity <= 0 || isNaN(quantity)) {
+            alert('Please enter a valid quantity.');
+            return;
+        }
+
+        let existingProduct = cart.find(item => item.name === productName);
+        if (existingProduct) {
+            existingProduct.quantity += quantity;
+        } else {
+            cart.push({ name: productName, price: productPrice, quantity: quantity });
+        }
+
         localStorage.setItem('cart', JSON.stringify(cart));
         alert('Added to cart!');
     });
-  </script>
+});
+updateCartCount();
+</script>
 
 </body>
 </html>

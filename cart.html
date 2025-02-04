@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header>
+    <div class="header-top">
+      <a href="index.html" class="logo-container">
+        <img src="girl-frog-psd.png" alt="Logo" class="logo">
+        <div class="logo-text">Olga Qekkel</div>
+      </a>
+    </div>
+    <nav class="header-bottom">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="store.html">Store</a>
+      <a href="cart.html">Cart 🛒 <span id="cart-count">(0)</span></a> <!-- Количество товаров в корзине -->
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+<!-- Иконка корзины в правом верхнем углу -->
+<div id="cart-icon" class="cart-icon">
+    <span id="cart-count">0</span>
+    <span id="cart-total-price">$0.00</span>
+  </div>
+  
+  <h1>Shopping Cart</h1>
+  <div id="cart-container">
+    <p>Your cart is empty.</p>
+  </div>
+
+  <button id="clear-cart">Clear Cart</button>
+
+ 
+
+  <!-- 🟢 JavaScript код вставляем здесь, перед `</body>` -->
+  <script>
+    function updateCartUI() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartContainer = document.getElementById('cart-container');
+        let cartCount = document.getElementById('cart-count');
+
+        if (cart.length === 0) {
+            cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+            cartCount.innerText = "(0)";
+            return;
+        }
+
+        let totalPrice = 0;
+        cartContainer.innerHTML = "<ul>";
+        cart.forEach((item, index) => {
+            totalPrice += item.price * item.quantity;
+            cartContainer.innerHTML += `
+                <li>
+                    <strong>${item.name}</strong> - ${item.quantity} pcs - $${(item.price * item.quantity).toFixed(2)}
+                    <button onclick="removeFromCart(${index})">Remove</button>
+                </li>`;
+        });
+        cartContainer.innerHTML += `</ul>
+            <p><strong>Total: $${totalPrice.toFixed(2)}</strong></p>
+            <button onclick="checkout()">Checkout</button>`;
+        
+        cartCount.innerText = `(${cart.length})`;
+    }
+
+    function removeFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartUI();
+    }
+
+    function checkout() {
+        alert("Checkout functionality will be added soon!");
+    }
+
+    document.getElementById('clear-cart').addEventListener('click', function() {
+        localStorage.removeItem('cart');
+        updateCartUI();
+    });
+
+    updateCartUI();
+  </script>
+
+</body>
+
+
+<footer>
+    <p>© 2025 Olga Boiko</p>
+  </footer>
+
+
+</html>
