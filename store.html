@@ -31,24 +31,42 @@
     </nav>
   </header>
 
+
+  <!-- Магазин -->
   <div class="product-grid">
     <div class="product-item">
-      <img src="store/art.png" alt="Product 1">
+      <a href="product1.html">
+        <img src="store/art.png" alt="Product 1">
+      </a>
       <div class="product-info">
-        <h3 class="product-name">Product 1</h3>
+        <h3 class="product-name">Painting Twins</h3>
         <p class="product-price">$20.00</p>
-        <div class="sold-out">Sold Out</div>
       </div>
     </div>
     <div class="product-item">
-      <img src="store/at.png" alt="Product 2">
+      <a href="product2.html">
+        <img src="store/at.png" alt="Product 2">
+      </a>
       <div class="product-info">
-        <h3 class="product-name">Product 2</h3>
+        <h3 class="product-name">Adventure Time Postcard</h3>
         <p class="product-price">$25.00</p>
-        <div class="sold-out">Sold Out</div>
       </div>
     </div>
-    <!-- Add more products here -->
+    <div class="product-item">
+      <a href="product3.html">
+        <img src="store/bild09.png" alt="Product 3">
+      </a>
+      <div class="product-info">
+        <h3 class="product-name">Bye-bye</h3>
+        <p class="product-price">$25.00</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Корзина -->
+  <div class="cart-container">
+    <div id="cart-items"></div>
+    <button id="checkout-btn" style="display: none;">Checkout</button>
   </div>
 
   <footer>
@@ -61,8 +79,8 @@
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function () {
             const productItem = this.closest('.product-item');
-            const productName = productItem.querySelector('h3').innerText;
-            const productPrice = productItem.querySelector('span').innerText;
+            const productName = productItem.querySelector('.product-name').innerText;
+            const productPrice = productItem.querySelector('.product-price').innerText;
 
             cart.push({ name: productName, price: productPrice });
             updateCart();
@@ -88,5 +106,4 @@
   </script>
 
 </body>
-
 </html>
