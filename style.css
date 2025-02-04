@@ -243,7 +243,7 @@ footer p {
 
 /* Секция About */
 .about-section {
-    font-family: 'Palanquin';
+    font-family: 'Palanquin, Lilita One';
     display: flex;
     justify-content: center; /* Центрируем контент по горизонтали */
     align-items: flex-start; /* Выравниваем элементы по верхнему краю */
@@ -390,3 +390,78 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #c3313d; /* Цвет кнопки при наведении */
 }
+
+
+
+
+
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .product-item {
+    position: relative;
+    border: 0px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: none;
+    transition: all 0.3s ease;
+  }
+  
+  .product-item img {
+    width: 100%;
+    border-radius: 0px;
+  }
+  
+  .product-info {
+    margin-top: 10px;
+  }
+  
+  .product-name {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .product-price {
+    font-size: 1em;
+    color: #888;
+  }
+  
+  .sold-out {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border-radius: 0px;
+    display: none; /* Hidden by default */
+  }
+  
+  .product-item.sold-out .sold-out {
+    display: block; /* Show "Sold Out" when the product is out of stock */
+  }
+  
+  .product-item:hover {
+    transform: scale(1.05); /* Увеличиваем картинку на 5% */
+    box-shadow: none;
+  }
+
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 колонки для средних экранов */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: 1fr; /* 1 колонка для мобильных экранов */
+    }
+  }
