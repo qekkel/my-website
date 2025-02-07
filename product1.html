@@ -21,7 +21,6 @@
       <a href="index.html" class="logo-container">
         <img src="girl-frog-psd.png" alt="Logo" class="logo">
         <div class="logo-text">Olga Qekkel</div>
-
       </a>
     </div>
     <nav class="header-bottom">
@@ -29,15 +28,11 @@
       <a href="about.html">About</a>
       <a href="store.html">Store</a>
       <a href="contact.html">Contact</a>
+  
     </nav>
   </header>
-  
-<!-- Иконка корзины в правом верхнем углу -->
-<div id="cart-icon" class="cart-icon">
-    <span id="cart-count">0</span>
-    <span id="cart-total-price">$0.00</span>
-  </div>
-  
+
+  <main>
   <div class="product-detail">
     <img src="store/art.png" alt="Painting Twins">
     <div class="product-info">
@@ -60,36 +55,7 @@
     <p>© 2025 Olga Boiko</p>
   </footer>
 
-
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    document.querySelector('.add-to-cart').addEventListener('click', function () {
-        const productName = this.getAttribute('data-name');
-        const productPrice = parseFloat(this.getAttribute('data-price'));
-        const quantityInput = document.getElementById('quantity');
-        const quantity = parseInt(quantityInput.value);
-
-        if (quantity <= 0 || isNaN(quantity)) {
-            alert('Please enter a valid quantity.');
-            return;
-        }
-
-        let existingProduct = cart.find(item => item.name === productName);
-        if (existingProduct) {
-            existingProduct.quantity += quantity;
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: quantity });
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert('Added to cart!');
-    });
-});
-updateCartCount();
-</script>
-
+<!-- Подключаем JavaScript -->
+<script src="javascript.js"></script>
 </body>
 </html>

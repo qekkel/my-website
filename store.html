@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
-
 </head>
 <body>
   <!-- Шапка -->
@@ -30,85 +29,103 @@
       <a href="contact.html">Contact</a>
     </nav>
   </header>
-<!-- Иконка корзины в правом верхнем углу -->
-<div id="cart-icon" class="cart-icon">
-  <span id="cart-count">0</span>
-  <span id="cart-total-price">$0.00</span>
-</div>
 
-
-  <!-- Магазин -->
-  <div class="product-grid">
-    <div class="product-item">
-      <a href="product1.html">
-        <img src="store/art.png" alt="Product 1">
-      </a>
-      <div class="product-info">
-        <h3 class="product-name">Painting Twins</h3>
-        <p class="product-price">$20.00</p>
+  <main>
+    <!-- Магазин -->
+    <div class="product-grid">
+      <div class="product-item" data-id="1">
+        <a href="product1.html">
+          <img src="store/art.png" alt="Product 1">
+        </a>
+        <div class="product-info">
+          <h3 class="product-name">Painting Twins</h3>
+          <p class="product-price">$20.00</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-item" data-id="2">
+        <a href="product2.html">
+          <img src="store/at.png" alt="Product 2">
+        </a>
+        <div class="product-info">
+          <h3 class="product-name">Adventure Time Postcard</h3>
+          <p class="product-price">$25.00</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product-item" data-id="3">
+        <a href="product3.html">
+          <img src="store/bild09.png" alt="Product 3">
+        </a>
+        <div class="product-info">
+          <h3 class="product-name">Bye-bye</h3>
+          <p class="product-price">$25.00</p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
       </div>
     </div>
-    <div class="product-item">
-      <a href="product2.html">
-        <img src="store/at.png" alt="Product 2">
-      </a>
-      <div class="product-info">
-        <h3 class="product-name">Adventure Time Postcard</h3>
-        <p class="product-price">$25.00</p>
-      </div>
+
+    <!-- Корзина -->
+    <div class="cart-container">
+      <div id="cart-items"></div>
+      <button id="checkout-btn" style="display: none;">Checkout</button>
     </div>
-    <div class="product-item">
-      <a href="product3.html">
-        <img src="store/bild09.png" alt="Product 3">
-      </a>
-      <div class="product-info">
-        <h3 class="product-name">Bye-bye</h3>
-        <p class="product-price">$25.00</p>
-      </div>
-    </div>
-  </div>
+  </main>
 
-  <!-- Корзина -->
-  <div class="cart-container">
-    <div id="cart-items"></div>
-    <button id="checkout-btn" style="display: none;">Checkout</button>
-  </div>
-
-  <footer>
-    <p>© 2025 Olga Boiko</p>
-  </footer>
-
+  <!-- Подключаем JavaScript -->
+  <script src="javascript.js"></script>
   <script>
-    let cart = [];
+    // Простой пример логики для корзины
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = document.getElementById('cart-count');
+    const cartTotalPrice = document.getElementById('cart-total-price');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const cartItems = document.getElementById('cart-items');
 
+    // Функция обновления отображения корзины
+    function updateCart() {
+      // Обновление количества товаров и общей цены
+      const totalItems = cart.length;
+      const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+
+      cartCount.textContent = totalItems;
+      cartTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
+
+      // Показ кнопки оформления заказа
+      checkoutBtn.style.display = totalItems > 0 ? 'block' : 'none';
+
+      // Отображение товаров в корзине
+      cartItems.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <img src="${item.img}" alt="${item.name}">
+          <span>${item.name}</span>
+          <span>$${item.price.toFixed(2)}</span>
+        </div>
+      `).join('');
+    }
+
+    // Обработчик добавления товара в корзину
     document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function () {
-            const productItem = this.closest('.product-item');
-            const productName = productItem.querySelector('.product-name').innerText;
-            const productPrice = productItem.querySelector('.product-price').innerText;
+      button.addEventListener('click', () => {
+        const product = button.closest('.product-item');
+        const id = product.getAttribute('data-id');
+        const name = product.querySelector('.product-name').textContent;
+        const price = parseFloat(product.querySelector('.product-price').textContent.replace('$', ''));
+        const img = product.querySelector('img').src;
 
-            cart.push({ name: productName, price: productPrice });
-            updateCart();
-        });
+        const newItem = { id, name, price, img };
+        cart.push(newItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
+      });
     });
 
-    function updateCart() {
-        const cartContainer = document.getElementById('cart-items');
-        cartContainer.innerHTML = '';
-
-        if (cart.length === 0) {
-            cartContainer.innerHTML = '<p>Your cart is empty.</p>';
-            document.getElementById('checkout-btn').style.display = 'none';
-        } else {
-            cart.forEach(item => {
-                const cartItem = document.createElement('div');
-                cartItem.textContent = `${item.name} - ${item.price}`;
-                cartContainer.appendChild(cartItem);
-            });
-            document.getElementById('checkout-btn').style.display = 'block';
-        }
-    }
+    // Инициализация корзины при загрузке
+    updateCart();
   </script>
-
 </body>
+
+<footer>
+  <p>© 2025 Olga Boiko</p>
+</footer>
 </html>
