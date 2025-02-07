@@ -5,57 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
-
 </head>
 <body>
-  <!-- Шапка -->
-  <header>
-    <div class="header-top">
-      <a href="index.html" class="logo-container">
-        <img src="girl-frog-psd.png" alt="Logo" class="logo">
-        <div class="logo-text">Olga Qekkel</div>
-      </a>
+  <div class="wrapper">
+    <!-- Шапка -->
+    <header>
+      <div class="header-top">
+        <a href="index.html" class="logo-container">
+          <img src="girl-frog-psd.png" alt="Логотип: Девушка-лягушка" class="logo">
+          <div class="logo-text">Olga Qekkel</div>
+        </a>
+      </div>
+      <nav class="header-bottom">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="store.html">Store</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+    <!-- Иконка корзины -->
+    <div id="cart-icon" style="display: none;">
+      🛒 <span id="cart-count">0</span> | <span id="cart-total-price">$0.00</span>
+      <button id="clear-cart-btn">Clear Cart</button>
+      <button id="checkout-btn">Proceed to Checkout</button>
     </div>
-    <nav class="header-bottom">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="store.html">Store</a>
-      <a href="contact.html">Contact</a>
-  
-    </nav>
-  </header>
-
-  <main>
-  <div class="product-detail">
-    <img src="store/art.png" alt="Painting Twins">
-    <div class="product-info">
-      <h1>Painting "Twins"</h1>
-      <p><strong>Material:</strong> Primed canvas board</p>
-      <p><strong>Size:</strong> 25x25 cm</p>
-      <p><strong>Composition:</strong> 100% cotton, 280 gsm</p>
-      <p><strong>Design:</strong> Deep black background with vibrant blue floral patterns</p>
-      <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
-      <p class="product-price">Price: <span class="price-value">$20.00</span></p>
-
-      <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" value="1" min="1"step="1" required>
-
-      <button class="add-to-cart" data-name="Painting Twins" data-price="20.00">Add to Cart</button>
+    <main>
+      <div class="product-detail">
+        <img src="store/art.png" alt="Painting Twins">
+        <div class="product-info">
+          <h1>Painting "Twins"</h1>
+          <p class="product-price">Price: <span class="price-value">$20.00</span></p>
+          <p><strong>Material:</strong> Primed canvas board</p>
+          <p><strong>Size:</strong> 25x25 cm</p>
+          <p><strong>Composition:</strong> 100% cotton, 280 gsm</p>
+          <p><strong>Design:</strong> Deep black background with vibrant blue floral patterns</p>
+          <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
+          <p><strong>Quantity:</strong> 1</p>
+          <button class="add-to-cart" data-name="Painting Twins" data-price="20.00">Add to Cart</button>
+        </div>
+      </div>
+    </main>
+    <div id="checkout-btn-container" style="display: none;">
+      <button>Proceed to Checkout</button>
     </div>
-</div>
-
+  </div>
+  <!-- Футер -->
   <footer>
     <p>© 2025 Olga Boiko</p>
   </footer>
-
-<!-- Подключаем JavaScript -->
-<script src="javascript.js"></script>
+  <!-- Подключаем JavaScript -->
+  <script src="javascript.js"></script>
 </body>
 </html>
