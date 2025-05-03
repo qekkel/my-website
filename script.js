@@ -151,4 +151,30 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
+    function optimizeImageSizes() {
+  document.querySelectorAll('.gallery-item img').forEach(img => {
+    const container = img.closest('.gallery-item');
+    if (container.offsetWidth < img.naturalWidth) {
+      img.style.width = `${container.offsetWidth}px`;
+      img.style.height = 'auto';
+    }
+  });
+}
+window.addEventListener('load', optimizeImageSizes);
 });
+document.addEventListener('DOMContentLoaded', function() {
+    // Сначала скрываем всё тело
+    document.body.style.opacity = 0;
+    
+    // Ждём загрузки всех изображений
+    imagesLoaded('.gallery-container', function() {
+      // Плавное появление всей страницы
+      document.body.style.transition = 'opacity 0.7s ease-in';
+      document.body.style.opacity = 1;
+      
+      // Показываем футер с небольшой задержкой
+      setTimeout(function() {
+        document.querySelector('footer').classList.add('show');
+      }, 300);
+    });
+  });

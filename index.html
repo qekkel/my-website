@@ -12,10 +12,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Palanquin&display=swap" as="style">
-  <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+<!-- 1. Предзагрузка основного шрифта -->
+  <!-- 2. Асинхронная загрузка CSS -->
+  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    
+  <!-- 3. Предзагрузка логотипа -->
+  <link rel="preload" href="favicon/favicon.svg" as="image">
 </head>
+
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Palanquin&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer></script>
+</head>
+
+<script>
+  // Показываем страницу сразу, но галерею — только после загрузки
+  document.addEventListener('DOMContentLoaded', function() {
+    // Ждем загрузки всех изображений в галерее
+    imagesLoaded('.gallery-container', function() {
+      document.querySelector('.gallery-container').style.opacity = 1;
+    });
+  });
+</script>
+
 <body>
       <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58QCTH55"
@@ -157,9 +176,10 @@
   </div>
 
   <!-- Футер -->
-  <footer>
+  <footer class="hidden-footer">
     <p>© 2025 Olga Boiko</p>
   </footer>
+
 
   <!-- Подключение библиотек -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>

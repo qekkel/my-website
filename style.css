@@ -1,4 +1,9 @@
-body, header {
+
+/* Для плавного скролла всей страницы */
+html {
+    scroll-behavior: smooth;
+  }
+  body, header {
     background-color: #eddfdc;
 }
 body, nav a {
@@ -103,18 +108,19 @@ main {
     display: flex; /* Убираем display: none */
     opacity: 1; /* Вместо этого делаем прозрачной */
     transition: opacity 0.5s;
-  }
-  
-  .gallery-container.loaded {
-    opacity: 1;
+
   }
 
 .gallery-item {
+
+
+  width: 100%;
+  height: auto;
+  min-height: 250px; /* Запасная высота */
     position: relative;
     overflow: hidden;
     border-radius: 0;
     transition: transform .3s;
-    width: calc(33.333% - 20px);
     max-width: calc(100% / 3 - 20px);
 }
 #cart, #cart-icon, .modal {
@@ -177,14 +183,30 @@ main {
     text-decoration: none;
     cursor: pointer;
 }
+
 footer {
     background-color: #333;
     color: #fff;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
     margin-top: auto; /* Добавляем margin-top: auto для подвала */
     padding: 20px 0; /* Добавляем padding для подвала */
 }
+/* Класс для отображения */
+footer.show {
+    opacity: 1;
+  }
+
+/* Основной стиль футера */
+footer {
+    opacity: 1 !important; /* Всегда видим */
+    transform: translateY(0) !important; /* Убираем сдвиг если был */
+    transition: none; /* Отключаем анимацию */
+    position: relative; /* Фиксируем положение */
+    z-index: 10; /* Чтобы был поверх других элементов */
+  }
 
 .footer-content {
     justify-content: space-between;
@@ -669,3 +691,29 @@ button[type=submit] {
     opacity: 0;
     transition: opacity .3s;
 }
+
+/* Добавьте в конец style.css */
+.gallery-container {
+    opacity: 0;
+    transition: opacity 0.5s;
+    margin-bottom: 20px; /* Отступ от футера */
+  }
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  body {
+    visibility: visible !important; /* Отменяет скрытие, если где-то есть */
+  }
+
+  .hidden-footer {
+    display: none !important; /* Полностью скрываем */
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+  }
+  
+  .visible-footer {
+    display: block; /* Показываем */
+    opacity: 1;
+  }
