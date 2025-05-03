@@ -1,180 +1,127 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Проверяем, загружена ли библиотека imagesLoaded
-    if (typeof imagesLoaded === 'undefined') {
-        console.error('Библиотека imagesLoaded не найдена');
-        return;
-    }
-
-    // Инициализация Masonry для галереи
-    let galleryContainer = document.querySelector(".gallery-container");
-    if (galleryContainer) {
-        let masonry = new Masonry(galleryContainer, {
-            itemSelector: ".gallery-item",
-            columnWidth: ".gallery-item",
-            percentPosition: true,
-            gutter: 20
+// Выносим тяжелые операции в отдельные функции
+function initMasonryGallery() {
+    return new Promise((resolve) => {
+      const galleryContainer = document.querySelector(".gallery-container");
+      if (!galleryContainer) return resolve();
+      
+      // Даем браузеру "передышку" перед инициализацией Masonry
+      requestIdleCallback(() => {
+        const masonry = new Masonry(galleryContainer, {
+          itemSelector: ".gallery-item",
+          columnWidth: ".gallery-item",
+          percentPosition: true,
+          gutter: 20,
+          transitionDuration: 0 // Убираем анимацию для производительности
         });
-    
+        
         imagesLoaded(galleryContainer, function() {
-            masonry.layout();
-            galleryContainer.style.opacity = '1';
-            console.log('Masonry initialized and images loaded'); // Для отладки
+          masonry.layout();
+          galleryContainer.style.opacity = '1';
+          resolve();
         });
-    }
-
-    // Обработка кликов по изображениям для открытия модального окна
-    let galleryImages = document.querySelectorAll(".gallery-item img");
-    let modal = document.getElementById("modal");
-    let modalImage = document.getElementById("modal-image");
-    let caption = document.getElementById("caption");
-    let closeModal = document.querySelector(".close");
-
-    function openModal(event) {
+      }, { timeout: 1000 }); // Максимальное время ожидания
+    });
+  }
+  
+  function setupModal() {
+    const modal = document.getElementById("modal");
+    if (!modal) return;
+    
+    const modalImage = document.getElementById("modal-image");
+    const caption = document.getElementById("caption");
+    
+    document.querySelectorAll(".gallery-item img").forEach(image => {
+      image.addEventListener("click", (event) => {
         modal.style.display = "block";
         modalImage.src = event.target.src;
         caption.innerHTML = event.target.parentElement.getAttribute("data-title");
-    }
-
-    galleryImages.forEach(image => {
-        image.addEventListener("click", openModal);
+      });
     });
-
-    closeModal.addEventListener("click", function() {
-        modal.style.display = "none";
+    
+    modal.querySelector(".close").addEventListener("click", () => {
+      modal.style.display = "none";
     });
-
-    window.addEventListener("click", function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+    
+    window.addEventListener("click", (event) => {
+      if (event.target == modal) modal.style.display = "none";
     });
-
-    // Обработка корзины
+  }
+  
+  function setupCart() {
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    let cartIcon = document.getElementById("cart-icon");
-    let cartCount = document.getElementById("cart-count");
-    let cartTotalPrice = document.getElementById("cart-total-price");
-    let cartItemsList = document.getElementById("cart-items");
-    let cartCountSummary = document.getElementById("cart-count-summary");
-    let cartTotalPriceSummary = document.getElementById("cart-total-price-summary");
-    let clearCartBtn = document.getElementById("clear-cart-btn");
-
+    
     function updateCart() {
-        if (!cartCount || !cartTotalPrice) return;
-    
-        let totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-        let totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    
-        cartCount.textContent = totalQuantity;
-        cartTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
-    
-        if (cartCountSummary) {
-            cartCountSummary.textContent = totalQuantity;
-        }
-    
-        if (cartTotalPriceSummary) {
-            cartTotalPriceSummary.textContent = `$${totalPrice.toFixed(2)}`;
-        }
-    
-        if (cartItemsList) {
-            cartItemsList.innerHTML = cartItems.map(item => `
-                <li>
-                    <span class="cart-item-name">${item.name}</span>
-                    <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
-                    <button class="remove-from-cart" data-name="${item.name}">Remove</button>
-                </li>
-            `).join("");
-        }
-    
-        if (cartIcon) {
-            cartIcon.classList.toggle("show", totalQuantity > 0);
-            // Анимация
-            cartIcon.classList.add('pulse');
-            setTimeout(() => cartIcon.classList.remove('pulse'), 500);
-        }
-    
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    }
-
-    document.querySelectorAll(".add-to-cart").forEach(button => {
-        button.addEventListener("click", function() {
-            let productName = this.getAttribute("data-name");
-            let productPrice = parseFloat(this.getAttribute("data-price"));
-
-            if (!productName || isNaN(productPrice)) {
-                console.error(`Invalid product data: name="${productName}", price="${productPrice}"`);
-                return;
-            }
-
-            let existingItem = cartItems.find(item => item.name === productName);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cartItems.push({ name: productName, price: productPrice, quantity: 1 });
-            }
-
-            updateCart();
-        });
-    });
-
-    if (clearCartBtn) {
-        clearCartBtn.addEventListener("click", function() {
-            cartItems = [];
-            updateCart();
-        });
-    }
-
-    document.addEventListener("click", function(event) {
-        if (event.target.classList.contains("remove-from-cart")) {
-            let productName = event.target.getAttribute("data-name");
-            if (!productName) {
-                console.error("Missing data-name attribute on remove button");
-                return;
-            }
-
-            cartItems = cartItems.filter(item => item.name !== productName);
-            updateCart();
-        }
-    });
-
-    updateCart();
-
-    // Обработка переключения изображений в карусели
-    let mainImage = document.getElementById("main-image");
-    if (mainImage) {
-        document.querySelectorAll(".thumbnail").forEach(thumbnail => {
-            thumbnail.addEventListener("click", function() {
-                mainImage.src = this.src;
-                mainImage.alt = this.alt;
-                document.querySelectorAll(".thumbnail").forEach(thumb => thumb.classList.remove("active"));
-                this.classList.add("active");
-            });
-        });
-    }
-    function optimizeImageSizes() {
-  document.querySelectorAll('.gallery-item img').forEach(img => {
-    const container = img.closest('.gallery-item');
-    if (container.offsetWidth < img.naturalWidth) {
-      img.style.width = `${container.offsetWidth}px`;
-      img.style.height = 'auto';
-    }
-  });
-}
-window.addEventListener('load', optimizeImageSizes);
-});
-document.addEventListener('DOMContentLoaded', function() {
-    // Сначала скрываем всё тело
-    document.body.style.opacity = 0;
-    
-    // Ждём загрузки всех изображений
-    imagesLoaded('.gallery-container', function() {
-      // Плавное появление всей страницы
-      document.body.style.transition = 'opacity 0.7s ease-in';
-      document.body.style.opacity = 1;
+      const totalQuantity = cartItems.reduce((t, i) => t + i.quantity, 0);
+      const totalPrice = cartItems.reduce((t, i) => t + i.price * i.quantity, 0);
       
-      // Показываем футер с небольшой задержкой
-      setTimeout(function() {
-        document.querySelector('footer').classList.add('show');
-      }, 300);
+      document.getElementById("cart-count").textContent = totalQuantity;
+      document.getElementById("cart-total-price").textContent = `$${totalPrice.toFixed(2)}`;
+      
+      const cartIcon = document.getElementById("cart-icon");
+      if (cartIcon) {
+        cartIcon.classList.toggle("show", totalQuantity > 0);
+        cartIcon.classList.add('pulse');
+        setTimeout(() => cartIcon.classList.remove('pulse'), 500);
+      }
+      
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+  
+    document.addEventListener("click", (event) => {
+      if (event.target.classList.contains("add-to-cart")) {
+        const productName = event.target.getAttribute("data-name");
+        const productPrice = parseFloat(event.target.getAttribute("data-price"));
+        
+        if (!productName || isNaN(productPrice)) return;
+        
+        const existingItem = cartItems.find(item => item.name === productName);
+        existingItem ? existingItem.quantity++ : cartItems.push({ 
+          name: productName, 
+          price: productPrice, 
+          quantity: 1 
+        });
+        
+        updateCart();
+      }
+      
+      if (event.target.id === "clear-cart-btn") {
+        cartItems = [];
+        updateCart();
+      }
+      
+      if (event.target.classList.contains("remove-from-cart")) {
+        const productName = event.target.getAttribute("data-name");
+        if (productName) {
+          cartItems = cartItems.filter(item => item.name !== productName);
+          updateCart();
+        }
+      }
+    });
+    
+    updateCart();
+  }
+  
+  // Основная функция инициализации
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Сразу показываем страницу
+    document.body.style.opacity = 1;
+    
+    // Разбиваем инициализацию на этапы
+    await initMasonryGallery();
+    
+    // Параллельно запускаем легкие задачи
+    setupModal();
+    setupCart();
+    
+    // Показываем футер после загрузки основного контента
+    setTimeout(() => {
+      document.querySelector('footer').classList.add('show');
+    }, 300);
+  });
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      gtag('event', 'view_item', {
+        'item_name': item.dataset.title
+      });
     });
   });
