@@ -26,11 +26,18 @@
       </nav>
     </header>
     <!-- Иконка корзины -->
-    <div id="cart-icon" style="display: none;">
+    <div id="cart-icon">
       🛒 <span id="cart-count">0</span> | <span id="cart-total-price">$0.00</span>
       <button id="clear-cart-btn">Clear Cart</button>
       <button id="checkout-btn">Proceed to Checkout</button>
-    </div>
+  </div>
+  
+  <div id="cart">
+      <h2>Cart Items</h2>
+      <ul id="cart-items"></ul>
+      <p>Total Items: <span id="cart-count-summary">0</span></p>
+      <p>Total Price: <span id="cart-total-price-summary">$0.00</span></p>
+  </div>
     <main>
       <div class="product-detail">
         <div class="carousel" data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": false, "prevNextButtons": true, "pageDots": true }'>
@@ -63,6 +70,6 @@
     <p>© 2025 Olga Boiko</p>
   </footer>
   <!-- Подключаем JavaScript -->
-  <script src="javascript.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
