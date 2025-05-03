@@ -26,17 +26,30 @@
       </nav>
     </header>
     <!-- Иконка корзины -->
-    <div id="cart-icon" style="display: none;">
+    <div id="cart-icon">
       🛒 <span id="cart-count">0</span> | <span id="cart-total-price">$0.00</span>
       <button id="clear-cart-btn">Clear Cart</button>
       <button id="checkout-btn">Proceed to Checkout</button>
-    </div>
+  </div>
+  
+  <div id="cart">
+      <h2>Cart Items</h2>
+      <ul id="cart-items"></ul>
+      <p>Total Items: <span id="cart-count-summary">0</span></p>
+      <p>Total Price: <span id="cart-total-price-summary">$0.00</span></p>
+  </div>
     <main>
-      <div class="product-detail">
-        <div class="main-image">
-          <img src="store/art.png" alt="Painting Twins" class="w-full h-auto rounded-lg" />
+      <div class="product-container">
+        <!-- Левая часть: Галерея -->
+        <div class="product-gallery">
+            <img id="main-image" class="main-image" src="store/art.png" alt="Painting Twins">
+            <div class="thumbnails">
+                <img class="thumbnail" src="store/art.png" alt="Product Thumbnail">
+                <img class="thumbnail" src="store/art2.png" alt="Product Thumbnail">
+                <img class="thumbnail" src="store/art3.png" alt="Product Thumbnail">
+            </div>
         </div>
-        <div class="product-info">
+           <div class="product-info">
           <h1>Painting "Twins"</h1>
           <p class="product-price">Price: <span class="price-value">$20.00</span></p>
           <p><strong>Material:</strong> Primed canvas board</p>
@@ -46,17 +59,6 @@
           <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
           <p><strong>Quantity:</strong> 1</p>
           <button class="add-to-cart" data-name="Painting Twins" data-price="20.00">Add to Cart</button>
-        </div>
-      </div>
-      <div class="product-gallery">
-        <div class="gallery-item">
-          <img src="store/art2.png" alt="Painting Twins Detail 1" class="w-full h-auto rounded-lg" />
-        </div>
-        <div class="gallery-item">
-          <img src="store/art3.png" alt="Painting Twins Detail 2" class="w-full h-auto rounded-lg" />
-        </div>
-        <div class="gallery-item">
-          <img src="store/art4.png" alt="Painting Twins Detail 3" class="w-full h-auto rounded-lg" />
         </div>
       </div>
     </main>
@@ -69,6 +71,6 @@
     <p>© 2025 Olga Boiko</p>
   </footer>
   <!-- Подключаем JavaScript -->
-  <script src="javascript.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
