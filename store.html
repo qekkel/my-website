@@ -30,12 +30,6 @@
         <a href="contact.html">Contact</a>
       </nav>
     </header>
-<!-- Иконка корзины в правом верхнем углу -->
-<div id="cart-icon">
-  🛒 <span id="cart-count">0</span> | <span id="cart-total-price">$0.00</span>
-  <button id="clear-cart-btn">Clear Cart</button>
-  <button id="checkout-btn">Proceed to Checkout</button>
-</div>
 
 <div id="cart">
   <h2>Cart Items</h2>
@@ -49,6 +43,12 @@
       <a href="product1.html"class="block">
       <img src="store/art.png" alt="Painting Twins" class="w-full h-auto rounded-lg" />
       <h2 class="mt-2 text-primary">Painting Twins</h2>
+      <button class="snipcart-add-item"
+    data-item-id="twins-painting"
+    data-item-price="30.00"
+    data-item-url="/store.html"
+    data-item-name="Painting Twins">
+  </button>
     </a>
       <p class="product-price">$30.00</p>
     </div>

@@ -39,16 +39,7 @@ html {
   .logo-container, .logo-text, .product-item a, nav a {
     text-decoration: none;
   }
-  
-  #cart, #cart-icon {
-    right: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-  }
-  
-  #cart, .modal {
-    z-index: 1000;
-  }
+
   
   *, body {
     padding: 0;
@@ -148,9 +139,6 @@ html {
     max-width: calc(100% / 3 - 20px);
   }
   
-  #cart, #cart-icon, .modal {
-    position: fixed;
-  }
   
   .gallery-item img {
     width: 100%;
@@ -683,15 +671,6 @@ html {
     background-color: #0056b3;
   }
   
-  #cart-icon {
-    display: flex !important;
-    opacity: 0.5;
-    transition: opacity 0.3s;
-  }
-  
-  #cart-icon.show {
-    opacity: 1;
-  }
   
   #cart {
     top: 60px;
@@ -887,3 +866,13 @@ html {
 .message-success { color: green; }
 .message-error { color: red; }
 #form-message { margin: 10px 0; font-weight: bold; }
+
+/* Кастомизация корзины Snipcart */
+.snipcart-cart {
+  font-family: 'Palanquin', sans-serif;
+}
+.snipcart-checkout {
+  background: #FF6B6B;
+  color: white;
+  padding: 10px 20px;
+}

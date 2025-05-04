@@ -29,35 +29,16 @@
         <a href="contact.html">Contact</a>
       </nav>
     </header>
-    
-    <div id="cart-icon">
-      🛒 <span id="cart-count">0</span> | <span id="cart-total-price">$0.00</span>
-      <button id="clear-cart-btn">Clear Cart</button>
-      <button id="checkout-btn">Proceed to Checkout</button>
-  </div>
   
-  <div id="cart">
-      <h2>Cart Items</h2>
-      <ul id="cart-items"></ul>
-      <p>Total Items: <span id="cart-count-summary">0</span></p>
-      <p>Total Price: <span id="cart-total-price-summary">$0.00</span></p>
-  </div>
-
     <main>
       <section id="cart-section">
         <h1>Your Cart</h1>
-        <div id="cart-items-container">
-          <ul id="cart-items"></ul>
-        </div>
-        <div id="cart-summary">
-          <p>Total Items: <span id="cart-count-summary">0</span></p>
-          <p>Total Price: <span id="cart-total-price-summary">$0.00</span></p>
-          <button id="clear-cart-btn">Clear Cart</button>
-          <button id="checkout-btn">Proceed to Checkout</button>
-        </div>
+        <!-- Snipcart автоматически подтянет сюда содержимое корзины -->
+        <div class="snipcart-items"></div>
+        <div class="snipcart-summary"></div>
+        <button class="snipcart-checkout">Proceed to Checkout</button>
       </section>
     </main>
-  </div>
  
 <!-- Подключаем JavaScript -->
 <script src="script.js"></script>
