@@ -882,3 +882,8 @@ html {
     display: block;
     opacity: 1;
   }
+
+  .message-info { color: blue; }
+.message-success { color: green; }
+.message-error { color: red; }
+#form-message { margin: 10px 0; font-weight: bold; }
