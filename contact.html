@@ -54,26 +54,25 @@
     </div>
 
     <div class="contact-form">
-      <form action="sendEmail.php" method="post">
-        <!-- Row for First Name and Last Name -->
+      <form id="contactForm" action="contact.html" method="POST">
         <div class="form-row">
           <div>
-            <label for="first-name">First Name:</label>
-            <input type="text" id="first-name" name="first-name" required>
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Marceline the Vampire Queen" required minlength="2">
           </div>
           <div>
-            <label for="last-name">Last Name:</label>
-            <input type="text" id="last-name" name="last-name" required>
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" placeholder="Treehouse@gmail.com" required>
           </div>
         </div>
-        <!-- Email -->
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" required>
-        <!-- Message -->
+        
+        
         <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
-        <!-- Submit Button -->
-        <button type="submit">Submit</button>
+        <textarea id="message" name="message" placeholder="Olga, you're such a cool artist! I want to buy all your paintings... message me!" required minlength="10"></textarea>
+        
+        <div id="form-message"></div>
+        
+        <button type="submit" id="submit-btn">Send Message</button>
       </form>
     </div>
   </section>
@@ -90,4 +89,10 @@
         </a>
       </div>
     </div>
+    <input type="hidden" name="timestamp" value="<?= time() ?>">
+<input type="text" name="website" style="display:none;">
   </footer>
+
+  <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>      
