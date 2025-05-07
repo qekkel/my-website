@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio - Cart</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
+<script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Шапка -->
+    <header>
+      <div class="header-top">
+        <a href="index.html" class="logo-container">
+          <img src="girl-frog-psd.png" alt="Logo" class="logo">
+          <div class="logo-text">Olga Qekkel</div>
+        </a>
+      </div>
+      <nav class="header-bottom">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="store.html">Store</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+      <!-- Кастомная иконка корзины -->
+  <button class="snipcart-checkout" style="background:none; border:none; cursor:pointer;">
+    <img src="bag.jpg" alt="Cart" width="40">
+    <span class="snipcart-total-price" style="margin-left:5px;"></span>
+  </button>
+
+  
+  
+    <main>
+      <section id="cart-section">
+        <h1>Your Cart</h1>
+        <!-- Контейнер для корзины Snipcart -->
+        <div id="snipcart"  
+             data-api-key="ZWQxMmRkOTUtMWJiYy00Zjk2LWIwZTUtOTdlOTc5Mzg0ZjVhNjM4ODE5NjM1Mzk2NjQwNjA2"  data-test-mode="true"
+             hidden>
+        </div>
+        
+        <!-- Резервный контент, если Snipcart не загрузился -->
+        <div id="fallback-cart" style="display: none;">
+          <p>Корзина пуста или система временно недоступна.</p>
+        </div>
+      
+        <!-- Стилизованная кнопка оформления заказа -->
+        <button class="snipcart-checkout btn-primary">
+          🛒 Checkout (<span class="snipcart-items-count">0</span>)
+        </button>
+      </section>
+    </main>
+ 
+<!-- Подключаем JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
+
+
+ <!-- Футер -->
+ <footer>
+  <p>© 2025 Olga Boiko</p>
+</footer>

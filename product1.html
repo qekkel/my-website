@@ -25,12 +25,8 @@
         <a href="contact.html">Contact</a>
       </nav>
     </header>
-    <!-- Иконка корзины -->
-    <div id="cart-icon">
-      🛒 <span id="cart-count">0</span> | <span id="cart-total-price">$0.00</span>
-      <button id="clear-cart-btn">Clear Cart</button>
-      <button id="checkout-btn">Proceed to Checkout</button>
-  </div>
+
+
   
   <div id="cart">
       <h2>Cart Items</h2>
@@ -58,7 +54,17 @@
           <p><strong>Design:</strong> Deep black background with vibrant blue floral patterns</p>
           <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
           <p><strong>Quantity:</strong> 1</p>
-          <button class="add-to-cart" data-name="Painting Twins" data-price="20.00">Add to Cart</button>
+          <button class="snipcart-add-item"
+  data-item-id="twins-painting"
+  data-item-price="20.00"
+  data-item-url="/product1.html"
+  data-item-name="Painting Twins"
+  data-item-description="Hand-painted artwork, 25x25 cm"
+  data-item-image="/store/art.png">
+  Add to Cart
+</button>
+
+
         </div>
       </div>
     </main>

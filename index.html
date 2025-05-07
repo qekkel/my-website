@@ -56,14 +56,14 @@
       <a href="store.html">Store</a>
       <a href="contact.html">Contact</a>
     </nav>
+      <!-- Кастомная иконка корзины -->
+ <button class="btn btn-buy" 
+      data-id="1" 
+      data-name="Футболка" 
+      data-price="1500"
+      onclick="addToCart(this)">
+</button>
   </header>
-  <!-- Иконка корзины -->
-  <div id="cart-icon" style="display: none;">
-    🛒 <span id="cart-count">0</span> | <span id="cart-total-price">$0.00</span>
-    <button id="clear-cart-btn">Clear Cart</button>
-    <button id="checkout-btn">Proceed to Checkout</button>
-  </div>
-
 
 
   <!-- Галерея -->
@@ -187,6 +187,12 @@
   <!-- Подключение библиотек -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+  <!-- Snipcart (добавить перед script.js) -->
+<div hidden id="snipcart" data-api-key="YOUR_API_KEY"></div>
+<script async src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js"></script>
+
   <script src="script.js"></script>  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@4.1.4/imagesloaded.pkgd.min.js"></script>
+  <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js"></script>
+<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
 </body>
 </html>

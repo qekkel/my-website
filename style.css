@@ -876,3 +876,31 @@ html {
   color: white;
   padding: 10px 20px;
 }
+
+/* Стили для кастомной корзины */
+.snipcart-checkout {
+  display: flex;
+  align-items: center;
+  font-family: 'Palanquin', sans-serif;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.snipcart-checkout img {
+  transition: transform 0.3s;
+}
+
+.snipcart-checkout:hover img {
+  transform: scale(1.1);
+}
+
+.snipcart-total-price {
+  font-weight: bold;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+.snipcart-checkout.added { animation: bounce 0.5s; }
+
