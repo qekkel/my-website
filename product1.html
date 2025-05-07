@@ -66,15 +66,16 @@
           
           <!-- Add to Cart Button -->
           <button class="snipcart-add-item"
-            data-item-id="twins-painting"
-            data-item-price="20.00"
-            data-item-url="/product1.html"
-            data-item-name="Painting Twins"
-            data-item-custom1-name="Gift"
-            data-item-description="Hand-painted artwork, 25x25 cm"
-            data-item-image="/store/art.png">
-            Add to Cart
-          </button>
+    data-item-id="twins-painting"
+    data-item-price="20.00"
+    data-item-url="/product1.html"
+    data-item-name="Painting Twins"
+    data-item-description="Hand-painted artwork, 25x25 cm"
+    data-item-image="/store/art.png"
+    data-item-custom1-name="Frame Color"
+    data-item-custom1-options="Black|White|Gold">
+    Add to Cart
+</button>
           <script>
             const button = document.querySelector('#starry-night')
             const quantity = document.querySelector('#quantity')
@@ -109,10 +110,13 @@
   <div id="snipcart" data-api-key="ZWQxMmRkOTUtMWJiYy00Zjk2LWIwZTUtOTdlOTc5Mzg0ZjVhNjM4ODE5NjM1Mzk2NjQwNjA2" hidden></div>
   <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
   <script>
-    document.addEventListener('snipcart.ready', () => {
-        Snipcart.api.configure('validate', {
-            endpoint: '/validate-order.php',
-            format: 'php' // or 'json' if using Node.js
+    document.addEventListener('DOMContentLoaded', () => {
+        // Инициализация корзины
+        Snipcart.store.subscribe(() => {
+            const count = Snipcart.store.getState().cart.items.count;
+            document.querySelectorAll('.snipcart-items-count').forEach(el => {
+                el.textContent = count;
+            });
         });
     });
     </script>
