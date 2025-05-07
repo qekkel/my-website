@@ -7,14 +7,16 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+  <!-- Snipcart CSS -->
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
 </head>
 <body>
   <div class="wrapper">
-    <!-- Шапка -->
+    <!-- Header -->
     <header>
       <div class="header-top">
         <a href="index.html" class="logo-container">
-          <img src="girl-frog-psd.png" alt="Логотип: Девушка-лягушка" class="logo">
+          <img src="girl-frog-psd.png" alt="Logo: Frog Girl" class="logo">
           <div class="logo-text">Olga Qekkel</div>
         </a>
       </div>
@@ -26,17 +28,22 @@
       </nav>
     </header>
 
+    <!-- Cart Button -->
+    <button class="snipcart-checkout" style="background:none; border:none; cursor:pointer;">
+      <img src="bag.jpg" alt="Cart" width="40">
+      <span class="snipcart-items-count" style="margin-left:5px;">0</span>
+    </button>
 
-  
-  <div id="cart">
+    <div id="cart">
       <h2>Cart Items</h2>
       <ul id="cart-items"></ul>
       <p>Total Items: <span id="cart-count-summary">0</span></p>
       <p>Total Price: <span id="cart-total-price-summary">$0.00</span></p>
-  </div>
+    </div>
+
     <main>
       <div class="product-container">
-        <!-- Левая часть: Галерея -->
+        <!-- Left Part: Gallery -->
         <div class="product-gallery">
             <img id="main-image" class="main-image" src="store/art.png" alt="Painting Twins">
             <div class="thumbnails">
@@ -45,7 +52,9 @@
                 <img class="thumbnail" src="store/art3.png" alt="Product Thumbnail">
             </div>
         </div>
-           <div class="product-info">
+        
+        <!-- Right Part: Product Info -->
+        <div class="product-info">
           <h1>Painting "Twins"</h1>
           <p class="product-price">Price: <span class="price-value">$20.00</span></p>
           <p><strong>Material:</strong> Primed canvas board</p>
@@ -54,29 +63,50 @@
           <p><strong>Design:</strong> Deep black background with vibrant blue floral patterns</p>
           <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
           <p><strong>Quantity:</strong> 1</p>
+          
+          <!-- Add to Cart Button -->
           <button class="snipcart-add-item"
-  data-item-id="twins-painting"
-  data-item-price="20.00"
-  data-item-url="/product1.html"
-  data-item-name="Painting Twins"
-  data-item-description="Hand-painted artwork, 25x25 cm"
-  data-item-image="/store/art.png">
-  Add to Cart
-</button>
-
-
+            data-item-id="twins-painting"
+            data-item-price="20.00"
+            data-item-url="/product1.html"
+            data-item-name="Painting Twins"
+            data-item-custom1-name="Gift"
+            data-item-description="Hand-painted artwork, 25x25 cm"
+            data-item-image="/store/art.png">
+            Add to Cart
+          </button>
+          <script>
+            const button = document.querySelector('#starry-night')
+            const quantity = document.querySelector('#quantity')
+            quantity.addEventListener('change', () => {
+              // Sets the default quantity when adding the item
+              button.setAttribute('data-item-quantity', quantity.value)
+            })
+            const select = document.querySelector('#frame_color')
+            select.addEventListener('change', () => {
+              // Sets the default frame color when adding the item
+              button.setAttribute("data-item-custom1-value", select.value)
+            })
+            </script>
         </div>
       </div>
     </main>
+
     <div id="checkout-btn-container" style="display: none;">
       <button>Proceed to Checkout</button>
     </div>
   </div>
-  <!-- Футер -->
+
+  <!-- Footer -->
   <footer>
     <p>© 2025 Olga Boiko</p>
   </footer>
-  <!-- Подключаем JavaScript -->
+
+  <!-- JavaScript -->
   <script src="script.js"></script>
+  
+  <!-- Snipcart Container and JS -->
+  <div id="snipcart" data-api-key="YOUR_API_KEY_HERE" hidden></div>
+  <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
 </body>
 </html>
