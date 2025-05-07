@@ -26,7 +26,7 @@ foreach ($request['items'] as $item) {
     // Проверка максимального количества
     if ($item['id'] === 'twins-painting' && $item['quantity'] > 5) {
         $response['success'] = false;
-        $response['errors'][] = "Maximum 5 units allowed for 'Painting Twins'";
+        $response['errors'][] = "Maximum 1 unit allowed for 'Painting Twins'";
     }
     
     // Проверка выбора рамки
