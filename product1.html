@@ -106,7 +106,15 @@
   <script src="script.js"></script>
   
   <!-- Snipcart Container and JS -->
-  <div id="snipcart" data-api-key="YOUR_API_KEY_HERE" hidden></div>
+  <div id="snipcart" data-api-key="ZWQxMmRkOTUtMWJiYy00Zjk2LWIwZTUtOTdlOTc5Mzg0ZjVhNjM4ODE5NjM1Mzk2NjQwNjA2" hidden></div>
   <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
+  <script>
+    document.addEventListener('snipcart.ready', () => {
+        Snipcart.api.configure('validate', {
+            endpoint: '/validate-order.php',
+            format: 'php' // or 'json' if using Node.js
+        });
+    });
+    </script>
 </body>
 </html>
