@@ -37,4 +37,16 @@ foreach ($request['items'] as $item) {
 }
 
 echo json_encode($response);
+
+// Добавьте эту проверку
+foreach ($request['items'] as $item) {
+    if ($item['id'] === 'twins-painting') {
+      $available = 5; // Получайте это значение из БД
+      
+      if ($item['quantity'] > $available) {
+        $isValid = false;
+        $errors[] = "Only $available items available for 'Painting Twins'";
+      }
+    }
+  }
 ?>

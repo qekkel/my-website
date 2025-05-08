@@ -80,3 +80,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 3000);
 });
+Snipcart.store.subscribe(() => {
+  const floatingCart = document.getElementById('floating-cart');
+  floatingCart.classList.add('added');
+  setTimeout(() => floatingCart.classList.remove('added'), 500);
+});
+// В функции setupImageGallery:
+thumbnail.addEventListener('mouseenter', () => {
+  mainImage.style.opacity = 0;
+  setTimeout(() => {
+    mainImage.src = thumbnail.src;
+    mainImage.alt = thumbnail.alt;
+    mainImage.style.opacity = 1;
+    thumbnails[0].classList.add('active');
+  }, 300);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const MAX_ITEMS = 1; // Максимальное количество товара
+  let availableItems = MAX_ITEMS;
+  const addButton = document.getElementById('add-to-cart-btn');
+  const outOfStockMsg = document.getElementById('out-of-stock');
+  const availableQuantity = document.getElementById('available-quantity');
+
+  // Инициализация Snipcart
+  Snipcart.store.subscribe(() => {
+    const cart = Snipcart.store.getState().cart.items;
+    const currentItem = cart.find(item => item.id === 'twins-painting');
+    
+    // Вычисляем сколько осталось
+    const inCart = currentItem ? currentItem.quantity : 0;
+    availableItems = MAX_ITEMS - inCart;
+    
+    // Обновляем интерфейс
+    availableQuantity.textContent = availableItems;
+    
+    if (availableItems <= 0) {
+      addButton.disabled = true;
+      outOfStockMsg.style.display = 'block';
+      addButton.style.opacity = '0.5';
+      addButton.style.cursor = 'not-allowed';
+    } else {
+      addButton.disabled = false;
+      outOfStockMsg.style.display = 'none';
+      addButton.style.opacity = '1';
+      addButton.style.cursor = 'pointer';
+    }
+  });
+});
+// Вместо const MAX_ITEMS = 5;
+fetch('/get-product-quantity?id=twins-painting')
+  .then(response => response.json())
+  .then(data => {
+    MAX_ITEMS = data.quantity;
+    availableQuantity.textContent = 1;
+  });
+
+  // В обработчике Snipcart:
+const progress = document.querySelector('.quantity-progress');
+progress.style.width = `${(availableItems / MAX_ITEMS) * 100}%`;
