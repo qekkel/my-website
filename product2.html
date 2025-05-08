@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Купить постер 'Adventure Time' ручной работы. Размер: 25×25 см, цена: $20.">
   <title>My Portfolio</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
+<script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
 </head>
 <body>
   <div class="wrapper">
@@ -33,29 +35,55 @@
       <p>Total Items: <span id="cart-count-summary">0</span></p>
       <p>Total Price: <span id="cart-total-price-summary">$0.00</span></p>
   </div>
-    <main>
-      <div class="product-detail">
-        <div class="carousel" data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": false, "prevNextButtons": true, "pageDots": true }'>
-          <div class="carousel-cell">
-            <img src="store/at.png" alt="Adventure Time Postcard">
-          </div>
-          <div class="carousel-cell">
-            <img src="store/at2.png" alt="Adventure Time Postcard Detail 1">
+
+
+  <main class="product-page">
+    <div class="wrapper">
+      <div class="product-container">
+        <!-- Левая часть: Галерея -->
+        <div class="product-gallery">
+          <img id="main-image" class="main-image" src="store/at.png" alt="Adventure Time Postcard">
+          <div class="thumbnails">
+            <img class="thumbnail" src="store/at.png" alt="Product Thumbnail">
+            <img class="thumbnail" src="store/at2.png" alt="Product Thumbnail">
+            <!-- Добавьте другие миниатюры, если есть -->
           </div>
         </div>
-        <div class="product-info">
-          <h1>Adventure Time Postcard"</h1>
-          <p class="product-price">Price: <span class="price-value">$20.00</span></p>
-          <p><strong>Material:</strong> Primed canvas board</p>
-          <p><strong>Size:</strong> 25x25 cm</p>
-          <p><strong>Composition:</strong> 100% cotton, 280 gsm</p>
-          <p><strong>Design:</strong> Deep black background with vibrant blue floral patterns</p>
-          <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
-          <p><strong>Quantity:</strong> 1</p>
-          <button class="add-to-cart" data-name="Adventure Time Postcard" data-price="5.00">Add to Cart</button>
-        </div>
+
+
+<!-- Правая часть: Информация о товаре -->
+      <div class="product-info">
+        <h1>Adventure Time Postcard</h1>
+        <p class="product-price">Price: <span class="price-value">$20.00</span></p>
+        <p><strong>Material:</strong> Primed canvas board</p>
+        <p><strong>Size:</strong> 25x25 cm</p>
+        <p><strong>Composition:</strong> 100% cotton, 280 gsm</p>
+        <p><strong>Design:</strong> Deep black background with vibrant blue floral patterns</p>
+        <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
+        <p><strong>Quantity:</strong> 1</p>
+
+        <!-- Кнопка добавления в корзину -->
+        <button class="snipcart-add-item"
+          data-item-id="adventure-time-postcard"
+          data-item-price="20.00"
+          data-item-url="/product2.html"
+          data-item-name="Adventure Time Postcard"
+          data-item-description="Hand-painted artwork, 25x25 cm"
+          data-item-image="/store/at.png"
+          data-item-custom1-name="Frame Color"
+          data-item-max-quantity="1"
+          data-item-custom1-options="None|Black|White|Gold">
+          Add to Cart
+        </button>
+
+
+        <p id="out-of-stock" style="display: none; color: red;">
+          Sorry, this item is out of stock
+        </p>
       </div>
-    </main>
+    </div>
+  </div>
+</main>
     <div id="checkout-btn-container" style="display: none;">
       <button>Proceed to Checkout</button>
     </div>
@@ -66,5 +94,24 @@
   </footer>
   <!-- Подключаем JavaScript -->
   <script src="script.js"></script>
+  <script>
+    // Функция для смены главного изображения при наведении на миниатюру
+    document.addEventListener('DOMContentLoaded', function() {
+      const mainImage = document.getElementById('main-image');
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('mouseenter', () => {
+          mainImage.src = thumbnail.src;
+          mainImage.alt = thumbnail.alt;
+          
+          // Удаляем активный класс у всех миниатюр
+          thumbnails.forEach(t => t.classList.remove('active'));
+          // Добавляем активный класс текущей миниатюре
+          thumbnail.classList.add('active');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
