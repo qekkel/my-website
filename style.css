@@ -258,32 +258,310 @@ html {
     }
   }
   
-  .about-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px; /* Такие же отступы по бокам, как на главной */
-    font-family: 'Palanquin, Lilita One';
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: #eddfdc;
+
+
+/* О СЕБЕ - исправленные стили */
+/* Комментарий - указывает, что это стили для раздела "О себе" */
+
+/* Стили для всего раздела "О себе" */
+.about-section {
+  /* Устанавливает максимальную ширину контейнера 1200px */
+  max-width: 1200px;
+  
+ 
+  /* Центрирует блок по горизонтали с автоматическими отступами по бокам */
+   margin: 0 auto; /* Центрирует контейнер */
+  /* Добавляет внутренние отступы 20px со всех сторон */
+  padding: 40px;
+  /* Задает основной шрифт текста - Palanquin с запасным sans-serif */
+  font-family: 'Palanquin', sans-serif;
+ 
+}
+
+/* Главный блок с фото и текстом */
+/* Комментарий - стили для верхнего блока с фото и текстом */
+
+.about-top {
+  /* Включает flex-раскладку для дочерних элементов */
+  display: flex;
+  /* Выравнивает элементы по верхнему краю контейнера */
+  align-items: center;
+  /* Добавляет отступ снизу 40px перед следующим блоком */
+  margin-bottom: 40px;
+  gap: 0px;
+  padding-right: 450px; /* опционально */
+
+}
+
+.about-photo {
+   /* Фиксированная ширина контейнера 150px */
+  width: 50px;
+  /* Фиксированная высота контейнера 150px */
+  height: 50px;
+   /* Позволяет элементу уменьшаться до 40% от исходной ширины */
+  position: relative;
+  right: 50px;
+
+}
+
+.profile-pic {
+  float: right; 
+  /* Растягивает фото на всю ширину родительского контейнера */
+  width: 60%;
+  /* Устанавливает высоту фото 50% от высоты родительского контейнера */
+  height: 60%;
+  /* Скругляет углы фото, создавая круглую форму */
+  border-radius: 50%;
+    /* Обеспечивает правильное масштабирование и обрезку фото */
+  object-fit: cover;
+  display: block;
+}
+
+.about-intro {
+  /* Позволяет элементу занимать все свободное пространство в flex-контейнере */
+  flex-grow: 1;
+  margin-right: 30 px; /* Добавляет отступ только между текстом и фото */
+}
+
+/* Стили для заголовка h2 внутри блока about-intro */
+.about-intro h2 {
+  /* Задает шрифт Lilita One с запасным cursive */
+  font-family: 'Lilita One', cursive;
+  /* Цвет текста - темно-серый (#333) */
+  color: #333;
+  
+  /* Отступ снизу 15px */
+  margin-bottom: 15px;
+  /* Размер шрифта 2rem */
+  font-size: 2rem;
+}
+
+/* Стили для блоков контента */
+.about-block {
+  /* Отступ снизу 50px между блоками */
+  margin-bottom: 50px;
+}
+
+/* Стили для заголовков h3 внутри блоков контента */
+.about-block h3 {
+  /* Цвет текста - светло-красный (#ff6b6b) */
+  color: #333;
+  /* Отступ снизу 15px */
+  margin-bottom: 15px;
+  /* Шрифт Pangolin с запасным cursive */
+  font-family: 'Lilita One', cursive;
+  /* Размер шрифта 1.5rem */
+  font-size: 1.5rem;
+}
+
+/* Стили для абзацев внутри блоков контента */
+.about-block p {
+  /* Межстрочный интервал 1.6 */
+  line-height: 1.6;
+  /* Отступ снизу 20px между абзацами */
+  margin-bottom: 20px;
+}
+
+/* Стили для галерей */
+.art-grid,
+.process-gallery,
+.interests-gallery {
+  /* Включает grid-раскладку для дочерних элементов */
+  display: grid;
+  /* Расстояние между элементами сетки 15px */
+  gap: 15px;
+  /* Отступ сверху 20px */
+  margin-top: 20px;
+}
+
+/* Специфичные стили для art-grid */
+.art-grid {
+  /* Создает 3 колонки равной ширины */
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Стили для process-gallery и interests-gallery */
+.process-gallery,
+.interests-gallery {
+  /* Создает 2 колонки равной ширины */
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Общие стили для изображений во всех галереях */
+.art-grid img,
+.process-gallery img,
+.interests-gallery img {
+  /* Растягивает изображение на всю ширину ячейки */
+  width: 100%;
+  /* Скругляет углы изображения на 8px */
+  border-radius: 8px;
+  /* Анимация изменения масштаба длительностью 0.3s */
+  transition: transform 0.3s;
+}
+
+/* Эффект при наведении на изображения во всех галереях */
+.art-grid img:hover,
+.process-gallery img:hover,
+.interests-gallery img:hover {
+  /* Увеличивает изображение на 3% при наведении */
+  transform: scale(1.03);
+}
+
+/* Медиа-запрос для экранов шириной до 768px */
+@media (max-width: 768px) {
+  /* Изменяет направление flex-контейнера на вертикальное */
+  .about-top {
+    flex-direction: column;
+    /* Центрирует элементы по горизонтали */
+    align-items: center;
+    /* Выравнивает текст по центру */
+    text-align: center;
   }
   
+  /* Изменяет количество колонок в art-grid на 2 */
+  .art-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Медиа-запрос для экранов шириной до 480px */
+@media (max-width: 480px) {
+  /* Для всех галерей устанавливает 1 колонку */
+  .art-grid,
+  .process-gallery,
+  .interests-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+/* Галереи */
+.art-gallery,
+.process-gallery,
+.interests-gallery {
+  display: grid;
+  gap: 15px;
+  margin-top: 20px;
+}
+.art-gallery {
+  grid-template-columns: repeat(3, 1fr);
+}
+.process-gallery,
+.interests-gallery {
+  grid-template-columns: repeat(2, 1fr);
+}
+.art-gallery img,
+.process-gallery img,
+.interests-gallery img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.art-gallery img:hover,
+.process-gallery img:hover,
+.interests-gallery img:hover {
+  transform: scale(1.02);
+}
+
+
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .work-steps {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .hobbies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .header-bottom a:hover {
+  color: #ff6b6b; /* или твой цвет */
+  text-decoration: underline;
+}
+
   .product-name, .product-price {
     font-family: 'Lilita One', sans-serif;
   }
   
-  #cart li, .about-container {
+  #cart li {
     justify-content: space-between;
     padding: 20px; /* Внутренние отступы контейнера */
 }
-  
-  .about-container {
-    display: flex;
-    gap: 20px;
-    max-width: 1200px;
-    width: 100%;
-  }
+
+/* Сетка: фото + текст */
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.art-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  gap: 15px;
+  margin-top: 30px;
+}
+.art-wide { grid-column: span 2; }
+.art-tall { grid-row: span 2; }
+.art-small { grid-column: span 1; }
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Секции с сеткой */
+.grid-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+  align-items: center;
+}
+.grid-section.reversed .grid-text {
+  order: 2;
+}
+.grid-section.reversed .grid-gallery {
+  order: 1;
+}
+
+/* Текстовые блоки */
+.grid-text h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+.grid-text p {
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Галерея внутри сетки */
+.grid-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+.grid-gallery img {
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+.grid-gallery img:hover {
+  transform: scale(1.02);
+}
   
   .about-photo-container {
     flex: 0 0 40%;
@@ -884,6 +1162,11 @@ html {
 #form-message { margin: 10px 0; font-weight: bold; }
 
 /* Кастомизация корзины Snipcart */
+
+.snipcart {
+  left: 0 !important;
+}
+
 .snipcart-cart {
   font-family: 'Palanquin', sans-serif;
 }
@@ -1133,3 +1416,4 @@ html {
   border-radius: 5px;
   transition: width 0.3s;
 }
+
