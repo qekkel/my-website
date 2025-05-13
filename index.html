@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <!-- Google Tag Manager -->
-   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-58QCTH55');</script>
-    <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-<!-- 1. Предзагрузка основного шрифта -->
-  <!-- 2. Асинхронная загрузка CSS -->
-  <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
-    
-  <!-- 3. Предзагрузка логотипа -->
+  
+  <!-- Предзагрузка критических ресурсов -->
+  <link rel="preload" href="style.css" as="style">
   <link rel="preload" href="favicon/favicon.svg" as="image">
-</head>
-
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Palanquin&display=swap" as="style">
-  <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&family=Lilita+One&display=swap" as="style">
+  
+  <!-- Google Tag Manager (оптимизированная версия) -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s);
+      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-58QCTH55');
+  </script>
+  
+  <!-- Основные стили -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Шрифты Google (оптимизированные) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&family=Lilita+One&display=swap">
+  
+  <!-- Отложенная загрузка Masonry -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer></script>
 </head>
 
@@ -44,26 +49,19 @@
       <!-- Ваш хедер -->
   <!-- Шапка -->
   <header>
-    <div class="header-top">
-      <a href="index.html" class="logo-container">
-        <img src="favicon/favicon.svg" alt="Логотип: Девушка-лягушка" class="logo">
-        <div class="logo-text">Olga Qekkel</div>
-      </a>
-    </div>
-    <nav class="header-bottom">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="store.html">Store</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-      <!-- Кастомная иконка корзины -->
- <button class="btn btn-buy" 
-      data-id="1" 
-      data-name="Футболка" 
-      data-price="1500"
-      onclick="addToCart(this)">
-</button>
-  </header>
+  <div class="header-top">
+    <a href="index.html" class="logo-container">
+      <img src="girl-frog-psd.png" alt="Logo" class="logo">
+      <div class="logo-text">Olga Qekkel</div>
+    </a>
+  </div>
+  <nav class="header-bottom">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="store.html">Store</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
 
 
   <!-- Галерея -->
@@ -193,6 +191,7 @@
 
   <script src="script.js"></script>  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@4.1.4/imagesloaded.pkgd.min.js"></script>
   <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js"></script>
+  
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
 </body>
 </html>
