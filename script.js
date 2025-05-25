@@ -139,3 +139,45 @@ fetch('/get-product-quantity?id=twins-painting')
   // В обработчике Snipcart:
 const progress = document.querySelector('.quantity-progress');
 progress.style.width = `${(availableItems / MAX_ITEMS) * 100}%`;
+
+// Показывать/скрывать корзину при добавлении товара
+document.addEventListener('snipcart.ready', () => {
+  Snipcart.store.subscribe(() => {
+    const cart = document.getElementById('floating-cart');
+    cart.style.display = Snipcart.store.getState().cart.items.count > 0 ? 'block' : 'none';
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const MAX_ITEMS_STAR = 15; // Для второго товара
+  let availableItemsStar = MAX_ITEMS_STAR;
+  const addButtonStar = document.getElementById('add-to-cart-btn-star');
+  const outOfStockMsgStar = document.getElementById('out-of-stock-star');
+  const availableQuantityStar = document.getElementById('available-quantity-star');
+
+  Snipcart.store.subscribe(() => {
+    const cart = Snipcart.store.getState().cart.items;
+    const currentItem = cart.find(item => item.id === 'starry-night-painting');
+    
+    const inCart = currentItem ? currentItem.quantity : 0;
+    availableItemsStar = MAX_ITEMS_STAR - inCart;
+
+    availableQuantityStar.textContent = availableItemsStar;
+
+    if (availableItemsStar <= 0) {
+      addButtonStar.disabled = true;
+      outOfStockMsgStar.style.display = 'block';
+      addButtonStar.style.opacity = '0.5';
+      addButtonStar.style.cursor = 'not-allowed';
+    } else {
+      addButtonStar.disabled = false;
+      outOfStockMsgStar.style.display = 'none';
+      addButtonStar.style.opacity = '1';
+      addButtonStar.style.cursor = 'pointer';
+    }
+  });
+
+  const progressStar = document.querySelector('.quantity-progress-star');
+  progressStar.style.width = `${(availableItemsStar / MAX_ITEMS_STAR) * 100}%`;
+});
+
