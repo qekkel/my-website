@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PRODUCT_NAME}} | Olga Qekkel Store</title>
+  <!-- SEO-оптимизация -->
+  <meta name="description" content="Купить {{PRODUCT_NAME}} ручной работы. {{SHORT_DESCRIPTION}}. Цена: ${{PRICE}}.">
+  
+  <!-- Стили -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
+  
+  <!-- Snipcart -->
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
+  
+  <!-- Preload изображений (замените на свои) -->
+  <link rel="preload" href="store/{{MAIN_IMAGE}}.png" as="image">
+  <link rel="preload" href="store/{{SECOND_IMAGE}}.png" as="image">
+  <link rel="preload" href="store/{{THIRD_IMAGE}}.png" as="image">
+  
+  <!-- Микроразметка Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "{{PRODUCT_NAME}}",
+    "image": "store/{{MAIN_IMAGE}}.png",
+    "description": "{{FULL_DESCRIPTION}}",
+    "offers": {
+      "@type": "Offer",
+      "price": "{{PRICE}}",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Шапка -->
+    <header>
+      <div class="header-top">
+        <a href="index.html" class="logo-container">
+          <img src="girl-frog-psd.png" alt="Logo: Frog Girl" class="logo">
+          <div class="logo-text">Olga Qekkel</div>
+        </a>
+      </div>
+      <nav class="header-bottom">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="store.html">Store</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="product-page">
+      <div class="product-container">
+        <!-- Галерея -->
+        <div class="product-gallery">
+          <img id="main-image" class="main-image" src="store/{{MAIN_IMAGE}}.png" alt="{{PRODUCT_NAME}}">
+          <div class="thumbnails">
+            <img class="thumbnail" src="store/{{MAIN_IMAGE}}.png" alt="{{PRODUCT_NAME}}">
+            <img class="thumbnail" src="store/{{SECOND_IMAGE}}.png" alt="{{PRODUCT_NAME}} - вариант 2">
+            <img class="thumbnail" src="store/{{THIRD_IMAGE}}.png" alt="{{PRODUCT_NAME}} - вариант 3">
+          </div>
+        </div>
+        
+        <!-- Информация о товаре -->
+        <div class="product-info">
+          <h1>{{PRODUCT_NAME}}</h1>
+          <p class="product-price">${{PRICE}}</p>
+          
+          <ul class="product-specs">
+            <li><strong>Material:</strong> {{MATERIAL}}</li>
+            <li><strong>Size:</strong> {{SIZE}}</li>
+            <li><strong>Technique:</strong> {{TECHNIQUE}}</li>
+            <!-- Добавьте другие характеристики по необходимости -->
+          </ul>
+          
+          <p class="product-description">{{FULL_DESCRIPTION}}</p>
+          
+          <!-- Кнопка добавления в корзину -->
+          <button class="snipcart-add-item"
+            data-item-id="{{UNIQUE_ID}}"
+            data-item-price="{{PRICE}}"
+            data-item-name="{{PRODUCT_NAME}}"
+            data-item-url="/{{PRODUCT_SLUG}}.html"
+            data-item-image="store/{{MAIN_IMAGE}}.png"
+            data-item-description="{{SHORT_DESCRIPTION}}"
+            data-item-custom1-name="Frame Color"
+            data-item-custom1-options="None|Black|White|Gold">
+            Add to Cart
+          </button>
+          
+          <!-- Индикатор количества -->
+          <div class="quantity-bar">
+            <div class="quantity-progress" style="width: {{STOCK_PERCENTAGE}}%"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+      <p>© 2025 Olga Qekkel. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Плавающая корзина -->
+  <div id="floating-cart" class="floating-cart">
+    <button class="snipcart-checkout">
+      <img src="bag.jpg" alt="Cart" width="30">
+      <span class="cart-badge snipcart-items-count">0</span>
+    </button>
+  </div>
+
+  <!-- Скрипты -->
+  <script src="script.js"></script>
+  <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
+  
+  <!-- Инициализация галереи -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Смена главного изображения при клике на миниатюру
+      const thumbnails = document.querySelectorAll('.thumbnail');
+      const mainImage = document.getElementById('main-image');
+      
+      thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          mainImage.src = thumb.src;
+          mainImage.alt = thumb.alt;
+          thumbnails.forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
