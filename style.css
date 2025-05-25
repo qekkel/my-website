@@ -1,11 +1,41 @@
+/* Добавьте в начало CSS */
+:root {
+  --header-padding: 20px;
+  --main-padding: 20px;
+}
+header {
+  position: static;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  margin: 0;
+  transition: none !important; /* Убираем любые анимации */
+  will-change: transform; /* Оптимизация анимации */
+  padding: 20px 20px 0; /* Сохраняем ваши отступы */
+}
+.header-bottom {
+  height: 50px; /* Фиксированная высота меню */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
 /* Для плавного скролла всей страницы */
 html {
     scroll-behavior: smooth;
   }
-  
-  body, header {
-    background-color: #eddfdc;
-  }
+ body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Минимальная высота = весь экран */
+  background: linear-gradient(to bottom, #EDDFDC, #ebd1c5);
+  margin: 0;
+  padding: 0;
+  background-color: #eddfdc;
+  font-family: 'Palanquin', sans-serif;
+}
   
   body, nav a {
     color: #333;
@@ -20,12 +50,8 @@ html {
     border-radius: 0;
   }
   
-  *, body, footer p {
+  *, body {
     margin: 0;
-  }
-  
-  footer p, nav a {
-    font-size: 1rem;
   }
   
   #caption, textarea {
@@ -36,7 +62,7 @@ html {
     font-weight: 700;
   }
   
-  .logo-container, .logo-text, .product-item a, nav a {
+  .logo-container, nav a {
     text-decoration: none;
   }
 
@@ -45,7 +71,7 @@ html {
     padding: 0;
   }
   
-  #caption, #cart-section h1, #cart-summary, .product-item, .quantity-input, header {
+  #caption, #cart-section h1, #cart-summary, .quantity-input {
     text-align: center;
   }
   
@@ -66,10 +92,6 @@ html {
     overflow-x: hidden;
   }
   
-  header, nav {
-    font-family: Palanquin;
-  }
-  
   
   .logo-container {
     align-items: center;
@@ -80,6 +102,7 @@ html {
   .logo {
     max-width: 100px;
     height: auto;
+    flex-shrink: 20px;
   }
   
   .logo-text {
@@ -87,6 +110,8 @@ html {
     color: #3d6e69;
     margin-left: 5px;
     font-family: 'Lilita One', cursive;
+     line-height: 1.2; /* Фиксируем высоту строки */
+  min-height: 1.2em; /* Резервная высота */
   }
   
   nav {
@@ -104,10 +129,13 @@ html {
     color: #e75c67;
   }
   
-  main {
-    flex-grow: 1;
-  }
-  
+ /* Для основных разделов */
+main {
+  flex: 1; /* Растягивает блок на всё свободное пространство */
+padding: var(--main-padding) !important; /* Сохраняем твой отступ */
+  padding-bottom: calc(var(--main-padding) + 60px) !important; /* + место для футера */
+}
+
   .gallery-section {
     width: 100%;
     max-width: 1200px;
@@ -176,13 +204,6 @@ html {
     display: block;
   }
   
-  .footer-content, footer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: auto;
-  }
   
   #caption {
     color: #ccc;
@@ -204,31 +225,33 @@ html {
     cursor: pointer;
   }
   
-  footer {
-    background-color: #333;
-    color: #fff;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-    margin-top: auto;
-    padding: 20px 0;
-  }
+ footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+  z-index: 100;
+  opacity: 1; /* Важно! */
+  margin-top: auto; /* Дополнительная страховка */
   
-  footer.show {
-    opacity: 1;
-  }
-  
-  .footer-content {
-    justify-content: space-between;
-    padding: 20px 0;
-    margin-top: auto;
-  }
-  
-  .social-icons {
-    display: flex;
-    align-items: center;
-  }
+
+
+}
+@keyframes slideUp {
+  from { bottom: -200px; }
+  to { bottom: 0; }
+}
+
+/* Дополнительные стили для контента футера */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.social-icons 
+  display: flex;
   
   .social-icons a {
     margin-left: 10px;
@@ -289,7 +312,7 @@ html {
   /* Добавляет отступ снизу 40px перед следующим блоком */
   margin-bottom: 40px;
   gap: 0px;
-  padding-right: 450px; /* опционально */
+  padding-right: 350px; /* опционально */
 
 }
 
@@ -344,7 +367,6 @@ html {
 
 /* Стили для заголовков h3 внутри блоков контента */
 .about-block h3 {
-  /* Цвет текста - светло-красный (#ff6b6b) */
   color: #333;
   /* Отступ снизу 15px */
   margin-bottom: 15px;
@@ -485,10 +507,6 @@ html {
     flex-wrap: wrap;
     gap: 10px;
   }
-  .header-bottom a:hover {
-  color: #ff6b6b; /* или твой цвет */
-  text-decoration: underline;
-}
 
   .product-name, .product-price {
     font-family: 'Lilita One', sans-serif;
@@ -751,7 +769,14 @@ img {
   .product-image img, .product-item img {
     width: 100%;
   }
-  
+  .product-item {
+  margin-bottom: 20px;
+}
+.product-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
   .product-thumbnails img {
     width: 60px;
     border-radius: 5px;
@@ -1145,16 +1170,6 @@ img {
     visibility: visible !important;
   }
   
-  .hidden-footer {
-    display: none !important;
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-  }
-  
-  .visible-footer {
-    display: block;
-    opacity: 1;
-  }
 
   .message-info { color: blue; }
 .message-success { color: green; }
@@ -1344,10 +1359,11 @@ img {
   background: #480ca8;
 }
 
+/* Главный контейнер (как в store.html) */
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px; /* Увеличил для лучшего вида */
+  padding: 20px;
 }
 
 .product-container {
@@ -1417,3 +1433,11 @@ img {
   transition: width 0.3s;
 }
 
+/* Добавьте в самый конец CSS */
+header {
+  padding: 20px 20px 0 20px !important;
+}
+
+main {
+  padding: 20px !important;
+}
