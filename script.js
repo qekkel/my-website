@@ -72,24 +72,43 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     
     updateUI() {
-      const cartItemsEl = document.getElementById('cart-items');
-      const cartTotalEl = document.getElementById('cart-total-price-summary');
+      const cartItemsEl = document.getElementById('cart-items-container');
+      const cartTotalEl = document.getElementById('cart-total-price');
+      const emptyMsg = document.getElementById('cart-empty-message');
       
       if (cartItemsEl) {
         cartItemsEl.innerHTML = '';
+        
+        if (this.items.length === 0) {
+          if (emptyMsg) emptyMsg.style.display = 'block';
+          return;
+        }
+        
+        if (emptyMsg) emptyMsg.style.display = 'none';
+        let total = 0;
+        
         this.items.forEach(item => {
-          const li = document.createElement('li');
-          li.innerHTML = `
-            ${item.name} × ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}
-            <button class="remove-item" data-id="${item.id}">×</button>
+          total += item.price * item.quantity;
+          const itemEl = document.createElement('div');
+          itemEl.className = 'cart-item';
+          itemEl.innerHTML = `
+            <div class="item-info">
+              <div class="item-name">${item.name}</div>
+              <div class="item-quantity">Quantity: ${item.quantity}</div>
+            </div>
+            <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+            <button class="remove-item" data-id="${item.id}" aria-label="Remove item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
           `;
-          cartItemsEl.appendChild(li);
+          cartItemsEl.appendChild(itemEl);
         });
-      }
-      
-      if (cartTotalEl) {
-        const total = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        cartTotalEl.textContent = `$${total.toFixed(2)}`;
+        
+        if (cartTotalEl) {
+          cartTotalEl.textContent = `$${total.toFixed(2)}`;
+        }
       }
     },
     
@@ -108,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
         cartLink.classList.toggle('visible', totalItems > 0);
       }
       
-      // Звук при добавлении любого количества товаров
       if (totalItems > 0) {
         const audio = new Audio('notification.mp3');
         audio.volume = 0.3;
@@ -166,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Проверка Telegram username
       const contactMethod = document.querySelector('[name="contact_method"]')?.value;
       const contactInfo = document.querySelector('[name="contact_info"]')?.value;
       
@@ -176,18 +193,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Формируем читаемое содержимое корзины
       let cartText = "Order Details:\n\n";
       cart.forEach(item => {
         cartText += `- ${item.quantity} × ${item.name} ($${item.price.toFixed(2)} each)\n`;
       });
       
-      // Добавляем контактную информацию
       if (contactMethod && contactInfo) {
         cartText += `\nContact: ${contactMethod} (${contactInfo})`;
       }
       
-      // Создаем скрытое поле для Formspree
       let cartDataField = document.getElementById('cart-data');
       if (!cartDataField) {
         cartDataField = document.createElement('input');
@@ -213,7 +227,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     if (cart.add(product)) {
-      // Visual feedback
       button.textContent = '✓ Added!';
       button.classList.add('added-to-cart');
       setTimeout(() => {
@@ -224,31 +237,32 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function handleRemoveItem(e) {
-    if (e.target.classList.contains('remove-item')) {
-      cart.remove(e.target.dataset.id);
+    if (e.target.classList.contains('remove-item') || e.target.closest('.remove-item')) {
+      const button = e.target.classList.contains('remove-item') ? e.target : e.target.closest('.remove-item');
+      const itemEl = button.closest('.cart-item');
+      
+      if (itemEl) {
+        itemEl.classList.add('removing');
+        setTimeout(() => {
+          cart.remove(button.dataset.id);
+        }, 300);
+      }
     }
   }
 
   // ===== Initialization =====
   function initialize() {
-    // Initialize buttons
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
       button.dataset.originalText = button.textContent;
       button.addEventListener('click', handleAddToCart);
     });
 
-    // Initialize cart
-    document.getElementById('cart-items')?.addEventListener('click', handleRemoveItem);
+    document.getElementById('cart-items-container')?.addEventListener('click', handleRemoveItem);
     cart.updateUI();
     cart.updateCounter();
-
-    // Initialize contact method
     setupContactMethod();
-    
-    // Initialize form submission
     setupFormSubmission();
 
-    // Initialize checkout
     document.getElementById('checkout-btn')?.addEventListener('click', () => {
       document.getElementById('checkout-modal').style.display = 'flex';
       document.getElementById('cart-data').value = JSON.stringify(cart.items);
@@ -262,4 +276,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   initialize();
-});ы
+});
