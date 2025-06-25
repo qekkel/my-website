@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
   <!-- Snipcart CSS -->
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
   <link rel="preload" href="store/art.png" as="image">
 <link rel="preload" href="store/art2.png" as="image">
 <link rel="preload" href="store/art3.png" as="image">
@@ -56,7 +55,7 @@
   <p><strong>Quantity:</strong> 1</p>
   
   <!-- Add to Cart Button -->
-  <button class="snipcart-add-item"
+  <button class="add-item"
     data-item-id="twins-painting"
     data-item-price="20.00"
     data-item-url="/product1.html"
@@ -106,78 +105,22 @@
 
   <!-- JavaScript -->
   <script src="script.js"></script>
-  
-  <!-- Snipcart Container and JS -->
-  <div id="snipcart" data-api-key="ZWQxMmRkOTUtMWJiYy00Zjk2LWIwZTUtOTdlOTc5Mzg0ZjVhNjM4ODE5NjM1Mzk2NjQwNjA2" 
-  data-config-modal-style="side"
-     data-config-currency="usd|rub|euro"
-     data-config-language="en" <!-- Язык -->
-data-config-templates-url="/snipcart-templates.html" <!-- Кастомный дизайн -->
-     data-config-close-cart-after-add="true"
-     hidden>
-</div>
-  <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Инициализация корзины
-        Snipcart.store.subscribe(() => {
-            const count = Snipcart.store.getState().cart.items.count;
-            document.querySelectorAll('.snipcart-items-count').forEach(el => {
-                el.textContent = count;
-            });
-        });
-    });
-    </script>
-    
-    <!-- Плавающая иконка корзины -->
-<div id="floating-cart" class="floating-cart">
-  <button class="snipcart-checkout">
-    <img src="bag.jpg" alt="Cart" width="30">
-    <span class="cart-badge snipcart-items-count">0</span>
-  </button>
-</div>
-<script>
-  document.addEventListener('snipcart.ready', () => {
-    const floatingCart = document.getElementById('floating-cart');
-    
-    // Функция обновления видимости
-    const updateCartVisibility = () => {
-      const count = Snipcart.store.getState().cart.items.count;
-      if (count > 0) {
-        floatingCart.classList.add('visible');
-      } else {
-        floatingCart.classList.remove('visible');
-      }
-    };
-    
-    // Подписываемся на изменения корзины
-    Snipcart.store.subscribe(updateCartVisibility);
-    
-    // Инициализация при загрузке
-    updateCartVisibility();
-  });
-  </script>
-  <script>
-    // Функция для смены главного изображения
-    function setupImageGallery() {
+   <script>
+    // Функция для смены главного изображения при наведении на миниатюру
+    document.addEventListener('DOMContentLoaded', function() {
       const mainImage = document.getElementById('main-image');
       const thumbnails = document.querySelectorAll('.thumbnail');
-      
       thumbnails.forEach(thumbnail => {
         thumbnail.addEventListener('mouseenter', () => {
           mainImage.src = thumbnail.src;
           mainImage.alt = thumbnail.alt;
-          
-          // Удаляем активный класс у всех миниатюр
           thumbnails.forEach(t => t.classList.remove('active'));
-          // Добавляем активный класс текущей миниатюре
           thumbnail.classList.add('active');
         });
       });
-    }
-  
-    // Инициализация при загрузке страницы
-    document.addEventListener('DOMContentLoaded', setupImageGallery);
+    });
+
   </script>
+
 </body>
 </html>

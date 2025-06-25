@@ -6,10 +6,8 @@
   <title>My Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-<!-- Masonry и Snipcart -->
+<!-- Masonry -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js "></script>
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css " />
-<script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js " defer></script>
 </head>
 <body>
 
@@ -64,7 +62,7 @@
             <p><strong>Quantity:</strong> 1</p>
 
             <!-- Кнопка добавления в корзину -->
-            <button class="snipcart-add-item"
+            <button class="add-item"
               data-item-id="adventure-time-postcard"
               data-item-price="5.00"
               data-item-url="/product2.html"
@@ -95,14 +93,6 @@
     </footer>
   </div>
 
-  <!-- Snipcart -->
-  <div id="snipcart"
-       data-api-key="ZWQxMmRkOTUtMWJiYy00Zjk2LWIwZTUtOTdlOTc5Mzg0ZjVhNjM4ODE5NjM1Mzk2NjQwNjA2"
-       data-test-mode="true"
-       data-config-modal-style="side"
-       hidden>
-  </div>
-
   <!-- Подключаем JavaScript -->
   <script src="script.js"></script>
 
@@ -121,14 +111,6 @@
       });
     });
 
-    // Обновление счетчика корзины
-    document.addEventListener('snipcart.ready', function () {
-      console.log('Snipcart готов!');
-      Snipcart.store.subscribe(() => {
-        const count = Snipcart.store.getState().cart.items.count;
-        document.querySelectorAll('.cart-count').forEach(el => el.textContent = count);
-      });
-    });
   </script>
 
 </body>

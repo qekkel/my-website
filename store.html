@@ -100,7 +100,29 @@
 
 <!-- Подключаем JavaScript -->
 <script src="script.js"></script>
-<div id="snipcart" data-api-key="ZWQxMmRkOTUtMWJiYy00Zjk2LWIwZTUtOTdlOTc5Mzg0ZjVhNjM4ODE5NjM1Mzk2NjQwNjA2" data-test-mode="true" hidden></div>
-<script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
+
+
+<!-- Форма оформления заказа (изначально скрыта) -->
+<div id="checkout-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
+  <div style="background: #1a1a1a; padding: 20px; border-radius: 10px; max-width: 500px;">
+    <h2 style="font-family: 'Lilita One', cursive; color: #ff6b6b;">Checkout</h2>
+    <form id="order-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 10px; margin: 5px 0;">
+      <input type="email" name="email" placeholder="Email" required style="width: 100%; padding: 10px; margin: 5px 0;">
+      <input type="tel" name="phone" placeholder="Phone" style="width: 100%; padding: 10px; margin: 5px 0;">
+      <textarea name="address" placeholder="Shipping Address" style="width: 100%; padding: 10px; margin: 5px 0;"></textarea>
+      
+      <!-- Скрытое поле с данными корзины -->
+      <input type="hidden" name="cart" id="cart-data">
+      
+      <button type="submit" style="background: #ff6b6b; color: white; border: none; padding: 10px 20px; cursor: pointer;">Place Order</button>
+    </form>
+  </div>
+</div>
+
+<!-- Кнопка "Оформить заказ" (появляется при наличии товаров) -->
+<button id="checkout-btn" style="display: none; background: #ff6b6b; color: white; border: none; padding: 10px 20px; margin: 20px 0; cursor: pointer;">Proceed to Checkout</button>
+
+
 </body>
 </html>
