@@ -1,183 +1,179 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Получаем контейнер для галереи
+  // ===== Masonry Gallery =====
   const grid = document.querySelector('.gallery-container');
+  if (grid) {
+    const masonry = new Masonry(grid, {
+      itemSelector: '.gallery-item',
+      columnWidth: '.gallery-item',
+      percentPosition: true,
+      gutter: 20
+    });
 
-  if (!grid) {
-    console.error('Галерея не найдена!');
-    return;
+    if (typeof imagesLoaded !== 'undefined') {
+      imagesLoaded(grid, function() {
+        masonry.layout();
+      });
+    }
+
+    window.addEventListener('resize', function() {
+      masonry.layout();
+    });
   }
 
-  // Инициализируем Masonry
-  const masonry = new Masonry(grid, {
-    itemSelector: '.gallery-item',
-    columnWidth: '.gallery-item', // Укажите фиксированную ширину для колонок
-    percentPosition: true,
-    gutter: 20  // Вы можете также уменьшить gutter, если нужно
-  });
-
-  // Проверяем, загружена ли библиотека imagesLoaded
-  if (typeof imagesLoaded === 'undefined') {
-    console.error('Библиотека imagesLoaded не загружена!');
-    return;
-  }
-
-  // Ждем загрузки всех изображений в контейнере
-  imagesLoaded(grid, function() {
-    // После загрузки всех изображений выполняем layout
-    masonry.layout();
-  });
-
-  // Перерасчет layout при изменении размера окна
-  window.addEventListener('resize', function () {
-    masonry.layout();
-  });
-});
-
-// Корзина (можно вынести в отдельный файл cart.js)
-const cart = {
-  items: [],
-  add(product) {
-    const existingItem = this.items.find(item => item.id === product.id);
-    existingItem ? existingItem.quantity++ : this.items.push({...product, quantity: 1});
-    this.save();
-  },
-  remove(id) {
-    this.items = this.items.filter(item => item.id !== id);
-    this.save();
-  },
-  clear() {
-    this.items = [];
-    this.save();
-  },
-  getTotal() {
-    return this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  },
-  save() {
-    localStorage.setItem('cart', JSON.stringify(this.items));
-  },
-  load() {
-    this.items = JSON.parse(localStorage.getItem('cart')) || [];
-    return this.items;
-  }
-};
-
-// Инициализация корзины при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-  cart.load();
-  updateCartIcon(); // Обновляем иконку корзины
-});
-
-// Обновление счетчика товаров в шапке
-function updateCartIcon() {
-  const count = cart.items.reduce((sum, item) => sum + item.quantity, 0);
-  document.querySelectorAll('.cart-count').forEach(el => el.textContent = count);
-}
-document.addEventListener('DOMContentLoaded', () => {
-  // Если Snipcart не загрузился через 3 секунды, покажем fallback
+  // ===== Snipcart Integration =====
   setTimeout(() => {
     if (!window.Snipcart) {
       document.getElementById('fallback-cart').style.display = 'block';
     }
   }, 3000);
-});
-Snipcart.store.subscribe(() => {
-  const floatingCart = document.getElementById('floating-cart');
-  floatingCart.classList.add('added');
-  setTimeout(() => floatingCart.classList.remove('added'), 500);
-});
-// В функции setupImageGallery:
-thumbnail.addEventListener('mouseenter', () => {
-  mainImage.style.opacity = 0;
-  setTimeout(() => {
-    mainImage.src = thumbnail.src;
-    mainImage.alt = thumbnail.alt;
-    mainImage.style.opacity = 1;
-    thumbnails[0].classList.add('active');
-  }, 300);
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-  const MAX_ITEMS = 1; // Максимальное количество товара
-  let availableItems = MAX_ITEMS;
-  const addButton = document.getElementById('add-to-cart-btn');
-  const outOfStockMsg = document.getElementById('out-of-stock');
-  const availableQuantity = document.getElementById('available-quantity');
+  if (window.Snipcart) {
+    Snipcart.store.subscribe(() => {
+      const floatingCart = document.getElementById('floating-cart');
+      floatingCart.classList.add('added');
+      setTimeout(() => floatingCart.classList.remove('added'), 500);
+      floatingCart.style.display = Snipcart.store.getState().cart.items.count > 0 ? 'block' : 'none';
+    });
+  }
 
-  // Инициализация Snipcart
-  Snipcart.store.subscribe(() => {
-    const cart = Snipcart.store.getState().cart.items;
-    const currentItem = cart.find(item => item.id === 'twins-painting');
+  // ===== Custom Cart System =====
+  const cart = {
+    items: JSON.parse(localStorage.getItem('cart')) || [],
     
-    // Вычисляем сколько осталось
-    const inCart = currentItem ? currentItem.quantity : 0;
-    availableItems = MAX_ITEMS - inCart;
+    add(product) {
+      const existingItem = this.items.find(item => item.id === product.id);
+      if (existingItem) {
+        if (existingItem.quantity >= (product.maxQuantity || 10)) {
+          alert(`Maximum ${product.maxQuantity} items allowed`);
+          return false;
+        }
+        existingItem.quantity += 1;
+      } else {
+        this.items.push({...product, quantity: 1});
+      }
+      this.save();
+      return true;
+    },
     
-    // Обновляем интерфейс
-    availableQuantity.textContent = availableItems;
+    remove(id) {
+      this.items = this.items.filter(item => item.id !== id);
+      this.save();
+    },
     
-    if (availableItems <= 0) {
-      addButton.disabled = true;
-      outOfStockMsg.style.display = 'block';
-      addButton.style.opacity = '0.5';
-      addButton.style.cursor = 'not-allowed';
-    } else {
-      addButton.disabled = false;
-      outOfStockMsg.style.display = 'none';
-      addButton.style.opacity = '1';
-      addButton.style.cursor = 'pointer';
+    clear() {
+      this.items = [];
+      this.save();
+    },
+    
+    save() {
+      localStorage.setItem('cart', JSON.stringify(this.items));
+      this.updateUI();
+      this.updateCounter();
+    },
+    
+    updateUI() {
+      const cartItemsEl = document.getElementById('cart-items');
+      const cartTotalEl = document.getElementById('cart-total-price-summary');
+      
+      if (cartItemsEl) {
+        cartItemsEl.innerHTML = '';
+        this.items.forEach(item => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            ${item.name} × ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}
+            <button class="remove-item" data-id="${item.id}">×</button>
+          `;
+          cartItemsEl.appendChild(li);
+        });
+      }
+      
+      if (cartTotalEl) {
+        const total = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalEl.textContent = `$${total.toFixed(2)}`;
+      }
+    },
+    
+    updateCounter() {
+      const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+      const counter = document.getElementById('cart-count');
+      const cartLink = document.querySelector('.cart-link');
+      if (counter) {
+        counter.textContent = totalItems;
+        counter.classList.add('bounce');
+        setTimeout(() => counter.classList.remove('bounce'), 300);
+      }
+        if (cartLink) {
+      cartLink.classList.toggle('visible', totalItems > 0);
+    }  
+    if (totalItems === 1) { // Только при добавлении первого товара
+  const audio = new Audio('notification.mp3');
+  audio.volume = 0.3;
+  audio.play();
+}
+
     }
-  });
-});
-// Вместо const MAX_ITEMS = 5;
-fetch('/get-product-quantity?id=twins-painting')
-  .then(response => response.json())
-  .then(data => {
-    MAX_ITEMS = data.quantity;
-    availableQuantity.textContent = 1;
-  });
+  };
 
-  // В обработчике Snipcart:
-const progress = document.querySelector('.quantity-progress');
-progress.style.width = `${(availableItems / MAX_ITEMS) * 100}%`;
-
-// Показывать/скрывать корзину при добавлении товара
-document.addEventListener('snipcart.ready', () => {
-  Snipcart.store.subscribe(() => {
-    const cart = document.getElementById('floating-cart');
-    cart.style.display = Snipcart.store.getState().cart.items.count > 0 ? 'block' : 'none';
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const MAX_ITEMS_STAR = 15; // Для второго товара
-  let availableItemsStar = MAX_ITEMS_STAR;
-  const addButtonStar = document.getElementById('add-to-cart-btn-star');
-  const outOfStockMsgStar = document.getElementById('out-of-stock-star');
-  const availableQuantityStar = document.getElementById('available-quantity-star');
-
-  Snipcart.store.subscribe(() => {
-    const cart = Snipcart.store.getState().cart.items;
-    const currentItem = cart.find(item => item.id === 'starry-night-painting');
+  // ===== Event Handlers =====
+  function handleAddToCart(e) {
+    e.preventDefault();
+    const button = e.currentTarget;
     
-    const inCart = currentItem ? currentItem.quantity : 0;
-    availableItemsStar = MAX_ITEMS_STAR - inCart;
+    const product = {
+      id: button.dataset.id || Date.now().toString(),
+      name: button.dataset.name || button.closest('.product-item')?.querySelector('h2')?.textContent || 'Product',
+      price: parseFloat(button.dataset.price || 0),
+      maxQuantity: parseInt(button.dataset.maxQuantity || 10)
+    };
 
-    availableQuantityStar.textContent = availableItemsStar;
-
-    if (availableItemsStar <= 0) {
-      addButtonStar.disabled = true;
-      outOfStockMsgStar.style.display = 'block';
-      addButtonStar.style.opacity = '0.5';
-      addButtonStar.style.cursor = 'not-allowed';
-    } else {
-      addButtonStar.disabled = false;
-      outOfStockMsgStar.style.display = 'none';
-      addButtonStar.style.opacity = '1';
-      addButtonStar.style.cursor = 'pointer';
+    if (cart.add(product)) {
+      // Visual feedback
+      button.textContent = '✓ Added!';
+      button.classList.add('added-to-cart');
+      setTimeout(() => {
+        button.textContent = button.dataset.originalText || 'Add to Cart';
+        button.classList.remove('added-to-cart');
+      }, 1000);
     }
-  });
+  }
 
-  const progressStar = document.querySelector('.quantity-progress-star');
-  progressStar.style.width = `${(availableItemsStar / MAX_ITEMS_STAR) * 100}%`;
+  function handleRemoveItem(e) {
+    if (e.target.classList.contains('remove-item')) {
+      cart.remove(e.target.dataset.id);
+    }
+  }
+
+  // ===== Initialization =====
+  function initialize() {
+    // Initialize buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+      button.dataset.originalText = button.textContent;
+      button.addEventListener('click', handleAddToCart);
+    });
+
+    // Initialize cart
+    document.getElementById('cart-items')?.addEventListener('click', handleRemoveItem);
+    cart.updateUI();
+    cart.updateCounter();
+
+    // Initialize checkout
+    document.getElementById('checkout-btn')?.addEventListener('click', () => {
+      document.getElementById('checkout-modal').style.display = 'flex';
+      document.getElementById('cart-data').value = JSON.stringify(cart.items);
+    });
+
+    document.getElementById('checkout-modal')?.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('checkout-modal')) {
+        e.target.style.display = 'none';
+      }
+    });
+
+    document.getElementById('order-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Order placed! Thank you!');
+      cart.clear();
+    });
+  }
+
+  initialize();
 });
-
