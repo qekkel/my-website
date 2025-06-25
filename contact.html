@@ -88,6 +88,28 @@
 <input type="text" name="website" style="display:none;">
   </footer>
 
+
+<!-- В конце body перед script.js -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Обновляем счетчик при загрузке страницы
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const counter = document.getElementById('cart-count');
+    
+    if (counter) {
+      counter.textContent = count;
+      // Показываем/скрываем корзину
+      document.querySelector('.cart-link').style.display = count > 0 ? 'inline-block' : 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
   <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>      
+<script src="cart-display.js"></script>
+
+</html>
