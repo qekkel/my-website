@@ -105,11 +105,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (cartLink) {
       cartLink.classList.toggle('visible', totalItems > 0);
     }  
-    if (totalItems === 1) { // Только при добавлении первого товара
+    if (totalItems === 1,2,3,4,5,6) { // Только при добавлении первого товара
   const audio = new Audio('notification.mp3');
   audio.volume = 0.3;
   audio.play();
 }
+
 
     }
   };
