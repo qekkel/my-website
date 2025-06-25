@@ -82,9 +82,11 @@ html {
     background-color: rgba(0, 0, 0, .5);
   }
   
-  * {
-    box-sizing: border-box;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
   
   body {
     flex-direction: column;
@@ -1440,4 +1442,82 @@ header {
 
 main {
   padding: 20px !important;
+}
+
+
+
+
+
+/* Стили для ссылки корзины */
+.cart-link {
+  position: relative;
+  margin-left: 15px;
+  padding-left: 25px;
+}
+
+.cart-link::before {
+  content: "🛒";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.cart-count {
+  background: #ff6b6b;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.cart-count.pulse {
+  animation: pulse 0.3s ease;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Анимация счетчика */
+.cart-count.bounce {
+  animation: bounce 0.3s;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+}
+
+/* Стили для кнопки добавления */
+.add-to-cart-btn {
+  padding: 10px 20px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn.added-to-cart {
+  background: #4CAF50;
+  transform: scale(0.95);
+}
+
+/* Анимация счетчика */
+#cart-count {
+  transition: all 0.3s;
+}
+
+#cart-count.bounce {
+  display: inline-block;
+  animation: bounce 0.3s;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
 }

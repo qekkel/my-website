@@ -27,6 +27,8 @@
         <a href="about.html">About</a>
         <a href="store.html">Store</a>
         <a href="contact.html">Contact</a>
+         <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span>
+  </a>
       </nav>
     </header>
 
@@ -55,16 +57,15 @@
   <p><strong>Quantity:</strong> 1</p>
   
   <!-- Add to Cart Button -->
-  <button class="add-item"
-    data-item-id="twins-painting"
-    data-item-price="20.00"
-    data-item-url="/product1.html"
-    data-item-name="Painting Twins"
-    data-item-description="Hand-painted artwork, 25x25 cm"
-    data-item-image="/store/art.png"
-    data-item-custom1-name="Frame Color"
-    data-item-max-quantity="1"
-    data-item-custom1-options="None|Black|White|Gold">
+  <button class="add-to-cart-btn" 
+    data-id="product-1"
+    data-price="20.00"
+    data-url="/product1.html"
+    data-name="Painting Twins"
+    data-description="Hand-painted artwork, 25x25 cm"
+    data-image="/store/art.png"
+    data-custom1-name="Frame Color"
+    data-max-quantity="1">
     Add to Cart
   </button>
 
@@ -121,6 +122,58 @@
     });
 
   </script>
+<script>
+  // Функция для обновления счетчика корзины
+  function updateCartCounter() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    document.getElementById('cart-count').textContent = totalItems;
+  }
 
+  // Обработчик добавления в корзину
+  document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация счетчика
+    updateCartCounter();
+
+    // Обработчик для кнопки добавления
+    document.querySelector('.add-item').addEventListener('click', function() {
+      const product = {
+        id: this.dataset.id,
+        name: this.dataset.name,
+        price: parseFloat(this.dataset.price),
+        image: this.dataset.image,
+        quantity: 1
+      };
+
+      // Получаем текущую корзину или создаем новую
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      // Проверяем, есть ли уже такой товар в корзине
+      const existingItem = cart.find(item => item.id === product.id);
+      if (existingItem) {
+        if (existingItem.quantity >= parseInt(this.dataset.maxQuantity || 1)) {
+          alert('Maximum quantity reached for this item');
+          return;
+        }
+        existingItem.quantity += 1;
+      } else {
+        cart.push(product);
+      }
+
+      // Сохраняем обновленную корзину
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Обновляем счетчик
+      updateCartCounter();
+      
+      // Анимация добавления
+      const counter = document.getElementById('cart-count');
+      counter.classList.add('pulse');
+      setTimeout(() => counter.classList.remove('pulse'), 300);
+      
+      console.log('Added to cart:', product);
+    });
+  });
+</script>
 </body>
 </html>
