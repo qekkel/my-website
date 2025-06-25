@@ -1448,12 +1448,22 @@ main {
 
 
 
+
+
 /* Стили для ссылки корзины */
 .cart-link {
+  display: none; /* Скрываем по умолчанию */
   position: relative;
   margin-left: 15px;
   padding-left: 25px;
 }
+
+
+.cart-link.visible {
+  display: inline-block; /* Показываем когда есть товары */
+}
+
+
 
 .cart-link::before {
   content: "🛒";
@@ -1512,6 +1522,7 @@ main {
   transition: all 0.3s;
 }
 
+/* Анимация счетчика */
 #cart-count.bounce {
   display: inline-block;
   animation: bounce 0.3s;
@@ -1521,3 +1532,13 @@ main {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.5); }
 }
+
+/* Стили для кнопки добавления */
+.add-to-cart-btn {
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn.added-to-cart {
+  background-color: #4CAF50 !important;
+  transform: scale(0.95);
+  }
