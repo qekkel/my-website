@@ -53,20 +53,36 @@
         <h2>Contact Information</h2>
         
         <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        
+          <label for="name">Your Name:</label>
+           <input type="text" name="name" placeholder="Your Name" required>
+          <input type="hidden" name="_subject" value="New Order!">
+
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
+         <input type="email" name="email" placeholder="Email" required>
         </div>
         
-        <div class="form-group">
-          <label for="phone">Phone:</label>
-          <input type="tel" id="phone" name="phone">
-        </div>
-        
+   <!-- Поле для предпочтительного способа связи -->
+  <div class="form-group">
+    <label>Preferred contact method:</label>
+    <select name="contact_method" required>
+      <option value="">Select option</option>
+      <option value="telegram">Telegram</option>
+      <option value="whatsapp">WhatsApp</option>
+      <option value="email">Email Only</option>
+    </select>
+  </div>
+
+  <!-- Поле для Telegram/WhatsApp/Phone -->
+  <div class="form-group" id="contact-field" style="display: none;">
+    <label id="contact-label">Contact info</label>
+    <input type="text" name="contact_info" placeholder="@username or +123456789">
+  </div>
+
+         <!-- Скрытые поля -->
+  <input type="hidden" name="cart" id="cart-data">
+  <input type="hidden" name="_subject" value="New Order from Qekkel.com">
+
         <div class="form-group">
           <label for="address">Shipping Address:</label>
           <textarea id="address" name="address" rows="3"></textarea>
@@ -80,6 +96,19 @@
         <input type="hidden" name="cart" id="cart-data">
         <button type="submit" class="btn">Place Order</button>
       </form>
+      <script>
+document.getElementById('order-form').addEventListener('submit', function() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let message = "ORDER DETAILS:\n\n";
+  
+  cart.forEach(item => {
+    message += `- ${item.quantity} × ${item.name} ($${item.price} each)\n`;
+  });
+  
+  document.getElementById('cart-message').value = message;
+});
+</script>
+
     </main>
 
     <!-- Футер -->

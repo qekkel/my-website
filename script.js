@@ -97,23 +97,108 @@ document.addEventListener('DOMContentLoaded', function() {
       const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
       const counter = document.getElementById('cart-count');
       const cartLink = document.querySelector('.cart-link');
+      
       if (counter) {
         counter.textContent = totalItems;
         counter.classList.add('bounce');
         setTimeout(() => counter.classList.remove('bounce'), 300);
       }
-        if (cartLink) {
-      cartLink.classList.toggle('visible', totalItems > 0);
-    }  
-    if (totalItems === 1,2,3,4,5,6) { // Только при добавлении первого товара
-  const audio = new Audio('notification.mp3');
-  audio.volume = 0.3;
-  audio.play();
-}
-
-
+      
+      if (cartLink) {
+        cartLink.classList.toggle('visible', totalItems > 0);
+      }
+      
+      // Звук при добавлении любого количества товаров
+      if (totalItems > 0) {
+        const audio = new Audio('notification.mp3');
+        audio.volume = 0.3;
+        audio.play().catch(e => console.log("Audio error:", e));
+      }
     }
   };
+
+  // ===== Contact Method Handler =====
+  function setupContactMethod() {
+    const contactMethod = document.querySelector('[name="contact_method"]');
+    const contactField = document.getElementById('contact-field');
+    const contactLabel = document.getElementById('contact-label');
+
+    if (contactMethod && contactField && contactLabel) {
+      contactMethod.addEventListener('change', function() {
+        if (!this.value) {
+          contactField.style.display = 'none';
+          return;
+        }
+
+        contactField.style.display = 'block';
+        
+        switch(this.value) {
+          case 'telegram':
+            contactLabel.textContent = 'Telegram username';
+            document.querySelector('[name="contact_info"]').placeholder = '@username';
+            break;
+          case 'whatsapp':
+            contactLabel.textContent = 'WhatsApp number';
+            document.querySelector('[name="contact_info"]').placeholder = '+1234567890';
+            break;
+          case 'phone':
+            contactLabel.textContent = 'Phone number';
+            document.querySelector('[name="contact_info"]').placeholder = '+1234567890';
+            break;
+          default:
+            contactField.style.display = 'none';
+        }
+      });
+    }
+  }
+
+  // ===== Form Submission Handler =====
+  function setupFormSubmission() {
+    const orderForm = document.getElementById('order-form');
+    if (!orderForm) return;
+
+    orderForm.addEventListener('submit', function(e) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      if (cart.length === 0) {
+        e.preventDefault();
+        alert('Your cart is empty!');
+        return;
+      }
+      
+      // Проверка Telegram username
+      const contactMethod = document.querySelector('[name="contact_method"]')?.value;
+      const contactInfo = document.querySelector('[name="contact_info"]')?.value;
+      
+      if (contactMethod === 'telegram' && contactInfo && !contactInfo.match(/^@?[a-zA-Z0-9_]{5,}$/)) {
+        e.preventDefault();
+        alert('Please enter valid Telegram username (e.g. @username)');
+        return;
+      }
+      
+      // Формируем читаемое содержимое корзины
+      let cartText = "Order Details:\n\n";
+      cart.forEach(item => {
+        cartText += `- ${item.quantity} × ${item.name} ($${item.price.toFixed(2)} each)\n`;
+      });
+      
+      // Добавляем контактную информацию
+      if (contactMethod && contactInfo) {
+        cartText += `\nContact: ${contactMethod} (${contactInfo})`;
+      }
+      
+      // Создаем скрытое поле для Formspree
+      let cartDataField = document.getElementById('cart-data');
+      if (!cartDataField) {
+        cartDataField = document.createElement('input');
+        cartDataField.type = 'hidden';
+        cartDataField.name = 'cart';
+        cartDataField.id = 'cart-data';
+        orderForm.appendChild(cartDataField);
+      }
+      cartDataField.value = cartText;
+    });
+  }
 
   // ===== Event Handlers =====
   function handleAddToCart(e) {
@@ -157,6 +242,12 @@ document.addEventListener('DOMContentLoaded', function() {
     cart.updateUI();
     cart.updateCounter();
 
+    // Initialize contact method
+    setupContactMethod();
+    
+    // Initialize form submission
+    setupFormSubmission();
+
     // Initialize checkout
     document.getElementById('checkout-btn')?.addEventListener('click', () => {
       document.getElementById('checkout-modal').style.display = 'flex';
@@ -168,37 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.target.style.display = 'none';
       }
     });
-
-    document.getElementById('order-form')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Order placed! Thank you!');
-      cart.clear();
-    });
   }
 
   initialize();
-});
-
-document.getElementById('order-form').addEventListener('submit', function(e) {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  if (cart.length === 0) {
-    e.preventDefault();
-    alert('Your cart is empty!');
-    return;
-  }
-  
-  // Заполняем скрытое поле
-  document.getElementById('cart-data').value = JSON.stringify(cart);
-});
-
-
-
-
-// В самом конце script.js
-if (document.getElementById('order-form')) {
-  document.getElementById('order-form').addEventListener('submit', function() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    document.getElementById('cart-data').value = JSON.stringify(cart);
-  });
-}
+});ы
