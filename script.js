@@ -178,3 +178,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   initialize();
 });
+
+document.getElementById('order-form').addEventListener('submit', function(e) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  if (cart.length === 0) {
+    e.preventDefault();
+    alert('Your cart is empty!');
+    return;
+  }
+  
+  // Заполняем скрытое поле
+  document.getElementById('cart-data').value = JSON.stringify(cart);
+});
+
+
+
+
+// В самом конце script.js
+if (document.getElementById('order-form')) {
+  document.getElementById('order-form').addEventListener('submit', function() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    document.getElementById('cart-data').value = JSON.stringify(cart);
+  });
+}
