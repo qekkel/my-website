@@ -1,0 +1,4 @@
+# Вариант 1: Редирект с www на без www
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.qekkel\.com [NC]
+RewriteRule ^(.*)$ https://qekkel.com/$1 [L,R=301]
