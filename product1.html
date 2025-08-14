@@ -3,14 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
+  <title>Painting "Twins" | Olga Qekkel</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Palanquin:wght@400;700&family=Erica+One&family=Lalezar&family=Lilita+One&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
-  <!-- Snipcart CSS -->
-  <link rel="preload" href="store/art.png" as="image">
-<link rel="preload" href="store/art2.png" as="image">
-<link rel="preload" href="store/art3.png" as="image">
+  <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&family=Lilita+One&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="wrapper">
@@ -18,7 +13,7 @@
     <header>
       <div class="header-top">
         <a href="index.html" class="logo-container">
-          <img src="girl-frog-psd.png" alt="Logo: Frog Girl" class="logo">
+          <img src="girl-frog-psd.png" alt="Logo" class="logo">
           <div class="logo-text">Olga Qekkel</div>
         </a>
       </div>
@@ -27,153 +22,107 @@
         <a href="about.html">About</a>
         <a href="store.html">Store</a>
         <a href="contact.html">Contact</a>
-         <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span>
-  </a>
+        <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span></a>
       </nav>
     </header>
 
     <main class="product-page">
-      <div class="wrapper">
-        <div class="product-container">
-        <!-- Left Part: Gallery -->
+      <div class="product-container">
+        <!-- Gallery -->
         <div class="product-gallery">
-            <img id="main-image" class="main-image" src="store/art.png" alt="Painting Twins">
-            <div class="thumbnails">
-                <img class="thumbnail" src="store/art.png" alt="Product Thumbnail">
-                <img class="thumbnail" src="store/art2.png" alt="Product Thumbnail">
-                <img class="thumbnail" src="store/art3.png" alt="Product Thumbnail">
-            </div>
+          <img id="main-image" class="main-image" src="store/art.png" alt="Painting Twins">
+          <div class="thumbnails">
+            <img class="thumbnail" src="store/art.png" alt="Thumbnail 1">
+            <img class="thumbnail" src="store/art2.png" alt="Thumbnail 2">
+            <img class="thumbnail" src="store/art3.png" alt="Thumbnail 3">
+          </div>
         </div>
         
-      <!-- Right Part: Product Info -->
-<div class="product-info">
-  <h1>Painting "Twins"</h1>
-  <p class="product-price">Price: <span class="price-value">$20.00</span></p>
-  <p><strong>Material:</strong> Primed canvas board</p>
-  <p><strong>Size:</strong> 25x25 cm</p>
-  <p><strong>Composition:</strong> 100% cotton, 280 gsm</p>
-  <p><strong>Design:</strong> Deep black background with vibrant blue floral patterns</p>
-  <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
-  <p><strong>Quantity:</strong> 1</p>
-  
-  <!-- Add to Cart Button -->
-  <button class="add-to-cart-btn" 
-    data-id="product-1"
-    data-price="20.00"
-    data-url="/product1.html"
-    data-name="Painting Twins"
-    data-description="Hand-painted artwork, 25x25 cm"
-    data-image="/store/art.png"
-    data-custom1-name="Frame Color"
-    data-max-quantity="1">
-    Add to Cart
-  </button>
+        <!-- Product Info -->
+        <div class="product-info">
+          <h1>Painting "Twins"</h1>
+          <p class="product-price">$20.00</p>
+          
+          <div class="product-details">
+            <p><strong>Material:</strong> Primed canvas board</p>
+            <p><strong>Size:</strong> 25x25 cm</p>
+            <p><strong>Composition:</strong> 100% cotton, 280 gsm</p>
+            <p><strong>Technique:</strong> Hand-painted, unique artwork</p>
+          </div>
 
-  <p id="out-of-stock" style="display: none; color: red;">
-    Sorry, this item is out of stock
-  </p>
-</div>
-<div class="quantity-bar">
-  <div class="quantity-progress" style="width: 100%"></div>
-</div>
-</div>
-          <script>
-            const button = document.querySelector('#starry-night')
-            const quantity = document.querySelector('#quantity')
-            quantity.addEventListener('change', () => {
-              // Sets the default quantity when adding the item
-              button.setAttribute('data-item-quantity', quantity.value)
-            })
-            const select = document.querySelector('#frame_color')
-            select.addEventListener('change', () => {
-              // Sets the default frame color when adding the item
-              button.setAttribute("data-item-custom1-value", select.value)
-            })
-            </script>
+          <!-- Add to Cart Button -->
+          <button id="add-to-cart-btn" class="add-to-cart-btn">
+            Add to Cart
+          </button>
+          
+          <p id="out-of-stock" style="display: none; color: red;">
+            Sorry, this item is out of stock
+          </p>
         </div>
       </div>
     </main>
 
-    <div id="checkout-btn-container" style="display: none;">
-      <button>Proceed to Checkout</button>
-    </div>
+    <footer>
+      <p>© 2025 Olga Boiko</p>
+    </footer>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Olga Boiko</p>
-  </footer>
-
   <!-- JavaScript -->
-  <script src="script.js"></script>
-   <script>
-    // Функция для смены главного изображения при наведении на миниатюру
+  <script>
+    // Gallery Image Switching
     document.addEventListener('DOMContentLoaded', function() {
       const mainImage = document.getElementById('main-image');
       const thumbnails = document.querySelectorAll('.thumbnail');
-      thumbnails.forEach(thumbnail => {
-        thumbnail.addEventListener('mouseenter', () => {
-          mainImage.src = thumbnail.src;
-          mainImage.alt = thumbnail.alt;
-          thumbnails.forEach(t => t.classList.remove('active'));
-          thumbnail.classList.add('active');
+      
+      thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          mainImage.src = thumb.src;
+          mainImage.alt = thumb.alt;
         });
       });
-    });
 
-  </script>
-<script>
-  // Функция для обновления счетчика корзины
-  function updateCartCounter() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-    document.getElementById('cart-count').textContent = totalItems;
-  }
-
-  // Обработчик добавления в корзину
-  document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация счетчика
-    updateCartCounter();
-
-    // Обработчик для кнопки добавления
-    document.querySelector('.add-item').addEventListener('click', function() {
-      const product = {
-        id: this.dataset.id,
-        name: this.dataset.name,
-        price: parseFloat(this.dataset.price),
-        image: this.dataset.image,
-        quantity: 1
-      };
-
-      // Получаем текущую корзину или создаем новую
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      // Cart Functionality
+      const cartBtn = document.getElementById('add-to-cart-btn');
+      const cartCount = document.getElementById('cart-count');
       
-      // Проверяем, есть ли уже такой товар в корзине
-      const existingItem = cart.find(item => item.id === product.id);
-      if (existingItem) {
-        if (existingItem.quantity >= parseInt(this.dataset.maxQuantity || 1)) {
-          alert('Maximum quantity reached for this item');
-          return;
+      cartBtn.addEventListener('click', () => {
+        const product = {
+          id: 'product-twins',
+          name: 'Painting "Twins"',
+          price: 20.00,
+          quantity: 1
+        };
+        
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItem = cart.find(item => item.id === product.id);
+        
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push(product);
         }
-        existingItem.quantity += 1;
-      } else {
-        cart.push(product);
-      }
-
-      // Сохраняем обновленную корзину
-      localStorage.setItem('cart', JSON.stringify(cart));
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Update counter
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+        
+        // Animation
+        cartCount.classList.add('bounce');
+        setTimeout(() => cartCount.classList.remove('bounce'), 300);
+        
+        // Feedback
+        cartBtn.textContent = '✓ Added!';
+        setTimeout(() => {
+          cartBtn.textContent = 'Add to Cart';
+        }, 1000);
+      });
       
-      // Обновляем счетчик
-      updateCartCounter();
-      
-      // Анимация добавления
-      const counter = document.getElementById('cart-count');
-      counter.classList.add('pulse');
-      setTimeout(() => counter.classList.remove('pulse'), 300);
-      
-      console.log('Added to cart:', product);
+      // Initialize counter
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
     });
-  });
-</script>
+  </script>
 </body>
 </html>
