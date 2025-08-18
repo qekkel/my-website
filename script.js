@@ -194,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       let cartText = "Order Details:\n\n";
+      console.log("Данные корзины:", cart);
       cart.forEach(item => {
         cartText += `- ${item.quantity} × ${item.name} ($${item.price.toFixed(2)} each)\n`;
       });

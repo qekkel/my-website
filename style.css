@@ -58,9 +58,6 @@ html {
     height: 150px;
   }
   
-  .close, .product-name, nav a {
-    font-weight: 700;
-  }
   
   .logo-container, nav a {
     text-decoration: none;
@@ -137,7 +134,7 @@ html {
 main {
   flex: 1; /* Растягивает блок на всё свободное пространство */
 padding: var(--main-padding) !important; /* Сохраняем твой отступ */
-  padding-bottom: calc(var(--main-padding) + 60px) !important; /* + место для футера */
+  padding-bottom: 60px; /* Отступ для футера */
 }
 
   .gallery-section {
@@ -229,19 +226,18 @@ padding: var(--main-padding) !important; /* Сохраняем твой отст
     cursor: pointer;
   }
   
- footer {
+footer {
   background-color: #333;
   color: #fff;
   text-align: center;
   padding: 20px 0;
   width: 100%;
-  z-index: 100;
-  opacity: 1; /* Важно! */
-  margin-top: auto; /* Дополнительная страховка */
-  
-
-
+  margin-top: auto; /* Прижимает к низу */
+  position: relative;
+  bottom: 0;
 }
+
+
 @keyframes slideUp {
   from { bottom: -200px; }
   to { bottom: 0; }
@@ -264,7 +260,13 @@ padding: var(--main-padding) !important; /* Сохраняем твой отст
   }
   
   @media (max-width: 768px) {
-    .gallery-item {
+    body {
+    padding-bottom: 0;
+  }
+  footer {
+    position: static;
+  }
+  .gallery-item {
       width: calc(100% - 20px);
       max-width: calc(100% - 20px);
     }
@@ -851,6 +853,8 @@ button[type=submit]:hover {
 }
 
 .product-details p {
+  font-family: 'Palanquin', sans-serif; /* Вместо Lilita One */
+  font-weight: 400; /* Обычное начертание */
   color: #555;
   margin: 5px 0;
 }
@@ -1235,9 +1239,12 @@ body {
 }
 
 .wrapper {
-  max-width: 1200px;
+   display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Минимальная высота = весь экран */
+  max-width: 100vh;
   margin: 0 auto;
-  padding: 20px;
+  
 }
 
 .product-container {
@@ -1311,6 +1318,8 @@ header {
 }
 
 main {
+   flex: 1; /* Занимает всё свободное пространство */
+  padding-bottom: 60px; /* Отступ для футера */
   padding: 20px !important;
 }
 
@@ -1393,3 +1402,17 @@ main {
   background-color: #4CAF50 !important;
   transform: scale(0.95);
  }
+
+ /* Добавьте в конец вашего CSS */
+.product-page {
+  font-weight: 400 !important;
+}
+
+.product-info p, 
+.product-details p {
+  font-weight: 400 !important;
+}
+
+.product-name {
+  font-weight: 600; /* Полужирный только для названия */
+}

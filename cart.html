@@ -10,6 +10,56 @@
   <link href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+  <style>
+    .cart-item-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    .quantity-btn {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: none;
+      background: #f0f0f0;
+      cursor: pointer;
+    }
+    .remove-item {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #ff5252;
+    }
+    .cart-total {
+      text-align: right;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    #contact-field {
+      margin-top: 15px;
+    }
+  </style>
 </head>
 <body>
   <div class="wrapper">
@@ -26,8 +76,7 @@
         <a href="about.html">About</a>
         <a href="store.html">Store</a>
         <a href="contact.html">Contact</a>
-         <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span>
-  </a>
+        <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span></a>
       </nav>
     </header>
 
@@ -54,34 +103,30 @@
         
         <div class="form-group">
           <label for="name">Your Name:</label>
-           <input type="text" name="name" placeholder="Your Name" required>
-          <input type="hidden" name="_subject" value="New Order!">
+          <input type="text" name="name" placeholder="Your Name" required>
+        </div>
 
         <div class="form-group">
           <label for="email">Email:</label>
-         <input type="email" name="email" placeholder="Email" required>
+          <input type="email" name="email" placeholder="Email" required>
         </div>
         
-   <!-- Поле для предпочтительного способа связи -->
-  <div class="form-group">
-    <label>Preferred contact method:</label>
-    <select name="contact_method" required>
-      <option value="">Select option</option>
-      <option value="telegram">Telegram</option>
-      <option value="whatsapp">WhatsApp</option>
-      <option value="email">Email Only</option>
-    </select>
-  </div>
+        <!-- Поле для предпочтительного способа связи -->
+        <div class="form-group">
+          <label>Preferred contact method:</label>
+          <select name="contact_method" id="contact-method" required>
+            <option value="">Select option</option>
+            <option value="telegram">Telegram</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="email">Email Only</option>
+          </select>
+        </div>
 
-  <!-- Поле для Telegram/WhatsApp/Phone -->
-  <div class="form-group" id="contact-field" style="display: none;">
-    <label id="contact-label">Contact info</label>
-    <input type="text" name="contact_info" placeholder="@username or +123456789">
-  </div>
-
-         <!-- Скрытые поля -->
-  <input type="hidden" name="cart" id="cart-data">
-  <input type="hidden" name="_subject" value="New Order from Qekkel.com">
+        <!-- Поле для Telegram/WhatsApp/Phone -->
+        <div class="form-group" id="contact-field" style="display: none;">
+          <label id="contact-label">Contact info</label>
+          <input type="text" name="contact_info" placeholder="@username or +123456789">
+        </div>
 
         <div class="form-group">
           <label for="address">Shipping Address:</label>
@@ -94,21 +139,9 @@
         </div>
         
         <input type="hidden" name="cart" id="cart-data">
+        <input type="hidden" name="_subject" value="New Order from Qekkel.com">
         <button type="submit" class="btn">Place Order</button>
       </form>
-      <script>
-document.getElementById('order-form').addEventListener('submit', function() {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  let message = "ORDER DETAILS:\n\n";
-  
-  cart.forEach(item => {
-    message += `- ${item.quantity} × ${item.name} ($${item.price} each)\n`;
-  });
-  
-  document.getElementById('cart-message').value = message;
-});
-</script>
-
     </main>
 
     <!-- Футер -->
@@ -118,88 +151,138 @@ document.getElementById('order-form').addEventListener('submit', function() {
   </div>
 
   <!-- Подключаем JavaScript -->
-  <<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const cartList = document.getElementById('cart-list');
-    const cartEmpty = document.getElementById('cart-empty');
-    const cartItems = document.getElementById('cart-items');
-    const orderForm = document.getElementById('order-form');
-    const totalPriceEl = document.getElementById('cart-total-price');
-    const cartData = document.getElementById('cart-data');
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartList = document.getElementById('cart-list');
+      const cartEmpty = document.getElementById('cart-empty');
+      const cartItems = document.getElementById('cart-items');
+      const orderForm = document.getElementById('order-form');
+      const totalPriceEl = document.getElementById('cart-total-price');
+      const cartData = document.getElementById('cart-data');
+      const contactMethod = document.getElementById('contact-method');
+      const contactField = document.getElementById('contact-field');
 
-    // Отображаем содержимое корзины
-    function displayCart() {
-      cartList.innerHTML = '';
-      let totalPrice = 0;
-
-      if (cart.length === 0) {
-        cartEmpty.style.display = 'block';
-        cartItems.style.display = 'none';
-        orderForm.style.display = 'none';
-      } else {
-        cartEmpty.style.display = 'none';
-        cartItems.style.display = 'block';
-        orderForm.style.display = 'block';
-
-        cart.forEach(item => {
-          const li = document.createElement('li');
-          li.className = 'cart-item';
-          li.innerHTML = `
-            <div class="cart-item-info">
-              <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-              <div>
-                <span class="cart-item-name">${item.name}</span>
-                <div class="quantity-controls">
-                  <button class="quantity-btn minus" data-id="${item.id}">-</button>
-                  <span class="quantity">${item.quantity}</span>
-                  <button class="quantity-btn plus" data-id="${item.id}">+</button>
-                </div>
-              </div>
-            </div>
-            <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-            <button class="remove-item" data-id="${item.id}">×</button>
-          `;
-          cartList.appendChild(li);
-          totalPrice += item.price * item.quantity;
-        });
-
-        totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
-        cartData.value = JSON.stringify(cart);
+      // Обновляем счетчик корзины
+      function updateCartCount() {
+        const count = cart.reduce((total, item) => total + item.quantity, 0);
+        document.getElementById('cart-count').textContent = count;
       }
-    }
 
-    // Обработчики событий
-    cartList.addEventListener('click', function(e) {
-      const itemId = e.target.getAttribute('data-id');
-      if (!itemId) return;
-
-      const itemIndex = cart.findIndex(item => item.id === itemId);
-      
-      if (e.target.classList.contains('remove-item')) {
-        cart.splice(itemIndex, 1);
-      } 
-      else if (e.target.classList.contains('minus')) {
-        if (cart[itemIndex].quantity > 1) {
-          cart[itemIndex].quantity--;
+      // Обработчик изменения способа связи
+      contactMethod.addEventListener('change', function() {
+        if (this.value === 'telegram' || this.value === 'whatsapp') {
+          contactField.style.display = 'block';
+          document.getElementById('contact-label').textContent = 
+            this.value === 'telegram' ? 'Telegram username (@)' : 'WhatsApp number (+...)';
         } else {
-          cart.splice(itemIndex, 1);
+          contactField.style.display = 'none';
         }
-      }
-      else if (e.target.classList.contains('plus')) {
-        cart[itemIndex].quantity++;
-      }
+      });
 
-      localStorage.setItem('cart', JSON.stringify(cart));
-      displayCart();
-      updateCartDisplay();
+      // Отображаем содержимое корзины
+      function displayCart() {
+  cartList.innerHTML = '';
+  let totalPrice = 0;
+
+  if (cart.length === 0) {
+    cartEmpty.style.display = 'block';
+    cartItems.style.display = 'none';
+    orderForm.style.display = 'none';
+  } else {
+    cartEmpty.style.display = 'none';
+    cartItems.style.display = 'block';
+    orderForm.style.display = 'block';
+
+    const fragment = document.createDocumentFragment();
+
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      li.className = 'cart-item';
+      
+      // Получаем корректный путь к изображению
+      const getImagePath = (imgPath) => {
+        if (!imgPath) return 'images/default-product.png';
+        
+        if (window.location.host.includes('github.io')) {
+          return `https://qekkel.github.io/my-website/${imgPath.startsWith('store/') ? imgPath : 'store/' + imgPath}`;
+        }
+        return imgPath.startsWith('store/') ? imgPath : 'store/' + imgPath;
+      };
+
+      const imagePath = getImagePath(item.image);
+      
+      li.innerHTML = `
+        <div class="cart-item-info">
+          <img src="${imagePath}" 
+               alt="${item.name}" 
+               class="cart-item-image"
+               onerror="this.src='images/default-product.png'">
+          <div>
+            <span class="cart-item-name">${item.name}</span>
+            <div class="quantity-controls">
+              <button class="quantity-btn minus" data-id="${item.id}">-</button>
+              <span class="quantity">${item.quantity}</span>
+              <button class="quantity-btn plus" data-id="${item.id}">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+        <button class="remove-item" data-id="${item.id}">×</button>
+      `;
+      
+      fragment.appendChild(li);
+      totalPrice += item.price * item.quantity;
     });
 
-    // Инициализация
-    displayCart();
-  });
-</script>
-</body>
-<script src="cart-display.js"></script>
+    cartList.appendChild(fragment);
+    totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+    cartData.value = JSON.stringify(cart);
+  }
+  updateCartCount();
+}
 
+      // Обработчики событий
+      cartList.addEventListener('click', function(e) {
+        const itemId = e.target.getAttribute('data-id');
+        if (!itemId) return;
+
+        const itemIndex = cart.findIndex(item => item.id === itemId);
+        
+        if (e.target.classList.contains('remove-item')) {
+          cart.splice(itemIndex, 1);
+        } 
+        else if (e.target.classList.contains('minus')) {
+          if (cart[itemIndex].quantity > 1) {
+            cart[itemIndex].quantity--;
+          } else {
+            cart.splice(itemIndex, 1);
+          }
+        }
+        else if (e.target.classList.contains('plus')) {
+          cart[itemIndex].quantity++;
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart();
+      });
+
+      // Инициализация
+      displayCart();
+      
+      // Обработчик отправки формы
+      document.getElementById('order-form').addEventListener('submit', function() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let message = "ORDER DETAILS:\n\n";
+        
+        cart.forEach(item => {
+          message += `- ${item.quantity} × ${item.name} ($${item.price} each)\n`;
+        });
+        
+        // Добавляем информацию о заказе в скрытое поле
+        document.getElementById('cart-data').value = message;
+      });
+    });
+  </script>
+</body>
 </html>
