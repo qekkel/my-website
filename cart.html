@@ -176,7 +176,25 @@ cart.forEach(item => {
     cartList.appendChild(li);
   });
 
-  
+
+// Функция для получения корректного пути к изображению
+function getCorrectImagePath(imgPath) {
+    if (!imgPath) return 'images/placeholder-image.jpg';
+    
+    // Если это полный URL (уже начинается с http)
+    if (imgPath.startsWith('http')) {
+        return imgPath;
+    }
+    
+    // Если путь относительный, добавляем базовый URL
+    const baseUrl = window.location.origin;
+    if (imgPath.startsWith('/')) {
+        return baseUrl + imgPath;
+    } else {
+        return baseUrl + '/store/' + imgPath;
+    }
+}
+
       // Обновляем счетчик корзины
       function updateCartCount() {
         const count = cart.reduce((total, item) => total + item.quantity, 0);
