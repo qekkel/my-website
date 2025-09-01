@@ -163,6 +163,20 @@
       const contactMethod = document.getElementById('contact-method');
       const contactField = document.getElementById('contact-field');
 
+cart.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'cart-item';
+    li.innerHTML = `
+      <div class="cart-item-info">
+        <img src="${item.image}" alt="${item.name}" class="cart-item-image" 
+             onerror="this.src='/placeholder-image.jpg'; this.alt='Image not available'">
+        <!-- остальная разметка -->
+      </div>
+    `;
+    cartList.appendChild(li);
+  });
+
+  
       // Обновляем счетчик корзины
       function updateCartCount() {
         const count = cart.reduce((total, item) => total + item.quantity, 0);
