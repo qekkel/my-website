@@ -26,6 +26,9 @@
   <!-- Шрифты Google (оптимизированные) -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&family=Lilita+One&display=swap">
   
+    <!-- Добавьте эту строку (стили GLightbox) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
   <!-- Отложенная загрузка Masonry -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer></script>
 </head>
@@ -71,95 +74,95 @@
     <div id="gallery" class="gallery-section">
       <div class="gallery-container">
         <div class="gallery-item" data-title="VAMPIRE"> 
-          <a href="vampire.html">
-            <img src="girl-vampire-marceline.gif" alt="Vampire"> 
-          </a>
-        </div>
-        <div class="gallery-item" data-title="ZORRO">
-          <a href="zorro.html">
-            <img src="images/optimized/one-piece-zorro.webp" alt="Art Piece 2" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="TRAVEL">
-          <a href="travel.html">
-            <img src="images/optimized/adventure-girl.webp" alt="Art Piece 3" class="gallery-image" fetchpriority="high" loading="eager" width="800" height="1000">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="SAGITTARIUS">
-          <a href="sagittarius.html">
-            <img src="images/optimized/Sagittarius.webp" alt="Art Piece 4" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="BMO">
-          <a href="bmo.html">
-            <img src="images/optimized/bmo.webp" alt="Art Piece 5" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="PRINCESS BUBBLEGUM">
-          <a href="princess-bubblegum.html">
-            <img src="images/optimized/princess-bubblegum-adventure-time.webp" alt="Art Piece 6" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="FIN'S ROOM">
-          <a href="fins-room.html">
-            <img src="adventure-time.gif" alt="Art Piece 7" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="MUSHROOM GIRL">
-          <a href="mushroom-girl.html">
-            <img src="images/optimized/mushrooms-girl.webp" alt="Art Piece 8" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="BOY">
-          <a href="boy.html">
-            <img src="images/optimized/egor-1.webp" alt="Art Piece 9" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="QUIZ CHARACTER">
-          <a href="quiz-character.html">
-            <img src="quiyzasha-tv.gif" alt="Art Piece 10" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="GIRL">
-          <a href="girl.html">
-            <img src="images/optimized/cg-girl-design.webp" alt="Art Piece 11" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="TREASURE CHEST">
-          <a href="treasure-chest.html">
-            <img src="images/optimized/sunduk.webp" alt="Art Piece 12" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="EMOTION SKETCH">
-          <a href="emotion-sketch.html">
-            <img src="images/optimized/sketch.webp" alt="Art Piece 13" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="SING STREET">
-          <a href="sing-street.html">
-            <img src="images/optimized/sing-street.webp" alt="Art Piece 14" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="VADIM">
-          <a href="vadim.html">
-            <img src="images/optimized/vadim.webp" alt="Art Piece 15" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="PIXEL TWILIGHT">
-          <a href="pixel-twilight.html">
-            <img src="images/optimized/twilight-mix.webp" alt="Art Piece 16" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="CUDDLY CATS">
-          <a href="cuddly-cats.html">
-            <img src="images/optimized/cuddly-cats.webp" alt="Art Piece 17" class="gallery-image">
-          </a>
-        </div>
-        <div class="gallery-item" data-title="OVER THE GARDEN WALL">
-          <a href="over-the-garden-wall.html">
-            <img src="images/optimized/over-the-garden-wall.webp" alt="Art Piece 18" class="gallery-image">
-          </a>
-        </div>
+  <a href="images/full/girl-vampire-marceline.gif" class="glightbox">
+    <img src="images/optimized/girl-vampire-marceline.gif" alt="Vampire" class="gallery-image" loading="lazy"> 
+  </a>
+</div>
+<div class="gallery-item" data-title="ZORRO">
+  <a href="images/full/one-piece-zorro.webp" class="glightbox">
+    <img src="images/optimized/one-piece-zorro.webp" alt="Zorro" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="TRAVEL">
+  <a href="images/full/adventure-girl.webp" class="glightbox">
+    <img src="images/optimized/adventure-girl.webp" alt="Travel Adventure Girl" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="SAGITTARIUS">
+  <a href="images/full/Sagittarius.webp" class="glightbox">
+    <img src="images/optimized/Sagittarius.webp" alt="Sagittarius Zodiac" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="BMO">
+  <a href="images/full/bmo.webp" class="glightbox">
+    <img src="images/optimized/bmo.webp" alt="BMO Adventure Time" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="PRINCESS BUBBLEGUM">
+  <a href="images/full/princess-bubblegum-adventure-time.webp" class="glightbox">
+    <img src="images/optimized/princess-bubblegum-adventure-time.webp" alt="Princess Bubblegum" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="FIN'S ROOM">
+  <a href="images/full/adventure-time.gif" class="glightbox">
+    <img src="images/optimized/adventure-time.gif" alt="Finn's Room Adventure Time" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="MUSHROOM GIRL">
+  <a href="images/full/mushrooms-girl.webp" class="glightbox">
+    <img src="images/optimized/mushrooms-girl.webp" alt="Mushroom Girl" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="BOY">
+  <a href="images/full/egor-1.webp" class="glightbox">
+    <img src="images/optimized/egor-1.webp" alt="Boy Portrait" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="QUIZ CHARACTER">
+  <a href="images/full/quiyzasha-tv.gif" class="glightbox">
+    <img src="images/optimized/quiyzasha-tv.gif" alt="Quiz Character" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="GIRL">
+  <a href="images/full/cg-girl-design.webp" class="glightbox">
+    <img src="images/optimized/cg-girl-design.webp" alt="CG Girl Design" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="TREASURE CHEST">
+  <a href="images/full/sunduk.webp" class="glightbox">
+    <img src="images/optimized/sunduk.webp" alt="Treasure Chest" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="EMOTION SKETCH">
+  <a href="images/full/sketch.webp" class="glightbox">
+    <img src="images/optimized/sketch.webp" alt="Emotion Sketch" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="SING STREET">
+  <a href="images/full/sing-street.webp" class="glightbox">
+    <img src="images/optimized/sing-street.webp" alt="Sing Street" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="VADIM">
+  <a href="images/full/vadim.webp" class="glightbox">
+    <img src="images/optimized/vadim.webp" alt="Vadim Portrait" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="PIXEL TWILIGHT">
+  <a href="images/full/twilight-mix.webp" class="glightbox">
+    <img src="images/optimized/twilight-mix.webp" alt="Pixel Twilight" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="CUDDLY CATS">
+  <a href="images/full/cuddly-cats.webp" class="glightbox">
+    <img src="images/optimized/cuddly-cats.webp" alt="Cuddly Cats" class="gallery-image" loading="lazy">
+  </a>
+</div>
+<div class="gallery-item" data-title="OVER THE GARDEN WALL">
+  <a href="images/full/over-the-garden-wall.webp" class="glightbox">
+    <img src="images/optimized/over-the-garden-wall.webp" alt="Over The Garden Wall" class="gallery-image" loading="lazy">
+  </a>
+</div>
       </div>
     </div>
 
@@ -192,8 +195,11 @@
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
   
 <script src="cart-display.js"></script>
-
-
+ <!-- Добавьте эту строку (скрипт GLightbox) -->
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+    // Инициализирует и запускает GLightbox
+    const lightbox = GLightbox();
 </script>
 </body>
 </html>
