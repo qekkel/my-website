@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
   
-  <!-- Предзагрузка критических ресурсов -->
+  <!-- Только самые важные preload -->
   <link rel="preload" href="style.css" as="style">
-  <link rel="preload" href="favicon/favicon.svg" as="image">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&family=Lilita+One&display=swap" as="style">
-  
-  <!-- Google Tag Manager (оптимизированная версия) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <!-- Google Tag Manager -->
   <script>
     (function(w,d,s,l,i){
       w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
@@ -20,53 +20,42 @@
     })(window,document,'script','dataLayer','GTM-58QCTH55');
   </script>
   
+  
   <!-- Основные стили -->
   <link rel="stylesheet" href="style.css">
   
-  <!-- Шрифты Google (оптимизированные) -->
+  <!-- Google Fonts с &display=swap -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&family=Lilita+One&display=swap">
-  
-    <!-- Добавьте эту строку (стили GLightbox) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
-  <!-- Отложенная загрузка Masonry -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer></script>
+  <!-- GLightbox стили -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+  <!-- Snipcart с отложенной загрузкой -->
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" media="print" onload="this.media='all'">
 </head>
 
-<script>
-  // Показываем страницу сразу, но галерею — только после загрузки
-  document.addEventListener('DOMContentLoaded', function() {
-    // Ждем загрузки всех изображений в галерее
-    imagesLoaded('.gallery-container', function() {
-      document.querySelector('.gallery-container').style.opacity = 1;
-    });
-  });
-</script>
-
 <body>
-      <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58QCTH55"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-      <!-- End Google Tag Manager (noscript) -->
-    
-      <!-- Ваш хедер -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58QCTH55"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
   <!-- Шапка -->
   <header>
-  <div class="header-top">
-    <a href="index.html" class="logo-container">
-      <img src="girl-frog-psd.png" alt="Logo" class="logo">
-      <div class="logo-text">Olga Qekkel</div>
-    </a>
-  </div>
-  <nav class="header-bottom">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="store.html">Store</a>
-    <a href="contact.html">Contact</a>
-    <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span>
-  </a>
-  </nav>
-</header>
+    <div class="header-top">
+      <a href="index.html" class="logo-container">
+        <img src="girl-frog-psd.png" alt="Logo" class="logo">
+        <div class="logo-text">Olga Qekkel</div>
+      </a>
+    </div>
+    <nav class="header-bottom">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="store.html">Store</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span></a>
+    </nav>
+  </header>
 
 
   <!-- Галерея -->
@@ -75,27 +64,27 @@
       <div class="gallery-container">
         <div class="gallery-item" data-title="VAMPIRE"> 
   <a href="images/full/girl-vampire-marceline.gif" class="glightbox">
-    <img src="images/optimized/girl-vampire-marceline.gif" alt="Vampire" class="gallery-image" loading="lazy"> 
+    <img src="images/optimized/girl-vampire-marceline.gif" alt="Vampire" class="gallery-image" loading="eager" width="600" height="800"> 
   </a>
 </div>
 <div class="gallery-item" data-title="ZORRO">
   <a href="images/full/one-piece-zorro.webp" class="glightbox">
-    <img src="images/optimized/one-piece-zorro.webp" alt="Zorro" class="gallery-image" loading="lazy">
+    <img src="images/optimized/one-piece-zorro.webp" alt="Zorro" class="gallery-image" loading="eager">
   </a>
 </div>
 <div class="gallery-item" data-title="TRAVEL">
   <a href="images/full/adventure-girl.webp" class="glightbox">
-    <img src="images/optimized/adventure-girl.webp" alt="Travel Adventure Girl" class="gallery-image" loading="lazy">
+    <img src="images/optimized/adventure-girl.webp" alt="Travel Adventure Girl" class="gallery-image" fetchpriority="high" loading="eager" width="800" height="1000">
   </a>
 </div>
 <div class="gallery-item" data-title="SAGITTARIUS">
   <a href="images/full/Sagittarius.webp" class="glightbox">
-    <img src="images/optimized/Sagittarius.webp" alt="Sagittarius Zodiac" class="gallery-image" loading="lazy">
+    <img src="images/optimized/Sagittarius.webp" alt="Sagittarius Zodiac" class="gallery-image" loading="eager">
   </a>
 </div>
 <div class="gallery-item" data-title="BMO">
   <a href="images/full/bmo.webp" class="glightbox">
-    <img src="images/optimized/bmo.webp" alt="BMO Adventure Time" class="gallery-image" loading="lazy">
+    <img src="images/optimized/bmo.webp" alt="BMO Adventure Time" class="gallery-image" loading="eager">
   </a>
 </div>
 <div class="gallery-item" data-title="PRINCESS BUBBLEGUM">
@@ -183,23 +172,46 @@
     <p>© 2025 Olga Boiko</p>
   </footer>
 
-  <input type="hidden" name="timestamp" value="<?php echo time(); ?>">
-<input type="text" name="website" style="display:none;">
+  <!-- ОПТИМИЗИРОВАННАЯ ЗАГРУЗКА СКРИПТОВ -->
+  <!-- Только самые важные скрипты -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js" defer></script>
 
+  <script>
+    // Упрощенная инициализация
+    function initGallery() {
+      // Показываем галерею сразу
+      const gallery = document.querySelector('.gallery-container');
+      if (gallery) gallery.style.opacity = '1';
+      
+      // GLightbox
+      if (typeof GLightbox !== 'undefined') {
+        GLightbox();
+      }
+      
+      // Masonry
+      if (typeof Masonry !== 'undefined' && typeof imagesLoaded !== 'undefined') {
+        imagesLoaded('.gallery-container', function() {
+          new Masonry('.gallery-container', {
+            itemSelector: '.gallery-item',
+            columnWidth: '.gallery-item',
+            percentPosition: true
+          });
+        });
+      }
+    }
 
-  <!-- Подключение библиотек -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+    // Запуск после загрузки страницы
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initGallery);
+    } else {
+      initGallery();
+    }
+  </script>
+
+  <!-- Второстепенные скрипты грузятся в самом конце -->
   <script src="script.js" defer></script>
-  <script src="script.js"></script>  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@4.1.4/imagesloaded.pkgd.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
-  
-<script src="cart-display.js"></script>
- <!-- Добавьте эту строку (скрипт GLightbox) -->
-    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-<script>
-    // Инициализирует и запускает GLightbox
-    const lightbox = GLightbox();
-</script>
+  <script src="cart-display.js" defer></script>
 </body>
 </html>
