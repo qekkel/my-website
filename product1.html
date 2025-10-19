@@ -21,9 +21,10 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="store.html">Store</a>
-        <a href="contact.html">Contact</a>
-        <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span></a>
-      </nav>
+         <a href="contact.html">Contact</a>
+     <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span>
+  </a>
+  </nav>
     </header>
 
     <main class="product-page">
@@ -70,60 +71,81 @@
 
   <!-- JavaScript -->
   <script>
-    // Gallery Image Switching
-    document.addEventListener('DOMContentLoaded', function() {
-      const mainImage = document.getElementById('main-image');
-      const thumbnails = document.querySelectorAll('.thumbnail');
-      
-      thumbnails.forEach(thumb => {
-        thumb.addEventListener('click', () => {
-          mainImage.src = thumb.src;
-          mainImage.alt = thumb.alt;
-        });
-      });
+  document.addEventListener('DOMContentLoaded', function() {
+    const mainImage = document.getElementById('main-image');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const cartBtn = document.getElementById('add-to-cart-btn');
+    const cartCount = document.getElementById('cart-count');
 
-      // Cart Functionality
-      const cartBtn = document.getElementById('add-to-cart-btn');
-      const cartCount = document.getElementById('cart-count');
+    // Gallery
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        mainImage.src = thumb.src;
+        mainImage.alt = thumb.alt;
+      });
+    });
+
+    // Cart functionality
+    function updateCartCounter() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = totalItems;
+
+      // После updateCartCounter() добавь:
+console.log('Cart count updated:', cartCount.textContent);
+console.log('Cart items:', JSON.parse(localStorage.getItem('cart')));
+
+    }
+
+    function checkIfInCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItem = cart.find(item => item.id === 'product-twins');
       
-      cartBtn.addEventListener('click', () => {
-        const product = {
-          id: 'product-twins',
-          name: 'Painting "Twins"',
-          price: 20.00,
-          quantity: 1
-        };
-        
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingItem = cart.find(item => item.id === product.id);
-        
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          cart.push(product);
-        }
-        
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Update counter
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCount.textContent = totalItems;
-        
-        // Animation
-        cartCount.classList.add('bounce');
-        setTimeout(() => cartCount.classList.remove('bounce'), 300);
-        
-        // Feedback
-        cartBtn.textContent = '✓ Added!';
+      if (existingItem) {
+        cartBtn.textContent = '✓ In Cart';
+        cartBtn.style.background = '#6c757d';
+        cartBtn.disabled = true;
+      }
+    }
+
+    cartBtn.addEventListener('click', () => {
+      const product = {
+        id: 'product-twins',
+        name: 'Painting "Twins"',
+        price: 20.00,
+        image: 'store/art.png',
+        quantity: 1
+      };
+      
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItem = cart.find(item => item.id === product.id);
+      
+      if (existingItem) {
+        cartBtn.textContent = '✓ Already in Cart';
+        cartBtn.style.background = '#6c757d';
         setTimeout(() => {
           cartBtn.textContent = 'Add to Cart';
-        }, 1000);
-      });
+          cartBtn.style.background = '';
+        }, 1500);
+        return;
+      }
       
-      // Initialize counter
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      updateCartCounter();
+      checkIfInCart();
+      
+      cartBtn.textContent = '✓ Added!';
+      setTimeout(() => {
+        cartBtn.textContent = 'Add to Cart';
+      }, 1000);
     });
-  </script>
+
+    // Initialize
+    updateCartCounter();
+    checkIfInCart();
+  });
+</script>
 </body>
 </html>
