@@ -1122,10 +1122,11 @@ body {
   border-radius: 4px;
 }
 
-
+/* Стиль для элемента товара с анимацией удаления */
 .cart-item.removing {
-  transform: translateX(100%);
   opacity: 0;
+  transform: translateX(-20px) scale(0.95);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .quantity-controls {
   display: flex;
@@ -1415,4 +1416,111 @@ main {
 
 .product-name {
   font-weight: 600; /* Полужирный только для названия */
+}
+
+
+
+
+
+
+
+
+
+
+
+.undo-notification {
+  background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
+  border: 2px solid #e6e1ff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  animation: gentleSlide 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 20px rgba(118, 75, 162, 0.15);
+  font-family: 'Palanquin', sans-serif;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+/* Плавное исчезновение */
+.undo-notification.fade-out {
+  opacity: 0;
+  transform: translateX(30px) scale(0.95);
+  transition: all 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+.undo-btn {
+  background: #8a63d2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-family: 'Palanquin', sans-serif;
+  box-shadow: 0 2px 8px rgba(138, 99, 210, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Эффект при наведении */
+.undo-btn:hover {
+  background: #764ba2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(118, 75, 162, 0.4);
+}
+
+/* Активная анимация кнопки */
+.undo-btn:active {
+  transform: translateY(0);
+  transition: all 0.1s ease;
+}
+
+.countdown {
+  font-weight: 700;
+  color: #8a63d2;
+  font-size: 18px;
+  min-width: 30px;
+  text-align: center;
+  font-family: 'Lilita One', cursive;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+/* Анимация изменения цифр */
+.countdown.changing {
+  transform: scale(1.2);
+  color: #5a4b81;
+}
+
+.undo-notification span {
+  color: #5a4b81;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+@keyframes gentleSlide {
+  from { 
+    opacity: 0; 
+    transform: translateX(-20px) scale(0.96); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0) scale(1); 
+  }
+}
+
+/* Плавное изменение фона при отсчете */
+.undo-notification.counting {
+  background: linear-gradient(135deg, #f8f7ff 0%, #fff0f5 100%);
+  border-color: #ffd6e7;
+  transition: all 0.5s ease;
 }

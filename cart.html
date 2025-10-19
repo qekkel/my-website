@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-  <style>
+<style>
     .cart-item-image {
       width: 80px;
       height: 80px;
@@ -23,32 +23,48 @@
       align-items: center;
       padding: 15px 0;
       border-bottom: 1px solid #eee;
+      gap: 30px; /* добавляем это */
     }
     .cart-item-info {
       display: flex;
       align-items: center;
       gap: 15px;
     }
+    
+    /* ОСТАВЬ ТОЛЬКО ЭТОТ БЛОК ДЛЯ quantity-controls */
     .quantity-controls {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-top: 5px;
     }
+
+    /* Скрываем кнопки +/- */
     .quantity-btn {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      border: none;
-      background: #f0f0f0;
-      cursor: pointer;
+      display: none !important;
     }
+
+    /* Стили для текста количества */
+    .quantity {
+      font-weight: bold;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .cart-item-price {
+      font-weight: bold;
+      font-size: 16px;
+      margin-left: auto; /* добавляем это */
+  padding-right: 20px; /* и это */
+    }
+    
     .remove-item {
       background: none;
       border: none;
       font-size: 20px;
       cursor: pointer;
       color: #ff5252;
+        margin-right: 15px; /* ← ДОБАВЬ ЭТУ СТРОКУ */
     }
     .cart-total {
       text-align: right;
@@ -59,7 +75,7 @@
     #contact-field {
       margin-top: 15px;
     }
-  </style>
+</style>
 </head>
 <body>
   <div class="wrapper">
@@ -151,171 +167,216 @@
     </footer>
   </div>
 
-  <!-- Подключаем JavaScript -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const cartList = document.getElementById('cart-list');
-      const cartEmpty = document.getElementById('cart-empty');
-      const cartItems = document.getElementById('cart-items');
-      const orderForm = document.getElementById('order-form');
-      const totalPriceEl = document.getElementById('cart-total-price');
-      const cartData = document.getElementById('cart-data');
-      const contactMethod = document.getElementById('contact-method');
-      const contactField = document.getElementById('contact-field');
+  let deletedItem = null;
+  let undoTimeout = null;
 
-cart.forEach(item => {
-    const li = document.createElement('li');
-    li.className = 'cart-item';
-    li.innerHTML = `
-      <div class="cart-item-info">
-        <img src="${item.image}" alt="${item.name}" class="cart-item-image" 
-             onerror="this.src='/placeholder-image.jpg'; this.alt='Image not available'">
-        <!-- остальная разметка -->
-      </div>
-    `;
-    cartList.appendChild(li);
-  });
+  document.addEventListener('DOMContentLoaded', function() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartList = document.getElementById('cart-list');
+    const cartEmpty = document.getElementById('cart-empty');
+    const cartItems = document.getElementById('cart-items');
+    const orderForm = document.getElementById('order-form');
+    const totalPriceEl = document.getElementById('cart-total-price');
+    const cartData = document.getElementById('cart-data');
+    const contactMethod = document.getElementById('contact-method');
+    const contactField = document.getElementById('contact-field');
 
-
-// Функция для получения корректного пути к изображению
-function getCorrectImagePath(imgPath) {
-    if (!imgPath) return 'images/placeholder-image.jpg';
-    
-    // Если это полный URL (уже начинается с http)
-    if (imgPath.startsWith('http')) {
-        return imgPath;
-    }
-    
-    // Если путь относительный, добавляем базовый URL
-    const baseUrl = window.location.origin;
-    if (imgPath.startsWith('/')) {
+    // Функция для получения корректного пути к изображению
+    function getCorrectImagePath(imgPath) {
+      if (!imgPath) return 'images/placeholder-image.jpg';
+      if (imgPath.startsWith('http')) return imgPath;
+      
+      const baseUrl = window.location.origin;
+      if (imgPath.startsWith('/')) {
         return baseUrl + imgPath;
-    } else {
+      } else {
         return baseUrl + '/store/' + imgPath;
-    }
-}
-
-      // Обновляем счетчик корзины
-      function updateCartCount() {
-        const count = cart.reduce((total, item) => total + item.quantity, 0);
-        document.getElementById('cart-count').textContent = count;
       }
+    }
 
-      // Обработчик изменения способа связи
-      contactMethod.addEventListener('change', function() {
-        if (this.value === 'telegram' || this.value === 'whatsapp') {
-          contactField.style.display = 'block';
-          document.getElementById('contact-label').textContent = 
-            this.value === 'telegram' ? 'Telegram username (@)' : 'WhatsApp number (+...)';
-        } else {
-          contactField.style.display = 'none';
-        }
-      });
+    // Обновляем счетчик корзины
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+    }
 
-      // Отображаем содержимое корзины
-      function displayCart() {
-  cartList.innerHTML = '';
-  let totalPrice = 0;
-
-  if (cart.length === 0) {
-    cartEmpty.style.display = 'block';
-    cartItems.style.display = 'none';
-    orderForm.style.display = 'none';
-  } else {
-    cartEmpty.style.display = 'none';
-    cartItems.style.display = 'block';
-    orderForm.style.display = 'block';
-
-    const fragment = document.createDocumentFragment();
-
-    cart.forEach(item => {
-      const li = document.createElement('li');
-      li.className = 'cart-item';
-      
-      // Получаем корректный путь к изображению
-      const getImagePath = (imgPath) => {
-        if (!imgPath) return 'images/default-product.png';
-        
-        if (window.location.host.includes('github.io')) {
-          return `https://qekkel.github.io/my-website/${imgPath.startsWith('store/') ? imgPath : 'store/' + imgPath}`;
-        }
-        return imgPath.startsWith('store/') ? imgPath : 'store/' + imgPath;
-      };
-
-      const imagePath = getImagePath(item.image);
-      
-      li.innerHTML = `
-        <div class="cart-item-info">
-          <img src="${imagePath}" 
-               alt="${item.name}" 
-               class="cart-item-image"
-               onerror="this.src='images/default-product.png'">
-          <div>
-            <span class="cart-item-name">${item.name}</span>
-            <div class="quantity-controls">
-              <button class="quantity-btn minus" data-id="${item.id}">-</button>
-              <span class="quantity">${item.quantity}</span>
-              <button class="quantity-btn plus" data-id="${item.id}">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-        <button class="remove-item" data-id="${item.id}">×</button>
-      `;
-      
-      fragment.appendChild(li);
-      totalPrice += item.price * item.quantity;
+    // Обработчик изменения способа связи
+    contactMethod.addEventListener('change', function() {
+      if (this.value === 'telegram' || this.value === 'whatsapp') {
+        contactField.style.display = 'block';
+        document.getElementById('contact-label').textContent = 
+          this.value === 'telegram' ? 'Telegram username (@)' : 'WhatsApp number (+...)';
+      } else {
+        contactField.style.display = 'none';
+      }
     });
 
-    cartList.appendChild(fragment);
-    totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
-    cartData.value = JSON.stringify(cart);
-  }
-  updateCartCount();
-}
-
-      // Обработчики событий
-      cartList.addEventListener('click', function(e) {
-        const itemId = e.target.getAttribute('data-id');
-        if (!itemId) return;
-
-        const itemIndex = cart.findIndex(item => item.id === itemId);
-        
-        if (e.target.classList.contains('remove-item')) {
-          cart.splice(itemIndex, 1);
-        } 
-        else if (e.target.classList.contains('minus')) {
-          if (cart[itemIndex].quantity > 1) {
-            cart[itemIndex].quantity--;
-          } else {
-            cart.splice(itemIndex, 1);
-          }
+    // Функция показа уведомления на месте товара
+   function showUndoNotification(itemName, itemId, itemElement) {
+  console.log('Показываем уведомление для:', itemName);
+  
+  const notification = document.createElement('li');
+  notification.className = 'undo-notification';
+  notification.innerHTML = `
+    <span>Вы удалили "${itemName}"</span>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <span class="countdown">4</span>
+      <button class="undo-btn" data-id="${itemId}">Вернуть</button>
+    </div>
+  `;
+  
+  itemElement.replaceWith(notification);
+  
+  let seconds = 4;
+  const countdownEl = notification.querySelector('.countdown');
+  const countdownInterval = setInterval(() => {
+    seconds--;
+    
+    // Анимация изменения цифры
+    countdownEl.classList.add('changing');
+    setTimeout(() => {
+      countdownEl.textContent = seconds;
+      countdownEl.classList.remove('changing');
+    }, 150);
+    
+    // Плавное изменение стиля при уменьшении времени
+    if (seconds <= 2) {
+      notification.classList.add('counting');
+    }
+    
+    if (seconds <= 0) {
+      clearInterval(countdownInterval);
+      
+      // Плавное исчезновение
+      notification.classList.add('fade-out');
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.remove();
         }
-        else if (e.target.classList.contains('plus')) {
-          cart[itemIndex].quantity++;
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
+        deletedItem = null;
         displayCart();
-      });
-
-      // Инициализация
-      displayCart();
-      
-      // Обработчик отправки формы
-      document.getElementById('order-form').addEventListener('submit', function() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let message = "ORDER DETAILS:\n\n";
+      }, 400); // Совпадает с длительностью анимации исчезновения
+    }
+  }, 1000);
+  
+  undoTimeout = countdownInterval;
+}
+    // Обработчик кнопки "Вернуть" (делегирование)
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('undo-btn')) {
+        const itemId = e.target.getAttribute('data-id');
+        console.log('Нажата кнопка Вернуть для:', itemId);
         
-        cart.forEach(item => {
-          message += `- ${item.quantity} × ${item.name} ($${item.price} each)\n`;
-        });
-        
-        // Добавляем информацию о заказе в скрытое поле
-        document.getElementById('cart-data').value = message;
-      });
+        if (deletedItem && deletedItem.id === itemId) {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          cart.push(deletedItem);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          
+          // Очищаем таймер
+          clearInterval(undoTimeout);
+          
+          // Обновляем отображение
+          displayCart();
+          deletedItem = null;
+        }
+      }
     });
-  </script>
-</body>
-</html>
+
+    // Отображаем содержимое корзины
+    function displayCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cartList.innerHTML = '';
+      let totalPrice = 0;
+
+      if (cart.length === 0) {
+        cartEmpty.style.display = 'block';
+        cartItems.style.display = 'none';
+        orderForm.style.display = 'none';
+      } else {
+        cartEmpty.style.display = 'none';
+        cartItems.style.display = 'block';
+        orderForm.style.display = 'block';
+
+        cart.forEach(item => {
+          const li = document.createElement('li');
+          li.className = 'cart-item';
+          
+          const getImagePath = (imgPath) => {
+            if (!imgPath) return 'images/default-product.png';
+            if (window.location.host.includes('github.io')) {
+              return `https://qekkel.github.io/my-website/${imgPath.startsWith('store/') ? imgPath : 'store/' + imgPath}`;
+            }
+            return imgPath.startsWith('store/') ? imgPath : 'store/' + imgPath;
+          };
+
+          const imagePath = getImagePath(item.image);
+          
+          li.innerHTML = `
+            <div class="cart-item-info">
+              <img src="${imagePath}" 
+                   alt="${item.name}" 
+                   class="cart-item-image"
+                   onerror="this.src='images/default-product.png'">
+              <div>
+                <span class="cart-item-name">${item.name}</span>
+                <div class="quantity-controls">
+                  <span class="quantity">Quantity: ${item.quantity}</span>
+                </div>
+              </div>
+            </div>
+            <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+            <button class="remove-item" data-id="${item.id}">×</button>
+          `;
+          
+          cartList.appendChild(li);
+          totalPrice += item.price * item.quantity;
+        });
+
+        totalPriceEl.textContent = `$${totalPrice.toFixed(2)}`;
+        cartData.value = JSON.stringify(cart);
+      }
+      updateCartCount();
+    }
+
+    // Обработчик удаления товара
+    cartList.addEventListener('click', function(e) {
+      const itemId = e.target.getAttribute('data-id');
+      if (!itemId) return;
+
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const itemIndex = cart.findIndex(item => item.id === itemId);
+      
+      if (e.target.classList.contains('remove-item')) {
+        console.log('Удаляем товар с ID:', itemId);
+        
+        // Сохраняем удаляемый товар и элемент
+        deletedItem = cart[itemIndex];
+        const itemElement = e.target.closest('li');
+        
+        // Удаляем из корзины
+        cart.splice(itemIndex, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Показываем уведомление на месте товара
+        showUndoNotification(deletedItem.name, itemId, itemElement);
+      }
+    });
+
+    // Обработчик отправки формы
+    document.getElementById('order-form').addEventListener('submit', function() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let message = "ORDER DETAILS:\n\n";
+      
+      cart.forEach(item => {
+        message += `- ${item.quantity} × ${item.name} ($${item.price} each)\n`;
+      });
+      
+      document.getElementById('cart-data').value = message;
+    });
+
+    // Инициализация
+    displayCart();
+  });
+</script>
