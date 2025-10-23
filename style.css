@@ -128,6 +128,66 @@ html {
     color: #e75c67;
   }
   
+/* Стили для прелоадера */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #EDDFDC;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+      transition: opacity 1s ease-in-out;
+
+}
+
+.percentage-loader {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.percentage {
+    font-family: Arial, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+animation: ticker 0.5s ease-in-out infinite;
+    /* Плавное исчезновение текста */
+    transition: opacity 0.5s ease;}
+
+@keyframes ticker {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Добавь этот стиль */
+body.preloader-active {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+
+#content {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+#content.content-visible {
+    opacity: 1;
+}
+
+
+
 
 
  /* Для основных разделов */
@@ -1523,4 +1583,17 @@ main {
   background: linear-gradient(135deg, #f8f7ff 0%, #fff0f5 100%);
   border-color: #ffd6e7;
   transition: all 0.5s ease;
+}
+
+* Начальное состояние уведомления (невидимое) */
+.undo-notification.initial {
+  opacity: 0;
+  transform: translateX(20px) scale(0.95);
+}
+
+/* Финальное состояние уведомления */
+.undo-notification.final {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
 }

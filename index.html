@@ -35,11 +35,23 @@
 </head>
 
 <body>
+
+   <!-- Прелоадер (добавь этот код ПЕРВЫМ в body) -->
+
+<div id="preloader">
+    <div class="percentage">0%</div>
+</div>
+
+
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58QCTH55"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   
+
+   <!-- Оберни весь твой существующий контент в этот div -->
+    <div id="content">
+
   <!-- Шапка -->
   <header>
     <div class="header-top">
@@ -172,6 +184,8 @@
     <p>© 2025 Olga Boiko</p>
   </footer>
 
+      </div>
+
   <!-- ОПТИМИЗИРОВАННАЯ ЗАГРУЗКА СКРИПТОВ -->
   <!-- Только самые важные скрипты -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer></script>
@@ -213,5 +227,38 @@
   <!-- Второстепенные скрипты грузятся в самом конце -->
   <script src="script.js" defer></script>
   <script src="cart-display.js" defer></script>
-</body>
-</html>
+
+<script>
+    let progress = 0;
+    const preloader = document.getElementById('preloader');
+    const percentageElement = document.querySelector('.percentage');
+    const content = document.getElementById('content'); // Добавляем эту строку
+
+    document.body.classList.add('preloader-active');
+
+    function updateProgress() {
+        // Базовая скорость + ускорение в конце
+        let increment = progress < 70 ? 10 : 20;
+        progress += increment + Math.random() * 15;
+        
+        if (progress > 100) progress = 100;
+        percentageElement.textContent = Math.floor(progress) + '%';
+        
+        if (progress < 100) {
+            setTimeout(updateProgress, progress < 50 ? 150 : 100);
+        } else {
+            setTimeout(() => {
+                // Плавно убираем прелоадер
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    // Плавно показываем контент
+                    content.classList.add('content-visible');
+                    document.body.classList.remove('preloader-active');
+                }, 500);
+            }, 300);
+        }
+    }
+
+    window.addEventListener('load', updateProgress);
+</script>
