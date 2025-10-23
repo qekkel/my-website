@@ -278,3 +278,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
   initialize();
 });
+
+// Функции для модальных окон
+function openProductModal(productId) {
+    const modal = document.getElementById(`product-modal-${productId}`);
+    modal.style.display = 'flex';
+}
+
+function closeProductModal(productId) {
+    const modal = document.getElementById(`product-modal-${productId}`);
+    modal.style.display = 'none';
+}
+
+// Закрытие по клику вне модалки
+window.onclick = function(event) {
+    if (event.target.classList.contains('product-modal')) {
+        event.target.style.display = 'none';
+    }
+}
+
+// Управление количеством
+document.querySelectorAll('.quantity-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const input = this.parentElement.querySelector('.quantity-input');
+        let value = parseInt(input.value);
+        
+        if (this.classList.contains('plus')) {
+            input.value = value + 1;
+        } else if (this.classList.contains('minus') && value > 1) {
+            input.value = value - 1;
+        }
+    });
+});
+
+// Закрытие по кнопке
+document.querySelectorAll('.close-modal').forEach(closeBtn => {
+    closeBtn.addEventListener('click', function() {
+        this.closest('.product-modal').style.display = 'none';
+    });
+});
+
+

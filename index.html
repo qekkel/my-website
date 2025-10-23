@@ -52,59 +52,81 @@
    <!-- Оберни весь твой существующий контент в этот div -->
     <div id="content">
 
-  <!-- Шапка -->
-  <header>
-    <div class="header-top">
-      <a href="index.html" class="logo-container">
-        <img src="girl-frog-psd.png" alt="Logo" class="logo">
-        <div class="logo-text">Olga Qekkel</div>
-      </a>
-    </div>
-    <nav class="header-bottom">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="store.html">Store</a>
-      <a href="contact.html">Contact</a>
-      <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span></a>
-    </nav>
-  </header>
+<!-- Удали старый хедер и замени на это -->
+<div class="content-area">
+    <!-- Верхняя строка с лого и навигацией -->
+    <div class="top-row">
+        <!-- Лого слева -->
+        <div class="logo-left">
+            <a href="index.html" class="logo-container">
+                <img src="girl-frog-psd.png" alt="Olga Qekkel" class="logo">
+                <div class="logo-text">Olga Qekkel</div>
+            </a>
+        </div>
 
+<!-- Основной контент с сайдбаром и навигацией --
+
+
+   !-- Навигация справа -->
+        <nav class="top-right-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="store.html">Store</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html" class="cart-link">
+                Cart<span id="cart-count" class="cart-count">0</span>
+            </a>
+            <div class="language-switcher">ENG</div>
+        </nav>
+    </div>
 
   <!-- Галерея -->
   <main>
+
+<div class="gallery-with-sidebar">
+    <!-- Фильтры сбоку -->
+    <div class="filter-sidebar">
+
+        <button class="filter-btn active" data-filter="all">All Works</button>
+        <button class="filter-btn" data-filter="characters">Characters</button>
+        <button class="filter-btn" data-filter="illustrations">Illustrations</button>
+        <button class="filter-btn" data-filter="fanart">Fan Art</button>
+        <button class="filter-btn" data-filter="sketches">Sketches</button>
+    </div>
+
     <div id="gallery" class="gallery-section">
       <div class="gallery-container">
-        <div class="gallery-item" data-title="VAMPIRE"> 
-  <a href="images/full/girl-vampire-marceline.gif" class="glightbox">
+<div class="gallery-item" data-category="fanart" data-title="VAMPIRE">
+    <a href="images/full/girl-vampire-marceline.gif" class="glightbox">
     <img src="images/optimized/girl-vampire-marceline.gif" alt="Vampire" class="gallery-image" loading="eager" width="600" height="800"> 
   </a>
 </div>
-<div class="gallery-item" data-title="ZORRO">
+<div class="gallery-item" data-category="fanart" data-title="ZORRO">
   <a href="images/full/one-piece-zorro.webp" class="glightbox">
-    <img src="images/optimized/one-piece-zorro.webp" alt="Zorro" class="gallery-image" loading="eager">
+    <img src="images/optimized/one-piece-zorro.webp" alt="Zorro" class="gallery-image">
   </a>
 </div>
-<div class="gallery-item" data-title="TRAVEL">
+<div class="gallery-item" data-category="illustrations" data-title="TRAVEL">
   <a href="images/full/adventure-girl.webp" class="glightbox">
     <img src="images/optimized/adventure-girl.webp" alt="Travel Adventure Girl" class="gallery-image" fetchpriority="high" loading="eager" width="800" height="1000">
   </a>
 </div>
-<div class="gallery-item" data-title="SAGITTARIUS">
+<div class="gallery-item" data-category="sketches" data-title="EMOTION SKETCH">
   <a href="images/full/Sagittarius.webp" class="glightbox">
-    <img src="images/optimized/Sagittarius.webp" alt="Sagittarius Zodiac" class="gallery-image" loading="eager">
-  </a>
+    <img src="images/optimized/sketch.webp" alt="Emotion Sketch" class="gallery-image">
+    </a>
 </div>
-<div class="gallery-item" data-title="BMO">
+<div class="gallery-item"  data-category="fanart" data-title="BMO">
   <a href="images/full/bmo.webp" class="glightbox">
     <img src="images/optimized/bmo.webp" alt="BMO Adventure Time" class="gallery-image" loading="eager">
   </a>
 </div>
-<div class="gallery-item" data-title="PRINCESS BUBBLEGUM">
+<div class="gallery-item"  data-category="fanart" data-title="PRINCESS BUBBLEGUM">
   <a href="images/full/princess-bubblegum-adventure-time.webp" class="glightbox">
     <img src="images/optimized/princess-bubblegum-adventure-time.webp" alt="Princess Bubblegum" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="FIN'S ROOM">
+<div class="gallery-item"  data-category="fanart"  data-title="FIN'S ROOM">
   <a href="images/full/adventure-time.gif" class="glightbox">
     <img src="images/optimized/adventure-time.gif" alt="Finn's Room Adventure Time" class="gallery-image" loading="lazy">
   </a>
@@ -224,9 +246,48 @@
     }
   </script>
 
-  <!-- Второстепенные скрипты грузятся в самом конце -->
-  <script src="script.js" defer></script>
-  <script src="cart-display.js" defer></script>
+<script>
+// Фильтрация галереи
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const filter = this.getAttribute('data-filter');
+            
+            galleryItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                item.style.display = (filter === 'all' || category === filter) ? 'block' : 'none';
+            });
+            
+            // Переинициализируем Masonry после фильтрации
+            setTimeout(() => {
+                if (typeof Masonry !== 'undefined') {
+                    imagesLoaded('.gallery-container', function() {
+                        new Masonry('.gallery-container', {
+                            itemSelector: '.gallery-item:not(.hidden)',
+                            columnWidth: '.gallery-item',
+                            percentPosition: true
+                        });
+                    });
+                }
+            }, 300);
+        });
+    });
+});
+</script>
+
+<!-- Остальные скрипты -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/5.2.0/imagesloaded.pkgd.min.js"></script>
+<script src="script.js"></script>
+<script src="script.js" defer></script>
+<script src="cart-display.js" defer></script>
+
+<!-- Скрипт прелоадера (оставляем последним) -->
 
 <script>
     let progress = 0;
@@ -262,3 +323,6 @@
 
     window.addEventListener('load', updateProgress);
 </script>
+
+
+</body>
