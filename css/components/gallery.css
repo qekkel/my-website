@@ -79,20 +79,4 @@
   margin-bottom: 20px;
 }
 
-\
 
-
-временно 
-
-.gallery-with-sidebar { 
-  border: 2px solid red !important; 
-  background: rgba(255,0,0,0.1) !important;
-}
-.filter-sidebar { 
-  border: 2px solid blue !important; 
-  background: rgba(0,0,255,0.1) !important;
-}
-.gallery-section { 
-  border: 2px solid green !important; 
-  background: rgba(0,255,0,0.1) !important;
-}
