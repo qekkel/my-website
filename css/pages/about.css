@@ -1,94 +1,225 @@
-/* ===== СТРАНИЦА "О СЕБЕ" ===== */
+
+
+.filter-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0; /* Растягиваем от верха до низа */
+    left: 0;
+    height: auto; /* Высота автоматически */
+    width: 250px;
+    background: white;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+
+/* PNG фон */
+.about-section::before {
+    content: "";
+    position: absolute;
+    width: 1000px;
+    height: 80vh; /* 80% высоты окна */
+    top: -15vh;
+    right: -90px;
+    background-image: url('../../images/background/2.png');
+    background-size: contain; /* Сохраняет пропорции */
+    background-repeat: no-repeat;
+    background-position: right top;
+    mix-blend-mode: multiply;
+    opacity: 0.4;
+    z-index: -1;
+    pointer-events: none;
+
+    transform: rotate(0deg); /* Можно добавить поворот */
+}
+
+/* Делаем блоки полупрозрачными чтобы фон просвечивал */
+.about-block {
+    background: rgba(255, 255, 255, 0.9); /* Более прозрачный */
+    backdrop-filter: blur(10px);
+    /* остальные стили */
+}
+
 .about-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px;
-  font-family: 'Palanquin', sans-serif;
+   background: transparent; /* Убедись что сам section прозрачный */
+    margin-left: 270px;
+    width: calc(100% - 270px);
+    padding: 40px;
+    flex: 1; /* Занимает всё оставшееся пространство */
+    min-height: 100vh; /* Минимум на всю высоту окна */
 }
 
 .about-top {
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-  gap: 0px;
-  padding-right: 350px;
-}
-
-.about-photo {
-  width: 50px;
-  height: 50px;
-  position: relative;
-  right: 50px;
+    display: flex;
+    gap: 30px; /* Уменьшаем расстояние между фото и текстом */
+    align-items: center;
+    margin-bottom: 60px;
 }
 
 .profile-pic {
-  float: right;
-  width: 60%;
-  height: 60%;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+ 
+}
+
+.skill-bar {
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 6px;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500);
+    animation: fillBar 2s ease-out;
+}
+
+
+.about-block::before {
+  content: "";
   display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #e75c67, #ff9a76);
+  margin-bottom: 20px;
+  border-radius: 2px;
 }
 
 .about-intro {
+   flex: 1;
   flex-grow: 1;
-  margin-right: 30 px;
+  margin-right: 0; /* Убираем отступ */
+}
+
+.about-intro p {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    line-height: 1.6;
+    margin-top: 0; /* Убираем лишний отступ сверху у текста */
 }
 
 .about-intro h2 {
-  font-family: 'Lilita One', cursive;
-  color: #333;
-  margin-bottom: 15px;
-  font-size: 2rem;
+    font-family: 'Lilita One', cursive;
+    font-size: 3rem;
+    background: linear-gradient(45deg, #e75c67, #ff9a76, #6c5ce7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text; /* Добавь эту строку */
+    color: #e75c67; /* Фолбэк цвет */
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    margin-bottom: 15px;
 }
 
 .about-block {
+   background: rgba(255, 255, 255, 0.7); /* Еще более прозрачный */
+    backdrop-filter: blur(5px);
+  max-width: none; /* Убедись что нет ограничений */
   margin-bottom: 50px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.about-block:hover {
+  transform: translateY(-5px);
 }
 
 .about-block h3 {
   color: #333;
   margin-bottom: 15px;
   font-family: 'Lilita One', cursive;
-  font-size: 1.5rem;
+  font-size: 1.8rem; /* Увеличиваем размер */
 }
+
 
 .about-block p {
   line-height: 1.6;
   margin-bottom: 20px;
+  font-size: 1.1rem;
 }
 
-/* Галереи для страницы "О себе" */
-.art-grid,
-.process-gallery,
-.interests-gallery {
-  display: grid;
-  gap: 15px;
-  margin-top: 20px;
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+
+
+
+
+
+/* ОСНОВНОЕ ИСПРАВЛЕНИЕ - ограничиваем контейнеры */
 .art-grid {
-  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
 }
 
-.process-gallery,
+.art-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.process-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.process-gallery img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.process-gallery img:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transform: scale(1.02);
+}
+
+
+
+
+/* Для интересов */
 .interests-gallery {
-  grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
 }
 
-.art-grid img,
-.process-gallery img,
 .interests-gallery img {
   width: 100%;
+  height: 180px;
+  object-fit: cover;
   border-radius: 8px;
-  transition: transform 0.3s;
+  /* Никаких фонов, градиентов, рамок - только фото */
 }
 
-.art-grid img:hover,
-.process-gallery img:hover,
-.interests-gallery img:hover {
-  transform: scale(1.03);
-}
+
 
 .about-container {
   max-width: 1200px;
@@ -147,10 +278,6 @@
   transition: transform 0.3s;
 }
 
-.grid-gallery img:hover {
-  transform: scale(1.02);
-}
-
 .about-photo-container {
   flex: 0 0 40%;
   position: relative;
@@ -158,10 +285,16 @@
 }
 
 .about-photo {
-  width: 100%;
+  flex-shrink: 0;
+  width: 350px;
+  height: 350px;
+  gap: 10px;
+ 
   height: auto;
   object-fit: cover;
   border-radius: 0;
+  flex-shrink: 0;
+
 }
 
 .text-content {
@@ -193,3 +326,17 @@
   color: #333;
   margin-bottom: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
