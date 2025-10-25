@@ -11,9 +11,10 @@
   min-height: auto;
   height: fit-content;
   text-align: center;
-  border-bottom: 3px solid transparent;
-  border-image: linear-gradient(90deg, transparent 20%, #333 20%, #333 80%, transparent 80%) 1;
+   border-image: linear-gradient(90deg, transparent 10%, #333 50%, transparent 90%) 1;
+  border-bottom: 2px solid transparent; /* Толщину можно менять */
 }
+
 
 .sidebar-logo-img {
   width: 180px;
@@ -35,19 +36,37 @@
 .filter-sidebar {
     position: fixed;
     top: 0;
+    bottom: 0;
     left: 0;
-    height: 100vh;
-    width: 250px; /* Фиксированная ширина */
+    height: 100vh; /* Фиксированная высота */
+    width: 250px;
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
     padding: 20px;
     box-sizing: border-box;
-    overflow-y: auto;
-  
+    overflow: hidden; /* НИКАКОГО СКРОЛЛА */
+      -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;     /* Firefox */
 }
+
+
+/* Этот блок будет прижимать About и Store к низу */
+.sidebar-bottom-section {
+    margin-top: auto; /* Вот магия! */
+    width: 100%;
+    padding-top: 20px;
+}
+
+.sidebar-divider {
+    height: 2px; /* или 1px для тоньше */
+    background: linear-gradient(90deg, transparent 10%, #ddd 50%, transparent 90%);
+    margin: 25px 0;
+    width: 100%;
+
+}
+
+
 
 .filter-btn {
     text-align: left;
@@ -72,12 +91,6 @@
     font-weight: bold;
 }
 
-.sidebar-divider {
-    height: 1px;
-    background: #ddd;
-    margin: 25px 0;
-    width: 100%;
-}
 
 /* Ссылки как кнопки */
 .filter-sidebar a {
@@ -93,4 +106,78 @@
   padding: 20px;
 }
 
-/* Удали дубликаты и неиспользуемые стили */
+
+/* Стили для важных ссылок внизу */
+.sidebar-bottom-section .filter-btn {
+    font-weight: 700; /* Жирный шрифт */
+    color: #e75c67; /* Яркий цвет */
+    border: 2px solid #e75c67; /* Рамка */
+    background: rgba(231, 92, 103, 0.1); /* Легкий фон */
+    margin: 5px 0; /* Отступы между кнопками */
+}
+
+.sidebar-bottom-section .filter-btn:hover {
+    background: #e75c67; /* Заливка при наведении */
+    color: white; /* Белый текст при наведении */
+    transform: translateX(5px);
+}
+
+/* Или вариант с другим стилем разделителя */
+.sidebar-bottom-section .sidebar-divider {
+    background: linear-gradient(90deg, transparent, #e75c67, transparent);
+    height: 2px; /* Толще обычного */
+     margin-top: 0px; /* Добавь это */
+}
+
+
+
+/* ДЛЯ ЭКРАНОВ 1200px И МЕНЬШЕ */
+@media (max-width: 1200px) {
+    .filter-sidebar {
+        width: 200px; /* Уменьшаем ширину */
+        padding: 15px;
+    }
+    
+    .sidebar-logo-img {
+        width: 120px; /* Уменьшаем лого */
+        height: 120px;
+    }
+    
+    .sidebar-logo-text {
+        font-size: 24px; /* Уменьшаем текст лого */
+    }
+    
+    .filter-btn {
+        padding: 8px 12px; /* Меньше отступы */
+        font-size: 14px;
+    }
+    
+    .gallery-section,
+    .about-section {
+        margin-left: 220px; /* 200px + 20px отступ */
+        width: calc(100% - 220px);
+    }
+}
+
+/* ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ */
+@media (max-width: 768px) {
+    .filter-sidebar {
+        width: 180px;
+        padding: 10px;
+    }
+    
+    .sidebar-logo-img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .sidebar-logo-text {
+        font-size: 20px;
+    }
+    
+    .gallery-section,
+    .about-section {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+}
