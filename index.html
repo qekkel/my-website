@@ -55,30 +55,7 @@
 <!-- Удали старый хедер и замени на это -->
 <div class="content-area">
     <!-- Верхняя строка с лого и навигацией -->
-    <div class="top-row">
-        <!-- Лого слева -->
-        <div class="logo-left">
-            <a href="index.html" class="logo-container">
-                <img src="girl-frog-psd.png" alt="Olga Qekkel" class="logo">
-                <div class="logo-text">Olga Qekkel</div>
-            </a>
-        </div>
-
-<!-- Основной контент с сайдбаром и навигацией --
-
-
-   !-- Навигация справа -->
-        <nav class="top-right-nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="store.html">Store</a>
-            <a href="contact.html">Contact</a>
-            <a href="cart.html" class="cart-link">
-                Cart<span id="cart-count" class="cart-count">0</span>
-            </a>
-            <div class="language-switcher">ENG</div>
-        </nav>
-    </div>
+   
 
   <!-- Галерея -->
   <main>
@@ -86,7 +63,12 @@
 <div class="gallery-with-sidebar">
     <!-- Фильтры сбоку -->
     <div class="filter-sidebar">
-
+ <!-- Добавь этот блок с лого -->
+    <div class="sidebar-logo">
+        <img src="favicon/web-app-manifest-512x512.png" Qekkel class="sidebar-logo-img">
+        <!-- или если хочешь текст -->
+        <div class="sidebar-logo-text">Qekkel</div>
+    </div>
         <button class="filter-btn active" data-filter="all">All Works</button>
         <button class="filter-btn" data-filter="characters">Characters</button>
         <button class="filter-btn" data-filter="illustrations">Illustrations</button>
@@ -131,57 +113,57 @@
     <img src="images/optimized/adventure-time.gif" alt="Finn's Room Adventure Time" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="MUSHROOM GIRL">
+<div class="gallery-item" data-category="illustrations" data-title="MUSHROOM GIRL">
   <a href="images/full/mushrooms-girl.webp" class="glightbox">
     <img src="images/optimized/mushrooms-girl.webp" alt="Mushroom Girl" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="BOY">
+<div class="gallery-item" data-category="illustrations" data-title="BOY">
   <a href="images/full/egor-1.webp" class="glightbox">
     <img src="images/optimized/egor-1.webp" alt="Boy Portrait" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="QUIZ CHARACTER">
+<div class="gallery-item" data-category="illustrations" data-title="QUIZ CHARACTER">
   <a href="images/full/quiyzasha-tv.gif" class="glightbox">
     <img src="images/optimized/quiyzasha-tv.gif" alt="Quiz Character" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="GIRL">
+<div class="gallery-item" data-category="illustrations" data-title="GIRL">
   <a href="images/full/cg-girl-design.webp" class="glightbox">
     <img src="images/optimized/cg-girl-design.webp" alt="CG Girl Design" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="TREASURE CHEST">
+<div class="gallery-item" data-category="illustrations" data-title="TREASURE CHEST">
   <a href="images/full/sunduk.webp" class="glightbox">
     <img src="images/optimized/sunduk.webp" alt="Treasure Chest" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="EMOTION SKETCH">
+<div class="gallery-item" data-category="sketches"  data-title="EMOTION SKETCH">
   <a href="images/full/sketch.webp" class="glightbox">
     <img src="images/optimized/sketch.webp" alt="Emotion Sketch" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="SING STREET">
+<div class="gallery-item" data-category="sketches"  data-title="SING STREET">
   <a href="images/full/sing-street.webp" class="glightbox">
     <img src="images/optimized/sing-street.webp" alt="Sing Street" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="VADIM">
+<div class="gallery-item" data-category="illustrations" data-title="VADIM">
   <a href="images/full/vadim.webp" class="glightbox">
     <img src="images/optimized/vadim.webp" alt="Vadim Portrait" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="PIXEL TWILIGHT">
+<div class="gallery-item" data-category="illustrations" data-title="PIXEL TWILIGHT">
   <a href="images/full/twilight-mix.webp" class="glightbox">
     <img src="images/optimized/twilight-mix.webp" alt="Pixel Twilight" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="CUDDLY CATS">
+<div class="gallery-item" data-category="illustrations" data-title="CUDDLY CATS">
   <a href="images/full/cuddly-cats.webp" class="glightbox">
     <img src="images/optimized/cuddly-cats.webp" alt="Cuddly Cats" class="gallery-image" loading="lazy">
   </a>
 </div>
-<div class="gallery-item" data-title="OVER THE GARDEN WALL">
+<div class="gallery-item" data-category="illustrations" data-title="OVER THE GARDEN WALL">
   <a href="images/full/over-the-garden-wall.webp" class="glightbox">
     <img src="images/optimized/over-the-garden-wall.webp" alt="Over The Garden Wall" class="gallery-image" loading="lazy">
   </a>
@@ -323,6 +305,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('load', updateProgress);
 </script>
+ <script>
+    // Функция фильтрации галереи
+    function filterGallery(category) {
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const filterTitle = document.querySelector('.filter-title');
+        
+        // Обновляем заголовок
+        filterTitle.textContent = category.toUpperCase();
+        
+        // Показываем/скрываем элементы
+        galleryItems.forEach(item => {
+            if (category === 'all' || item.dataset.category === category) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+        
+        // Обновляем активную кнопку
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent.toLowerCase() === category) {
+                btn.classList.add('active');
+            }
+        });
+    }
 
-
+    // Назначаем обработчики на кнопки
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.textContent.toLowerCase().replace(' ', '-');
+                filterGallery(category);
+            });
+        });
+        
+        // По умолчанию показываем "All Works"
+        filterGallery('all');
+    });
+    </script>
 </body>

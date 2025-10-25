@@ -2,27 +2,8 @@
 
 
 :root {
-  --header-padding: 20px;
   --main-padding: 20px;
 }
-header {
-  position: static;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  margin: 0;
-  transition: none !important; /* Убираем любые анимации */
-  will-change: transform; /* Оптимизация анимации */
-  padding: 20px 20px 0; /* Сохраняем ваши отступы */
-}
-.header-bottom {
-  height: 50px; /* Фиксированная высота меню */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
 
 /* Добавьте этот стиль для пунктов меню */
 nav ul li {
@@ -54,101 +35,49 @@ nav ul li {
     gap: 25px;
 }
 
+.sidebar-logo {
+    margin-bottom: 20px; /* ← Отступ снизу всего блока лого */
+    text-align: center; /* ← Выравнивание по центру */
+     padding: 20px 0 10px 0; /* ← ДОБАВЬ PADDING-TOP 20px */
+    width: 100%;
+     min-height: auto; /* ← Убираем мин. высоту */
+    height: fit-content; /* ← Подстраиваем под содержимое */
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg, transparent 20%, #333 20%, #333 80%, transparent 80%) 1;
+    padding-bottom: 15px;
+     margin: 0 auto 20px auto;
 
-/* Верхняя строка с лого и навигацией */
-/* Верхняя строка */
-.top-row {
+
+}
+
+.sidebar-logo-img {
+    width: 180px; /* ← Ширина лого */
+    height: 180px; /* ← Высота лого */
+    border-radius: 50%; /* ← Круглая форма */
+    object-fit: cover; /* ← Обрезка фото */
+    margin-bottom: 5px; /* ← Отступ между лого и текстом */
+}
+
+.sidebar-logo-text {
+    margin-top: 5px; /* ← Отступ сверху у текста */
+    line-height: 1.2; /* ← Межстрочный интервал */
+    font-family: 'Lilita One', cursive; /* ← Шрифт */
+    font-size: 32px; /* ← Размер текста */
+    color: #333; /* ← Цвет текста */
+}
+
+/* Или если хочешь лого слева от текста */
+.sidebar-logo.horizontal {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
-    padding: 0 15px;
-    max-width: 1400px;
-    margin: 40px auto 0;
+    gap: 15px;
+    text-align: left;
 }
 
-/* Лого слева */
-.logo-left {
-    display: flex;
-    align-items: center;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-.logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: none;
-}
-
-
-.logo-text {
-    font-family: 'Lilita One', cursive;
-    font-size: 28px;
-    color: #333;
-}
-
-/* Навигация - делаем заметной */
-/* Экстренное решение - если навигация скрыта */
-.top-right-nav {
-    position: relative !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: flex !important;
-    z-index: 1000;
-}
-
-/* Или более жёсткий вариант */
-nav.top-right-nav {
-    all: unset;
-    display: flex !important;
-    align-items: center;
-    gap: 30px;
-    position: static !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
-
-
-
-.top-right-nav a {
-    font-family: 'Palanquin', sans-serif;
-    font-size: 16px;
-    color: #333;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    text-transform: uppercase;
-}
-
-.top-right-nav a:hover {
-    color: #e75c67;
-}
-
-.cart-count {
-    background: #e75c67;
-    color: white;
-    border-radius: 50%;
-    padding: 4px 8px;
-    font-size: 12px;
-    margin-left: 5px;
-}
-
-.language-switcher {
-    font-family: 'Palanquin', sans-serif;
-    font-size: 14px;
-    color: #333;
-    font-weight: 600;
-    margin-left: 20px;
-    padding-left: 20px;
-    border-left: 1px solid #ddd;
+.sidebar-logo.horizontal .sidebar-logo-img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0;
 }
 
 /* Для плавного скролла всей страницы */
@@ -325,6 +254,7 @@ padding: var(--main-padding) !important; /* Сохраняем твой отст
 }
 
   .gallery-section {
+      flex: 1; /* Занимает всё оставшееся пространство */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -335,11 +265,12 @@ padding: var(--main-padding) !important; /* Сохраняем твой отст
     margin-bottom: 20px;
   }
   
-  .gallery-container {
-    display: flex;
-    opacity: 1;
-    transition: opacity 0.5s;
-  }
+ .gallery-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    width: 100% !important;
+}
   
   .gallery-item {
     width: 100%;
@@ -348,7 +279,7 @@ padding: var(--main-padding) !important; /* Сохраняем твой отст
     position: relative;
     overflow: hidden;
     border-radius: 0;
-    transition: transform .3s;
+     transition: all 0.3s ease;
     max-width: calc(100% / 3 - 20px);
   }
   
@@ -435,7 +366,7 @@ footer {
 .gallery-with-sidebar {
     display: flex;
     gap: 40px;
-    max-width: 1400px;
+    max-width: none; /* Убираем ограничение по ширине */
     margin: 0 auto;
     padding: 0 20px;
     margin-top: 0 !important;
@@ -444,11 +375,11 @@ footer {
 }
 
 .filter-sidebar {
+   margin-top: -40px; /* ← ПОДНИМАЕМ ВЕСЬ САЙДБАР ВВЕРХ */
     width: 250px;
     flex-shrink: 0;
     position: sticky;
-    top: 120px;
-    margin-top: 40px; /* ← ДОБАВЬ ЭТУ СТРОКУ */
+    top: 10px;
     height: fit-content;
 }
 
@@ -1669,9 +1600,6 @@ body {
   transition: width 0.3s;
 }
 
-header {
-  padding: 20px 20px 0 20px !important;
-}
 
 main {
    flex: 1; /* Занимает всё свободное пространство */
@@ -1913,8 +1841,9 @@ main {
 
 /* Для store.html */
 .product-grid {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
 }
 
 
@@ -2335,4 +2264,23 @@ main {
     .filter-sidebar.mobile-hidden {
         display: block !important;
     }
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.gallery-item {
+    transition: all 0.3s ease;
+}
+
+/* Убедись что у скрытых элементов нет отступов */
+.gallery-item[style*="display: none"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
 }

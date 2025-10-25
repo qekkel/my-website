@@ -1,3 +1,7 @@
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
   // ===== Masonry Gallery =====
   const grid = document.querySelector('.gallery-container');
@@ -319,3 +323,41 @@ document.querySelectorAll('.close-modal').forEach(closeBtn => {
 });
 
 
+function filterGallery(category) {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryContainer = document.querySelector('.gallery-container');
+    const filterTitle = document.querySelector('.filter-title');
+    
+    // Обновляем заголовок
+    filterTitle.textContent = category.toUpperCase();
+    
+    // Сначала скрываем все
+    galleryItems.forEach(item => {
+        item.style.display = 'none';
+    });
+    
+    // Показываем только нужные и перестраиваем сетку
+    const visibleItems = [];
+    galleryItems.forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+            item.style.display = 'block';
+            visibleItems.push(item);
+        }
+    });
+    
+    // Перестраиваем контейнер для устранения пробелов
+    galleryContainer.style.display = 'grid';
+    galleryContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
+    galleryContainer.style.gap = '20px';
+    
+    // Обновляем активную кнопку
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().replace(' ', '-') === category) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Принудительный reflow для анимации
+    galleryContainer.offsetHeight;
+}
