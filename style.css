@@ -17,15 +17,6 @@ nav ul li {
     margin-top: 0; /* ← УБЕРИ ОТСТУП СВЕРХУ */
 }
 
-.top-right-nav {
-    position: absolute; /* Абсолютное позиционирование внутри content-area */
-    top: -60px;        /* Поднимаем над контейнером */
-    right: 0;          /* Прижимаем к правому краю */
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
 /* Или вариант с отрицательным margin */
 .top-right-nav {
     margin-top: -50px;  /* Поднимаем вверх */
@@ -79,6 +70,43 @@ nav ul li {
     height: 50px;
     margin-bottom: 0;
 }
+
+
+/* Разделительная линия */
+.sidebar-divider {
+    height: 1px;
+    background: #ddd;
+    margin: 25px 0;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Кнопки внизу */
+.sidebar-bottom-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.sidebar-bottom-link {
+    font-family: 'Palanquin', sans-serif;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+}
+
+.sidebar-bottom-link:hover {
+    color: #e75c67;
+}
+
+
+
+
 
 /* Для плавного скролла всей страницы */
 html {
@@ -2265,22 +2293,6 @@ main {
         display: block !important;
     }
 }
-
-.gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    width: 100%;
-}
-
 .gallery-item {
     transition: all 0.3s ease;
-}
-
-/* Убедись что у скрытых элементов нет отступов */
-.gallery-item[style*="display: none"] {
-    margin: 0 !important;
-    padding: 0 !important;
-    height: 0 !important;
-    opacity: 0 !important;
 }
