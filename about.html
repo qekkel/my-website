@@ -8,7 +8,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portfolio</title>
+
+
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/about.css">
+
+
   <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Erica+One&display=swap" rel="stylesheet">
@@ -19,45 +24,51 @@
 
 </head>
 <body>
-  <!-- Шапка -->
-<header>
-  <div class="header-top">
-    <a href="index.html" class="logo-container">
-      <img src="girl-frog-psd.png" alt="Logo" class="logo">
-      <div class="logo-text">Olga Qekkel</div>
-    </a>
-  </div>
-  <nav class="header-bottom">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="store.html">Store</a>
-    <a href="contact.html">Contact</a>
-   <a href="cart.html" class="cart-link">Cart<span id="cart-count" class="cart-count">0</span>
-  </a>
-  </nav>
-</header>
 
-
-<main class="about-section">
-  <!-- Блок с фото слева и текстом справа -->
-  <div class="about-top">
-    <div class="about-photo">
-      <img src="images/optimized/me-2.jpg" alt="Olga" class="profile-pic">
+<div class="gallery-with-sidebar">
+    <!-- Сайдбар -->
+    <div class="filter-sidebar">
+        <!-- Верхняя часть - лого и фильтры -->
+        <div class="sidebar-logo">
+            <img src="favicon/web-app-manifest-512x512.png" Qekkel class="sidebar-logo-img">
+            <div class="sidebar-logo-text">Qekkel</div>
+        </div>
+        
+        <button class="filter-btn active" data-filter="all" onclick="window.location.href='index.html'">All Works</button>
+        <button class="filter-btn" onclick="window.open('https://t.me/qekkel266', '_blank')">Telegram channel</button>
+        <button class="filter-btn" onclick="window.open('https://youtube.com/qekkel', '_blank')">YouTube</button>
+        <button class="filter-btn" onclick="window.open('https://twitch.tv/qekkel26', '_blank')">Twitch</button>
+        <button class="filter-btn" onclick="window.open('https://instagram.com/qekkel, '_blank')">Instagram</button> 
+        
+        <!-- Нижняя часть - прижата к низу -->
+        <div class="sidebar-bottom-section">
+            <div class="sidebar-divider"></div>
+            <a href="index.html" class="filter-btn">Gallery</a>
+            <a href="about.html" class="filter-btn">About</a>
+            <a href="store.html" class="filter-btn">Store</a>
+        </div>
     </div>
-    <div class="about-intro">
-      <h2>Hi! I'm Olga</h2>
-      <p>I'm a digital artist specializing in pixel art and animation. My work is inspired by nature, storytelling, and vibrant colors.</p>
-    </div>
-  </div>
 
-   <!-- Остальные блоки (идут вертикально) -->
-  <div class="about-block">
-    <h3>My Art</h3>
-    <p>Each piece starts with a sketch and evolves into a detailed digital artwork.</p>
-    <div class="art-grid">
-      <img src="images/optimized/art-13.jpg" alt="Artwork 1">
-      <img src="images/optimized/art-14.jpg" alt="Artwork 2">
-      <img src="images/optimized/art-10.jpg" alt="Artwork 3">
+    <!-- Основной контент About -->
+    <main class="about-section">
+        <!-- Блок с фото слева и текстом справа -->
+        <div class="about-top">
+            <div class="about-photo">
+                <img src="images/optimized/me-2.jpg" alt="Olga" class="profile-pic">
+            </div>
+            <div class="about-intro">
+                <h2>Hi! I'm Olga<br>and I'm Artist</h2>
+            </div>
+        </div>
+
+        <!-- Остальные блоки -->
+        <div class="about-block">
+            <h3>My Art</h3>
+            <p>Each piece starts with a sketch and evolves into a detailed digital artwork.</p>
+            <div class="art-grid">
+                <img src="images/optimized/art-13.jpg" alt="Artwork 1">
+                <img src="images/optimized/art-14.jpg" alt="Artwork 2">
+                <img src="images/optimized/art-10.jpg" alt="Artwork 3">
     </div>
   </div>
 
@@ -80,13 +91,8 @@
       <img src="images/optimized/me-and-marcie-2.jpg" alt="Nature Walk">
     </div>
   </div>
-</main>
-
-  <!-- Футер -->
-  <footer>
-    <p>© 2025 Olga Boiko</p>
-  </footer>
+ </main>
+</div>
 </body>
 <script src="cart-display.js"></script>
-
 </html>

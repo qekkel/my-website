@@ -361,3 +361,5 @@ function filterGallery(category) {
     // Принудительный reflow для анимации
     galleryContainer.offsetHeight;
 }
+
+

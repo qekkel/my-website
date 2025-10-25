@@ -17,40 +17,34 @@
 </head>
 
 <body>
-<div id="content">
-    <div class="content-area">
-        <!-- Верхняя строка с лого и навигацией -->
-        <div class="top-row">
-            <div class="logo-left">
-                <a href="index.html" class="logo-container">
-                    <img src="girl-frog-psd.png" alt="Olga Qekkel" class="logo">
-                    <div class="logo-text">Olga Qekkel</div>
-                </a>
-            </div>
+
+<main>
+
+<div class="gallery-with-sidebar">
+    <!-- Фильтры сбоку -->
 
 
-               <nav class="top-right-nav">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="store.html">Store</a>
-                <a href="contact.html">Contact</a>
-                <a href="cart.html" class="cart-link">
-                    Cart<span id="cart-count" class="cart-count">0</span>
-                 </a>
-            <div class="language-switcher"></div>
-        </nav>
-        </div>
-
-        <!-- Основной контент с сайдбаром -->
-        <div class="gallery-with-sidebar">
-            <!-- Сайдбар слева -->
-            <aside class="filter-sidebar">
-                <button class="filter-btn active">ALL WORKS</button>
-                <button class="filter-btn">CHARACTERS</button>
-                <button class="filter-btn">ILLUSTRATIONS</button>
-                <button class="filter-btn">FAN ART</button>
-                <button class="filter-btn">SKETCHES</button>
-            </aside>
+   <div class="filter-sidebar">
+    <!-- Верхняя часть - лого и фильтры -->
+    <div class="sidebar-logo">
+        <img src="favicon/web-app-manifest-512x512.png" Qekkel class="sidebar-logo-img">
+        <div class="sidebar-logo-text">Qekkel</div>
+    </div>
+    
+    <button class="filter-btn active" data-filter="all">All Works</button>
+    <button class="filter-btn" data-filter="characters">Characters</button>
+    <button class="filter-btn" data-filter="illustrations">Illustrations</button>
+    <button class="filter-btn" data-filter="fanart">Fan Art</button>
+    <button class="filter-btn" data-filter="sketches">Sketches</button>
+    
+    <!-- Нижняя часть - прижата к низу -->
+    <div class="sidebar-bottom-section">
+        <div class="sidebar-divider"></div>
+         <a href="index.html" class="filter-btn">Gallery</a>
+        <a href="about.html" class="filter-btn">About</a>
+        <a href="store.html" class="filter-btn">Store</a>
+    </div>
+</div>
 
             <!-- Галерея товаров справа -->
             <main class="gallery-section">
@@ -134,11 +128,6 @@
             </div>
         </div> <!-- Закрыть gallery-with-sidebar -->
     </div> <!-- Закрыть content-area -->
-
-    <!-- Футер -->
-    <footer>
-        <p>© 2025 Olga Boiko</p>
-    </footer>
 
 
 
