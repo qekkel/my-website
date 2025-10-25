@@ -1,0 +1,96 @@
+/* ===== ФОРМЫ ===== */
+.contact-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-form, .contact-info {
+    width: 45%;
+    margin-right: 20px;
+}
+
+.contact-info {
+    font-size: 18px;
+}
+
+.contact-info a {
+    color: #e75c67;
+}
+
+.form-row {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.form-row div {
+    width: calc(50% - 10px);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input[type=email], 
+input[type=text], 
+textarea,
+.form-group select, 
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 16px;
+}
+
+button[type=submit] {
+    background-color: #e75c67;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type=submit]:hover {
+    background-color: #c3313d;
+}
+
+.quantity-selector {
+    margin: 20px 0;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.quantity-btn {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #333;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.message-info { color: blue; }
+.message-success { color: green; }
+.message-error { color: red; }
+#form-message { margin: 10px 0; font-weight: bold; }

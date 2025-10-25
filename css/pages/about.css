@@ -1,0 +1,195 @@
+/* ===== СТРАНИЦА "О СЕБЕ" ===== */
+.about-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  font-family: 'Palanquin', sans-serif;
+}
+
+.about-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 0px;
+  padding-right: 350px;
+}
+
+.about-photo {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  right: 50px;
+}
+
+.profile-pic {
+  float: right;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-intro {
+  flex-grow: 1;
+  margin-right: 30 px;
+}
+
+.about-intro h2 {
+  font-family: 'Lilita One', cursive;
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.about-block {
+  margin-bottom: 50px;
+}
+
+.about-block h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-family: 'Lilita One', cursive;
+  font-size: 1.5rem;
+}
+
+.about-block p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Галереи для страницы "О себе" */
+.art-grid,
+.process-gallery,
+.interests-gallery {
+  display: grid;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.art-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.process-gallery,
+.interests-gallery {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.art-grid img,
+.process-gallery img,
+.interests-gallery img {
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.art-grid img:hover,
+.process-gallery img:hover,
+.interests-gallery img:hover {
+  transform: scale(1.03);
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.art-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.art-wide { grid-column: span 2; }
+.art-tall { grid-row: span 2; }
+.art-small { grid-column: span 1; }
+
+.grid-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+  align-items: center;
+}
+
+.grid-section.reversed .grid-text {
+  order: 2;
+}
+
+.grid-section.reversed .grid-gallery {
+  order: 1;
+}
+
+.grid-text h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.grid-text p {
+  line-height: 1.6;
+  color: #555;
+}
+
+.grid-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.grid-gallery img {
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.grid-gallery img:hover {
+  transform: scale(1.02);
+}
+
+.about-photo-container {
+  flex: 0 0 40%;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-photo {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.text-content {
+  flex: 1;
+  max-width: 600px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.text-content h2 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.text-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.text-content ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.text-content ul li {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,124 @@
+/* ===== МАГАЗИН (STORE) ===== */
+#product-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.product-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.product-item a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.product-item h2 {
+    font-family: 'Lilita One', cursive;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-family: 'Palanquin', sans-serif;
+    font-size: 16px;
+    color: #e75c67;
+    font-weight: 600;
+}
+
+.product-name, .product-price {
+    font-family: 'Lilita One', sans-serif;
+}
+
+.product-name {
+    font-size: 22px;
+    color: #3b938a;
+    font-weight: 600;
+}
+
+.add-to-cart, .product-details p {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 14px;
+}
+
+.add-to-cart {
+    background-color: #3b938a;
+    color: #fff;
+    padding: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color .3s;
+}
+
+.add-to-cart:hover {
+    background-color: #2e7c68;
+}
+
+.product-details p {
+    font-family: 'Palanquin', sans-serif;
+    font-weight: 400;
+    color: #555;
+    margin: 5px 0;
+}
+
+.sold-out {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: .8em;
+    display: none;
+}
+
+.product-item.sold-out .sold-out {
+    display: block;
+}
+
+.product-thumbnails img, .thumbnail {
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.product-thumbnails img {
+    width: 60px;
+    border-radius: 5px;
+    transition: transform .3s;
+}
+
+.product-thumbnails img:hover {
+    transform: scale(1.1);
+}

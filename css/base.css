@@ -1,0 +1,57 @@
+/* ===== ПЕРЕМЕННЫЕ И БАЗОВЫЕ СТИЛИ ===== */
+:root {
+  --main-padding: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #EDDFDC, #ebd1c5);
+  background-color: #eddfdc;
+  font-family: 'Palanquin', sans-serif;
+  color: #333;
+  overflow-x: hidden;
+}
+
+body, nav {
+  display: flex;
+}
+
+body, nav a {
+  color: #333;
+}
+
+.logo-container, nav a {
+  text-decoration: none;
+}
+
+#caption, textarea {
+  height: 150px;
+}
+
+#caption, #cart-section h1, #cart-summary, .quantity-input {
+  text-align: center;
+}
+
+.gallery-item img, .gallery-item::after {
+  transition: opacity .3s;
+  border-radius: 0;
+}
+
+.gallery-item::after, .product-gallery .gallery-item::after {
+  content: attr(data-title);
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, .5);
+}

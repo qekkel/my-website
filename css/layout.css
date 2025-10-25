@@ -1,0 +1,42 @@
+/* ===== ОСНОВНАЯ СТРУКТУРА ===== */
+main {
+  flex: 1;
+  padding: var(--main-padding) !important;
+  padding-bottom: 60px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100vh;
+  margin: 0 auto;
+}
+
+.content-area {
+  margin-top: 0;
+}
+
+/* Футер */
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}

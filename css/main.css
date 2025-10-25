@@ -1,0 +1,40 @@
+/* ===== ГЛАВНЫЙ ФАЙЛ ИМПОРТА ===== */
+
+/* Базовые стили */
+@import url('base.css');
+@import url('layout.css');
+
+/* Компоненты */
+@import url('components/header.css');
+@import url('components/sidebar.css');
+@import url('components/gallery.css');
+@import url('components/filters.css');
+@import url('components/cart.css');
+@import url('components/forms.css');
+@import url('components/modals.css');
+@import url('components/preloader.css');
+
+/* Страницы */
+@import url('pages/about.css');
+@import url('pages/store.css');
+@import url('pages/product-detail.css');
+
+/* Утилиты и адаптивность */
+@import url('utils.css');
+@import url('responsive.css');
+
+/* Дополнительные исправления */
+body {
+    visibility: visible !important;
+}
+
+.gallery-item {
+    transition: all 0.3s ease;
+}
+
+/* Для store.html */
+.product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+}

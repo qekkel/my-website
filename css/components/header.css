@@ -1,0 +1,49 @@
+/* ===== ШАПКА И НАВИГАЦИЯ ===== */
+.logo-container {
+  align-items: center;
+  justify-content: center;
+  margin-right: auto;
+}
+
+.logo {
+  max-width: 100px;
+  height: auto;
+  flex-shrink: 20px;
+}
+
+.logo-text {
+  font-size: 2rem;
+  color: #3d6e69;
+  margin-left: 5px;
+  font-family: 'Lilita One', cursive;
+  line-height: 1.2;
+  min-height: 1.2em;
+}
+
+nav {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+nav a {
+  margin: 0 15px;
+  font-family: 'Palanquin', sans-serif;
+  transition: color .3s;
+}
+
+nav a:hover {
+  color: #e75c67;
+}
+
+nav ul li {
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.top-right-nav {
+  margin-top: -50px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+}
