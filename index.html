@@ -6,7 +6,6 @@
   <title>My Portfolio</title>
   
   <!-- Только самые важные preload -->
-  <link rel="preload" href="style.css" as="style">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
@@ -22,7 +21,8 @@
   
   
   <!-- Основные стили -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/sidebar.css">
   
   <!-- Google Fonts с &display=swap -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&family=Lilita+One&display=swap">
@@ -51,10 +51,6 @@
 
    <!-- Оберни весь твой существующий контент в этот div -->
     <div id="content">
-
-<!-- Удали старый хедер и замени на это -->
-<div class="content-area">
-    <!-- Верхняя строка с лого и навигацией -->
    
 
   <!-- Галерея -->
@@ -62,26 +58,26 @@
 
 <div class="gallery-with-sidebar">
     <!-- Фильтры сбоку -->
-    <div class="filter-sidebar">
- <!-- Добавь этот блок с лого -->
+
+
+   <div class="filter-sidebar">
+    <!-- Логотип -->
     <div class="sidebar-logo">
         <img src="favicon/web-app-manifest-512x512.png" Qekkel class="sidebar-logo-img">
-        <!-- или если хочешь текст -->
         <div class="sidebar-logo-text">Qekkel</div>
     </div>
-        <button class="filter-btn active" data-filter="all">All Works</button>
-        <button class="filter-btn" data-filter="characters">Characters</button>
-        <button class="filter-btn" data-filter="illustrations">Illustrations</button>
-        <button class="filter-btn" data-filter="fanart">Fan Art</button>
-        <button class="filter-btn" data-filter="sketches">Sketches</button>
-    </div>
-
-      <!-- разделитель и ссылки -->
+    
+    <!-- Кнопки фильтров -->
+    <button class="filter-btn active" data-filter="all">All Works</button>
+    <button class="filter-btn" data-filter="characters">Characters</button>
+    <button class="filter-btn" data-filter="illustrations">Illustrations</button>
+    <button class="filter-btn" data-filter="fanart">Fan Art</button>
+    <button class="filter-btn" data-filter="sketches">Sketches</button>
+    
+    <!-- About и Store ДОЛЖНЫ быть ЗДЕСЬ -->
     <div class="sidebar-divider"></div>
-<div class="sidebar-bottom-links">
-        <a href="about.html" class="sidebar-link">About</a>
-        <a href="store.html" class="sidebar-link">Store</a>
-    </div>
+    <a href="about.html" class="filter-btn">About</a>
+    <a href="store.html" class="filter-btn">Store</a>
 </div>
 
 

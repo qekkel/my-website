@@ -13,7 +13,6 @@ nav ul li {
 
 
 .content-area {
-    position: relative; /* Это важно для позиционирования */
     margin-top: 0; /* ← УБЕРИ ОТСТУП СВЕРХУ */
 }
 
@@ -399,7 +398,6 @@ footer {
     padding: 0 20px;
     margin-top: 0 !important;
     padding-top: 10px !important;
-     margin-left: 30px;
 }
 
 .filter-sidebar {
@@ -409,6 +407,7 @@ footer {
     position: sticky;
     top: 10px;
     height: fit-content;
+     margin-left: 0;
 }
 
 .filter-title {
@@ -672,17 +671,7 @@ footer {
   .art-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-/* Медиа-запрос для экранов шириной до 480px */
-@media (max-width: 480px) {
-  /* Для всех галерей устанавливает 1 колонку */
-  .art-grid,
-  .process-gallery,
-  .interests-gallery {
-    grid-template-columns: 1fr;
-  }
-}
 
 
 
@@ -1045,7 +1034,7 @@ button[type=submit]:hover {
 /* Адаптивность */
 @media (max-width: 768px) {
     .product-grid {
-        grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
         gap: 20px;
         padding: 15px;
     }
@@ -1632,7 +1621,6 @@ body {
 main {
    flex: 1; /* Занимает всё свободное пространство */
   padding-bottom: 60px; /* Отступ для футера */
-  padding: 20px !important;
 }
 
 .cart-link {
@@ -1850,22 +1838,6 @@ main {
 }
 
 
-/* ВЫРАВНИВАНИЕ ГАЛЕРЕЙ НА ОДНОМ УРОВНЕ */
-.gallery-with-sidebar {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-.gallery-section, 
-#product-grid {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-/* Для index.html */
-.gallery-section .gallery-container {
-    margin-top: 0 !important;
-}
 
 /* Для store.html */
 .product-grid {
@@ -2232,14 +2204,6 @@ main {
 .product-overlay.active .overlay-content {
     animation: overlayFadeIn 0.3s ease-out;
 }
-
-
-/* === МОБИЛЬНАЯ ВЕРСИЯ (iPhone SE - 320px) === */
-@media (max-width: 767px) {
-    /* Скрываем сайдбар с категориями */
-    .filter-sidebar.mobile-hidden {
-        display: none !important;
-    }
     
     /* Настраиваем логотип */
     .logo-category {
@@ -2295,4 +2259,24 @@ main {
 }
 .gallery-item {
     transition: all 0.3s ease;
+}
+
+
+/* ФИКС ДЛЯ ОТОБРАЖЕНИЯ САЙДБАРА */
+.filter-sidebar {
+    display: block !important;
+}
+
+/* Исправление медиа-запроса */
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+} /* ← ЗАКРЫВАЮЩАЯ СКОБКА */
+
+/* Гарантируем видимость сайдбара */
+.gallery-with-sidebar .filter-sidebar {
+    display: block;
+    visibility: visible;
+    opacity: 1;
 }
